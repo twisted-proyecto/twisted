@@ -33,10 +33,50 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.1.0.39271, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2, Version=2.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
     <Reference Include="FlickrNet">
       <HintPath>..\..\..\..\..\Downloads\FlickrNet-3.1\FlickrNet.dll</HintPath>
     </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcApplication1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\MvcApplication1.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Validator, Version=1.2.0.3001, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NHibernate.Validator.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -70,6 +110,18 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ViajeController.cs" />
+    <Compile Include="Dominio\IRepositorio.cs" />
+    <Compile Include="Dominio\Model\Amistad.cs" />
+    <Compile Include="Dominio\Model\Comentario.cs" />
+    <Compile Include="Dominio\Model\Destino.cs" />
+    <Compile Include="Dominio\Model\Foto.cs" />
+    <Compile Include="Dominio\Model\Participante.cs" />
+    <Compile Include="Dominio\Model\Persona.cs" />
+    <Compile Include="Dominio\Model\Validation.cs" />
+    <Compile Include="Dominio\Model\Viaje.cs" />
+    <Compile Include="Dominio\Repositorios\NHibernateHelper.cs" />
+    <Compile Include="Dominio\Repositorios\ViajeRepositorio.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -81,15 +133,60 @@
     <Compile Include="Repositories\MapRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AccesoDatos\Mapeos\Amistad.hbm.xml" />
+    <EmbeddedResource Include="AccesoDatos\Mapeos\Amistad.nhv.xml" />
+    <EmbeddedResource Include="AccesoDatos\Mapeos\Comentario.hbm.xml" />
+    <EmbeddedResource Include="AccesoDatos\Mapeos\Comentario.nhv.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AccesoDatos\Mapeos\Destino.hbm.xml" />
+    <EmbeddedResource Include="AccesoDatos\Mapeos\Destino.nhv.xml" />
+    <EmbeddedResource Include="AccesoDatos\Mapeos\Foto.hbm.xml" />
+    <EmbeddedResource Include="AccesoDatos\Mapeos\Foto.nhv.xml" />
+    <EmbeddedResource Include="AccesoDatos\Mapeos\Participante.hbm.xml" />
+    <EmbeddedResource Include="AccesoDatos\Mapeos\Participante.nhv.xml" />
+    <EmbeddedResource Include="AccesoDatos\Mapeos\Persona.hbm.xml" />
+    <EmbeddedResource Include="AccesoDatos\Mapeos\Persona.nhv.xml" />
+    <EmbeddedResource Include="AccesoDatos\Mapeos\Viaje.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AccesoDatos\Mapeos\Viaje.nhv.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Content Include="Content\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_75_ffffff_1x400.png" />
+    <Content Include="Content\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\images\ui-bg_inset-soft_95_fef1ec_1x100.png" />
+    <Content Include="Content\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\jquery-1.2.6.min.js" />
+    <Content Include="Content\jquery-ui-1.8.6.custom.css" />
     <Content Include="Content\MicrosoftAjax.debug.js" />
     <Content Include="Content\MicrosoftAjax.js" />
     <Content Include="Content\MicrosoftMvcAjax.debug.js" />
     <Content Include="Content\MicrosoftMvcAjax.js" />
     <Content Include="FlickrNet.dll" />
     <Content Include="Global.asax" />
+    <Content Include="hibernate.cfg.xml" />
+    <Content Include="log4net.xml" />
+    <Content Include="nhvalidator.cfg.xml" />
+    <Content Include="Scripts\jquery-1.4.3.js" />
+    <Content Include="Scripts\jquery.ui.core.js" />
+    <Content Include="Scripts\jquery.ui.datepicker-es.js" />
+    <Content Include="Scripts\jquery.ui.datepicker.js" />
     <Content Include="Scripts\LocationsMap.js" />
     <Content Include="Views\Home\Mapas.aspx" />
+    <Content Include="Views\Viaje\Create.aspx" />
+    <Content Include="Views\Viaje\Details.aspx" />
+    <Content Include="Views\Viaje\Edit.aspx" />
+    <Content Include="Views\Viaje\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -123,6 +220,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Dominio\Model\Model.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

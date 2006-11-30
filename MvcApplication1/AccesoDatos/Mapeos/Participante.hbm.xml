@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping namespace="MvcApplication1.Dominio.Model" assembly="MvcApplication1" xmlns="urn:nhibernate-mapping-2.2">
+	<class name="Participante" lazy="true" table="`Participante`" schema="`dbo`">
+		<composite-id>
+			<key-property name="IdViaje" column="`idViaje`" />
+			<key-property name="Nickname" column="`nickname`" />
+		</composite-id>
+		<property name="Tipo" column="`tipo`" length="25" />
+		<many-to-one name="Persona" class="Persona" column="`nickname`" not-null="true" fetch="select" update="true" insert="true" />
+		<many-to-one name="Viaje" class="Viaje" column="`idViaje`" not-null="true" fetch="select" update="true" insert="true" />
+	</class>
+</hibernate-mapping>

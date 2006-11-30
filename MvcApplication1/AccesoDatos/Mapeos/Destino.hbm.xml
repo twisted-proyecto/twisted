@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping namespace="MvcApplication1.Dominio.Model" assembly="MvcApplication1" xmlns="urn:nhibernate-mapping-2.2">
+	<class name="Destino" lazy="true" table="`Destino`" schema="`dbo`">
+		<id name="IdDestino" access="property" column="`idDestino`">
+			<generator class="native" />
+		</id>
+		<property name="Descripcion" column="`descripcion`" length="150" />
+		<property name="Direccion" column="`direccion`" length="150" />
+		<property name="Estatus" column="`estatus`" length="25" />
+		<property name="Fecha" column="`fecha`" />
+		<property name="Latitud" column="`latitud`" />
+		<property name="Longitud" column="`longitud`" />
+		<property name="Nombre" column="`nombre`" length="25" />
+		<property name="Url" column="`url`" length="100" />
+		<set name="Comentarios" fetch="select" cascade="save-update">
+			<key column="`idDestino`" />
+			<one-to-many class="Comentario" />
+		</set>
+		<many-to-one name="Viaje" class="Viaje" column="`idViaje`" not-null="true" fetch="select" update="true" insert="true" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping namespace="MvcApplication1.Dominio.Model" assembly="MvcApplication1" xmlns="urn:nhibernate-mapping-2.2">
+	<class name="Foto" lazy="true" table="`Foto`" schema="`dbo`">
+		<id name="IdFoto" access="property" column="`idFoto`">
+			<generator class="native" />
+		</id>
+		<property name="Descripcion" column="`descripcion`" length="150" />
+		<property name="Nombre" column="`nombre`" length="25" />
+		<property name="Url" column="`url`" length="100" />
+		<many-to-one name="Viaje" class="Viaje" column="`idViaje`" not-null="true" fetch="select" update="true" insert="true" />
+	</class>
+</hibernate-mapping>

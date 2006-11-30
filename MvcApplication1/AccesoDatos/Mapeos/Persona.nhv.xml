@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<nhv-mapping assembly="MvcApplication1" namespace="MvcApplication1.Dominio.Model" xmlns="urn:nhibernate-validator-1.0">
+	<class name="Persona">
+		<property name="Apellido">
+			<not-null />
+		</property>
+		<property name="Email">
+			<not-null />
+		</property>
+		<property name="FechaNacimiento">
+			<not-null />
+		</property>
+		<property name="Nickname">
+			<not-null />
+		</property>
+		<property name="Nombre">
+			<not-null />
+		</property>
+		<property name="Privacidad">
+			<not-null />
+		</property>
+	</class>
+</nhv-mapping>

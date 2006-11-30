@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping namespace="MvcApplication1.Dominio.Model" assembly="MvcApplication1" xmlns="urn:nhibernate-mapping-2.2">
+	<class name="Comentario" lazy="true" table="`Comentario`" schema="`dbo`">
+		<composite-id>
+			<key-property name="IdDestino" column="`idDestino`" />
+			<key-property name="Nickname" column="`nickname`" />
+		</composite-id>
+		<property name="Descripcion" column="`descripcion`" length="150" />
+		<property name="Fecha" column="`fecha`" />
+		<many-to-one name="Destino" class="Destino" column="`idDestino`" not-null="true" fetch="select" update="true" insert="true" />
+		<many-to-one name="Persona" class="Persona" column="`nickname`" not-null="true" fetch="select" update="true" insert="true" />
+	</class>
+</hibernate-mapping>

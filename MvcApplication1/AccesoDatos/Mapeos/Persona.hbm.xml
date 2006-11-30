@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping namespace="MvcApplication1.Dominio.Model" assembly="MvcApplication1" xmlns="urn:nhibernate-mapping-2.2">
+	<class name="Persona" lazy="true" table="`Persona`" schema="`dbo`">
+		<id name="Nickname" access="property" column="`nickname`" length="30">
+			<generator class="native" />
+		</id>
+		<property name="Apellido" column="`apellido`" length="25" />
+		<property name="Email" column="`email`" length="100" />
+		<property name="Estatus" column="`estatus`" length="25" />
+		<property name="FechaNacimiento" column="`fechaNacimiento`" />
+		<property name="Nombre" column="`nombre`" length="25" />
+		<property name="Privacidad" column="`privacidad`" length="25" />
+		<property name="Twitter" column="`twitter`" length="30" />
+		<set name="Amistads" fetch="select" cascade="save-update">
+			<key column="`nickname`" />
+			<one-to-many class="Amistad" />
+		</set>
+		<set name="Amistads1" fetch="select" cascade="save-update">
+			<key column="`nicknameAmigo`" />
+			<one-to-many class="Amistad" />
+		</set>
+		<set name="Comentarios" fetch="select" cascade="save-update">
+			<key column="`nickname`" />
+			<one-to-many class="Comentario" />
+		</set>
+		<set name="Participantes" fetch="select" cascade="save-update">
+			<key column="`nickname`" />
+			<one-to-many class="Participante" />
+		</set>
+	</class>
+</hibernate-mapping>
