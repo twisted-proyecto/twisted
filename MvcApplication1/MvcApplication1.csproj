@@ -86,6 +86,7 @@
     <Content Include="Content\MicrosoftAjax.js" />
     <Content Include="Content\MicrosoftMvcAjax.debug.js" />
     <Content Include="Content\MicrosoftMvcAjax.js" />
+    <Content Include="FlickrNet.dll" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\LocationsMap.js" />
     <Content Include="Views\Home\Mapas.aspx" />
