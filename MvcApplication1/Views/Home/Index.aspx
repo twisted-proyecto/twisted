@@ -6,7 +6,7 @@
 
     <div id="map" style="width : 700px; height : 400px; margin : 0px; padding : 0px; float : left; margin-right:20px;"></div>
     
-    <h2><%: ViewData["Message"] %></h2>
+    <h2><%: ViewData["Message"] %>Joe</h2>
     
     <%using (Html.BeginForm())
       {%>
