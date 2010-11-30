@@ -41,6 +41,7 @@
                     <li><%: Html.ActionLink("Página principal...", "Index", "Home")%></li>
                     <li><%: Html.ActionLink("Acerca de...", "About", "Home")%></li>
                     <li><%= Html.ActionLink("Viajes", "Index", "Viaje")%></li>
+                    <li><%= Html.ActionLink("Twitear", "Index", "Twitter")%></li>
                 </ul>
             
             </div>
