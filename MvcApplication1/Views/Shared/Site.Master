@@ -2,7 +2,13 @@
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<script runat="server">
 
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+</script>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <style type="text/css">
   @import url("http://www.google.com/uds/css/gsearch.css");
@@ -18,7 +24,7 @@
     <script src="../../Scripts/LocationsMap.js" type="text/javascript" ></script>
     <script src="http://www.google.com/uds/solutions/localsearch/gmlocalsearch.js" 
       type="text/javascript"></script>
-
+      
 </head>
 
 
@@ -29,19 +35,22 @@
         <div id="header">
             <div id="title">
                 <h1>TWISTED!</h1>
+               
             </div>
               
-            <div id="logindisplay">
-                <% Html.RenderPartial("LogOnUserControl"); %>
-            </div> 
+          <div>
+            Datos en sesión: <%: this.Session["data"] %>
+          </div>
+                               
+                      
             
             <div id="menucontainer">
             
-                <ul id="menu">              
+                <ul id="menu">
+                    <li><%= Html.ActionLink("Iniciar Sesion", "Index", "Twitter")%></li>              
                     <li><%: Html.ActionLink("Página principal...", "Index", "Home")%></li>
                     <li><%: Html.ActionLink("Acerca de...", "About", "Home")%></li>
                     <li><%= Html.ActionLink("Viajes", "Index", "Viaje")%></li>
-                    <li><%= Html.ActionLink("Twitear", "Index", "Twitter")%></li>
                 </ul>
             
             </div>

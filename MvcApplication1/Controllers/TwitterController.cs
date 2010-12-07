@@ -17,15 +17,6 @@ namespace MvcApplication1.Controllers
         
         public ActionResult Index()
         {
-            ViewData["XML"] = "Mi Xml";
-              return View();
-        }
-
-        [HttpPost]
-        public ActionResult Index(Object sender, EventArgs e)
-        {
-
-
             string url = "";
             string xml = "";
             oAuthTwitter oAuth = new oAuthTwitter();
@@ -49,18 +40,27 @@ namespace MvcApplication1.Controllers
                     //apiResponse.InnerHtml = Server.HtmlEncode(xml);
                     String parametroApertura = "<screen_name>";
                     String parametroCierre = "</screen_name>";
-                    String xmlParseado = parsear(xml, parametroApertura,parametroCierre);
-
+                    String xmlParseado = parsear(xml, parametroApertura, parametroCierre);
+                 
                     ViewData["XML"] = xmlParseado;
+                    ViewData["login"] = "Logeado Correctamente Como...";
+                    Session["data"] = xmlParseado;
                     //POST Test
-                    url = "http://twitter.com/statuses/update.xml";
-                    xml = oAuth.oAuthWebRequest(oAuthTwitter.Method.POST, url, "status=" + oAuth.UrlEncode("prueba con mvc Integrado9"));
+                   // url = "http://twitter.com/statuses/update.xml";
+                    //xml = oAuth.oAuthWebRequest(oAuthTwitter.Method.POST, url, "status=" + oAuth.UrlEncode("D @LuisExposito Prueba Proyecto Desarrollo de Software *Twisted* @Juan0fer @JoeElNegrito @LuisExposito"));
                     // apiResponse.InnerHtml = Server.HtmlEncode(xml);
                     XmlSiteMapProvider my = new XmlSiteMapProvider();
-                    return View((object)xml);
+                    return RedirectToAction("Index", "Home");
                 }
             }
 
+             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(Object sender, EventArgs e)
+        {
+               
 
             return View();
         }
