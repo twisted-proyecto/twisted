@@ -21,57 +21,63 @@
 
     <h2>- Gestion de Viajes -</h2>
 
-    <%= Html.ValidationSummary("Edit was unsuccessful. Please correct the errors and try again.") %>
+    <%= Html.ValidationSummary("Ha ocurrido un error. Por favor corrijalos e intente de nuevo.") %>
 
     <% using (Html.BeginForm()) {%>
 
         <fieldset>
             <legend>Editar Viaje:</legend>
-            <p>
+            
             <div class="editor-label">
                 <label for="Nombre">Nombre:</label>
             </div>
+            <div>
             <%= Html.TextBox("Nombre") %>
             <%= Html.ValidationMessage("Nombre", "*") %>
-            </p>
-            <p>
-                <div class="editor-label">
-                    <label for="Privacidad"> Privacidad:</label>
-                </div>
+            </div>
+            
+            <div class="editor-label">
+                <label for="Privacidad"> Privacidad:</label>
+            </div>
+            <div>
                 <%= Html.DropDownList("Privacidad") %>
                 <%= Html.ValidationMessage("Privacidad", "*") %>
-            </p>
-            <p>
-                <div class="editor-label">
-                    <label for="fechaInicio"> Fecha inicio:</label>
-                </div>
+            </div>
+
+            <div class="editor-label">
+                <label for="fechaInicio"> Fecha inicio:</label>
+            </div>
+            <div>
                 <%= Html.TextBox("fechaInicio")%>
                 <%= Html.ValidationMessage("fechaInicio", "*") %>
-            </p>
-            <p>
-                <div class="editor-label">
-                    <label for="fechaFin"> Fecha fin:</label>
-                </div>
+            </div>
+
+            <div class="editor-label">
+                <label for="fechaFin"> Fecha fin:</label>
+            </div>
+            <div>
                 <%= Html.TextBox("fechaFin")%>
                 <%= Html.ValidationMessage("fechaFin", "*") %>
-            </p>
-            <p>
-                <div class="editor-label">
-                    <label for="Hospedaje"> Hospedaje:</label>
-                </div>
-                <%= Html.TextBox("Hospedaje") %>
-                <%= Html.ValidationMessage("Hospedaje", "*") %>
-            </p>
-            <p>
-                <div class="editor-label">
-                    <label for="Destino"> Destino:</label>
-                </div>
+            </div>
+            
+            <div class="editor-label">
+                <label for="Destino"> Destino:</label>
+            </div>
+            <div>  
                 <%= Html.TextBox("Destino") %>
                 <%= Html.ValidationMessage("Destino", "*") %>
-            </p>
-            <p>
-                <input type="submit" value="Actualizar" />
-            </p>
+            </div>
+
+            <div class="editor-label">
+                <label for="Hospedaje"> Hospedaje:</label>
+            </div>
+            <div>  
+                <%= Html.TextBox("Hospedaje") %>
+            </div>
+            
+
+            <input type="submit" value="Actualizar" />
+            
         </fieldset>
 
     <% } %>

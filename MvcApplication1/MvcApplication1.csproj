@@ -207,10 +207,10 @@
     <Content Include="Scripts\LocationsMap.js" />
     <Content Include="Views\Home\Mapas.aspx" />
     <Content Include="Views\Twitter\Index.aspx" />
-    <Content Include="Views\Viaje\Create.aspx" />
     <Content Include="Views\Viaje\Details.aspx" />
     <Content Include="Views\Viaje\Edit.aspx" />
     <Content Include="Views\Viaje\Index.aspx" />
+    <Content Include="Views\Viaje\Create.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

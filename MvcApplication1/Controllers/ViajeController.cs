@@ -6,18 +6,13 @@ using System.Web.Mvc;
 using MvcApplication1.Dominio;
 using MvcApplication1.Dominio.Repositorios;
 using MvcApplication1.Dominio.Model;
+using MvcApplication1.Models;
+using System.Web.Security;
 
 namespace MvcApplication1.Controllers
 {
     public class ViajeController : Controller
     {
-        private string nombre = null;
-        private DateTime fechaI;
-        private DateTime fechaF;
-        private string destino = null;
-        private string hospedaje = null;
-        private string privacidad = null;
-
         //
         // GET: /Viaje/
         public ActionResult Index()
@@ -31,14 +26,14 @@ namespace MvcApplication1.Controllers
             IRepositorio<Viaje> repo = new ViajeRepositorio();
             return View(repo.GetById(id));
         }
-
+        
         public ActionResult Create()
         {
             IEnumerable<string> items = new string[] { "Publico", "Privado" };
             ViewData["Privacidad"] = new SelectList(items);
             return View();
         }
-
+        
         public ActionResult Edit(int id)
         {
             IEnumerable<string> items = new string[] {"Publico","Privado"};
@@ -47,54 +42,39 @@ namespace MvcApplication1.Controllers
             return View(repo.GetById(id));
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Edit(int id, FormCollection formCollection)
+        [HttpPost]
+        public ActionResult Edit(int id, Viaje Viaje)
         {
-            nombre = formCollection.Get("Nombre");
-            fechaI = System.Convert.ToDateTime(formCollection.Get("fechaInicio"));
-            fechaF = System.Convert.ToDateTime(formCollection.Get("fechaFin"));
-            destino = formCollection.Get("Destino");
-            hospedaje = formCollection.Get("Hospedaje");
-            privacidad = formCollection.Get("Privacidad");
+            if (ModelState.IsValid)
+            {
+                Viaje.IdViaje = id;
+                IRepositorio<Viaje> repo = new ViajeRepositorio();
+                repo.Update(Viaje);
 
-            Viaje Viaje = new Viaje();
-            Viaje.IdViaje = id;
-            Viaje.Nombre = nombre;
-            Viaje.FechaInicio = fechaI;
-            Viaje.FechaFin = fechaF;
-            Viaje.Destino = destino;
-            Viaje.Hospedaje = hospedaje;
-            Viaje.Privacidad = privacidad;
+                return RedirectToAction("Index");
+            }
 
-
-            IRepositorio<Viaje> repo = new ViajeRepositorio();
-            repo.Update(Viaje);
-
-            return RedirectToAction("Index");
+            // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
+            IEnumerable<string> items = new string[] { "Publico", "Privado" };
+            ViewData["Privacidad"] = new SelectList(items);
+            return View(Viaje);
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Create(FormCollection formCollection)
+        [HttpPost]
+        public ActionResult Create(Viaje Viaje)
         {
-            nombre = formCollection.Get("Nombre");
-            fechaI = System.Convert.ToDateTime(formCollection.Get("fechaInicio"));
-            fechaF = System.Convert.ToDateTime(formCollection.Get("fechaFin"));
-            destino = formCollection.Get("Destino");
-            hospedaje = formCollection.Get("Hospedaje");
-            privacidad = formCollection.Get("Privacidad");
-   
-            Viaje Viaje = new Viaje();
-            Viaje.Nombre = nombre;
-            Viaje.FechaInicio = fechaI;
-            Viaje.FechaFin = fechaF;
-            Viaje.Destino = destino;
-            Viaje.Hospedaje = hospedaje;
-            Viaje.Privacidad = privacidad;
-   
-            IRepositorio<Viaje> repo = new ViajeRepositorio();
-            repo.Save(Viaje);
+            if (ModelState.IsValid)
+            {                
+                IRepositorio<Viaje> repo = new ViajeRepositorio();
+                repo.Save(Viaje);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+
+            // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
+            IEnumerable<string> items = new string[] { "Publico", "Privado" };
+            ViewData["Privacidad"] = new SelectList(items);
+            return View(Viaje);
         }
 
         public ActionResult Delete(int id)

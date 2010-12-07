@@ -1,9 +1,7 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Viaje>" %>
- 
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Viaje>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Agregar nuevo Viaje
+	Agregar un nuevo Viaje
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -20,63 +18,73 @@
             $("#fechaFin").datepicker();
         });
 	</script>
+
+    <h2>- Gestion de Viajes - </h2>
+
+    <%= Html.ValidationSummary("Ha ocurrido un error. Por favor corrijalos e intente de nuevo.") %>
+
+    <% using (Html.BeginForm()) {%>
+
+        <fieldset>
+            <legend>Crear nuevo Viaje:</legend>
             
-    <form id="form1" runat="server">
-    <h2>- Gestion de Viajes -</h2>
-    <%= Html.ValidationSummary("Create was unsuccessful. Please correct the errors and try again.") %>
-    <% using (Html.BeginForm())
-       {%>
-    <fieldset>
-        <legend>Nuevo viaje:</legend>
-        <p>
             <div class="editor-label">
                 <label for="Nombre">Nombre:</label>
             </div>
+            <div>
             <%= Html.TextBox("Nombre") %>
             <%= Html.ValidationMessage("Nombre", "*") %>
-            </p>            
-            <p>
-                <div class="editor-label">
-                    <label for="Privacidad">Privacidad:</label>
-                </div>
+            </div>
+            
+            <div class="editor-label">
+                <label for="Privacidad"> Privacidad:</label>
+            </div>
+            <div>
                 <%= Html.DropDownList("Privacidad") %>
                 <%= Html.ValidationMessage("Privacidad", "*") %>
-            </p>
-            <p>
-                <div class="editor-label">
-                    <label for="fechaInicio"> Fecha inicio:</label>
-                </div>
+            </div>
+
+            <div class="editor-label">
+                <label for="fechaInicio"> Fecha inicio:</label>
+            </div>
+            <div>
                 <%= Html.TextBox("fechaInicio")%>
                 <%= Html.ValidationMessage("fechaInicio", "*") %>
-            </p>
-            <p>
-                <div class="editor-label">
-                    <label for="fechaFin"> Fecha fin:</label>
-                </div>
+            </div>
+
+            <div class="editor-label">
+                <label for="fechaFin"> Fecha fin:</label>
+            </div>
+            <div>
                 <%= Html.TextBox("fechaFin")%>
                 <%= Html.ValidationMessage("fechaFin", "*") %>
-            </p>
-            <p>
-                <div class="editor-label">
-                    <label for="Hospedaje">Hospedaje:</label>
-                </div>
-                <%= Html.TextBox("Hospedaje") %>
-                <%= Html.ValidationMessage("Hospedaje", "*") %>
-            </p>
-            <p>
-                <div class="editor-label">
-                    <label for="Destino">Destino:</label>
-                </div>
+            </div>
+            
+            <div class="editor-label">
+                <label for="Destino"> Destino:</label>
+            </div>
+            <div>  
                 <%= Html.TextBox("Destino") %>
                 <%= Html.ValidationMessage("Destino", "*") %>
+            </div>
+
+            <div class="editor-label">
+                <label for="Hospedaje"> Hospedaje:</label>
+            </div>
+            <div>  
+                <%= Html.TextBox("Hospedaje") %>
+            </div>
+            
+            <p>
+                <input type="submit" value="Aceptar" />
             </p>
-        <p>
-            <input type="submit" value="Agregar" />
-        </p>
-    </fieldset>
+        </fieldset>
+
     <% } %>
+
     <div>
-        <%=Html.ActionLink("Regresar a la lista", "Index") %>
+        <%: Html.ActionLink("Volver a la lista", "Index") %>
     </div>
-    </form>
+
 </asp:Content>
+
