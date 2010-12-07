@@ -6,18 +6,38 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2>Post Details</h2>
+    <h2>- Gestion de Viajes -</h2>
 
     <fieldset>
-        <legend>Fields</legend>
+        <legend>Detalles:</legend>
         <p>
-            Name:
+            Nombre:
             <%= Html.Encode(Model.Nombre) %>
+        </p>
+        <p>
+            Destino:
+            <%= Html.Encode(Model.Destino) %>
+        </p>
+        <p>
+            Hospedaje:
+            <%= Html.Encode(Model.Hospedaje) %>
+        </p>
+        <p>
+            Fecha Inicio:
+            <%= Html.Encode(Model.FechaInicio) %>
+        </p>
+        <p>
+            Fecha Fin:
+            <%= Html.Encode(Model.FechaFin) %>
+        </p>
+        <p>
+            Privacidad:
+            <%= Html.Encode(Model.Privacidad) %>
         </p>
     </fieldset>
     <p>
-        <%=Html.ActionLink("Edit", "Edit", new { id=Model.IdViaje }) %> |
-        <%=Html.ActionLink("Back to List", "Index") %>
+        <%=Html.ActionLink("Editar", "Edit", new { id=Model.IdViaje }) %> |
+        <%=Html.ActionLink("Volver a la lista", "Index") %>
     </p>
 
 </asp:Content>

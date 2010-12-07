@@ -32,8 +32,17 @@ namespace MvcApplication1.Controllers
             return View(repo.GetById(id));
         }
 
+        public ActionResult Create()
+        {
+            IEnumerable<string> items = new string[] { "Publico", "Privado" };
+            ViewData["Privacidad"] = new SelectList(items);
+            return View();
+        }
+
         public ActionResult Edit(int id)
         {
+            IEnumerable<string> items = new string[] {"Publico","Privado"};
+            ViewData["Privacidad"] = new SelectList(items);
             IRepositorio<Viaje> repo = new ViajeRepositorio();
             return View(repo.GetById(id));
         }
@@ -43,8 +52,7 @@ namespace MvcApplication1.Controllers
         {
             nombre = formCollection.Get("Nombre");
             fechaI = System.Convert.ToDateTime(formCollection.Get("fechaInicio"));
-            if (formCollection.Get("fechaFin").CompareTo("") != 0)
-                fechaF = System.Convert.ToDateTime(formCollection.Get("fechaFin"));
+            fechaF = System.Convert.ToDateTime(formCollection.Get("fechaFin"));
             destino = formCollection.Get("Destino");
             hospedaje = formCollection.Get("Hospedaje");
             privacidad = formCollection.Get("Privacidad");
@@ -65,18 +73,12 @@ namespace MvcApplication1.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create(FormCollection formCollection)
         {
             nombre = formCollection.Get("Nombre");
             fechaI = System.Convert.ToDateTime(formCollection.Get("fechaInicio"));
-            if (formCollection.Get("fechaFin").CompareTo("") != 0)
-                fechaF = System.Convert.ToDateTime(formCollection.Get("fechaFin"));
+            fechaF = System.Convert.ToDateTime(formCollection.Get("fechaFin"));
             destino = formCollection.Get("Destino");
             hospedaje = formCollection.Get("Hospedaje");
             privacidad = formCollection.Get("Privacidad");
