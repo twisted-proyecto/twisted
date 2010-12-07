@@ -35,19 +35,29 @@
         <div id="header">
             <div id="title">
                 <h1>TWISTED!</h1>
-               
             </div>
               
-          <div>
-            Datos en sesión: <%: this.Session["data"] %>
+          <div id="logindisplay">
+            <% if (this.Session["data"]!=null)
+             { %>
+            Bienvenido: <%: this.Session["data"] %>.!
+           <%}else{%>
+            Bienvenido: Guest User.!
+            <%}%>  
           </div>
-                               
+                              
                       
             
             <div id="menucontainer">
             
                 <ul id="menu">
-                    <li><%= Html.ActionLink("Iniciar Sesion", "Index", "Twitter")%></li>              
+                
+                     <% if (this.Session["data"]!=null)
+                        { %>
+                            <li><%= Html.ActionLink("Cerrar Sesion", "LogOut", "Twitter")%></li>
+                      <%}else{%>
+                            <li><%= Html.ActionLink("Iniciar Sesion", "Index", "Twitter")%></li>
+                      <%}%>              
                     <li><%: Html.ActionLink("Página principal...", "Index", "Home")%></li>
                     <li><%: Html.ActionLink("Acerca de...", "About", "Home")%></li>
                     <li><%= Html.ActionLink("Viajes", "Index", "Viaje")%></li>

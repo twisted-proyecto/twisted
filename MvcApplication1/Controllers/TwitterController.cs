@@ -51,6 +51,8 @@ namespace MvcApplication1.Controllers
                     // apiResponse.InnerHtml = Server.HtmlEncode(xml);
                     XmlSiteMapProvider my = new XmlSiteMapProvider();
                     return RedirectToAction("Index", "Home");
+
+
                 }
             }
 
@@ -60,9 +62,7 @@ namespace MvcApplication1.Controllers
         [HttpPost]
         public ActionResult Index(Object sender, EventArgs e)
         {
-               
-
-            return View();
+              return View();
         }
 
         public String parsear(String xml, String parametroApertura, String parametroCierre) {
@@ -75,7 +75,12 @@ namespace MvcApplication1.Controllers
             String xmlParseado = xml.Substring(indexApertura, indexCierre);
             return xmlParseado;
         }
-        
+
+        public ActionResult LogOut()
+        {
+            Session.Remove("data");
+            return RedirectToAction("Index", "Home");
+        }
 
     }
 
