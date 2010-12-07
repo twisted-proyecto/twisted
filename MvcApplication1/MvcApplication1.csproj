@@ -206,6 +206,7 @@
     <Content Include="Scripts\jquery.ui.datepicker.js" />
     <Content Include="Scripts\LocationsMap.js" />
     <Content Include="Views\Home\Mapas.aspx" />
+    <Content Include="Views\Twitter\LogOut.aspx" />
     <Content Include="Views\Twitter\Index.aspx" />
     <Content Include="Views\Viaje\Details.aspx" />
     <Content Include="Views\Viaje\Edit.aspx" />

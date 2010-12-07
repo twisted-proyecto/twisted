@@ -1,0 +1,31 @@
+Instalacion de Twisted
+
+Software Requerido 
+
+* Visual Studio 2010 en sus versiones express o professional
+* MS SqlServer 2008 normalmente este viene incluido con Visual Studio 2010
+
+1) Clonar o descargar el  proyecto desde el repositorio.
+
+2) Una vez este en una  carpeta local, importar a la solucion de visual studio 2010 
+las liberias que requiera o tengan problemas (Apereceran con un simbolo de warning, 
+hacer click derecho  y  agregar  nuevamente  la  referencia,  estaran en la carpeta
+/Twisted/MvcApplication1/references).
+
+3) En la carpeta /Twisted/MvcApplication1/ buscar los archivos: 
+
+"hibernate.cfg.xml" y "nhvalidator.cfg.xml" copiarlos y pegarlos en la carpeta...
+/Twisted/MvcApplication1/bin
+
+4) En la carpeta /Twisted/MvcApplication1/SQL habra un archivo llamado script.sql
+el  mismo  contiene  los  datos necesarios para crear la base de datos de nuestro
+proyecto debe ser ejecutado como esta en el manual de creacion de base datos.
+
+5) En este punto ya el proyecto deberia correr sin problemas...
+
+
+
+En caso de cualquier inconveniente escribanos a los correos:
+
+juanmanuelinf@gmail.com, joseph.villalba@gmail.com, luisfe.exposito@gmail.com
+  0426.820.78.26            0414. 229. 01. 00             0414.125. 21. 22 

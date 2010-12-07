@@ -17,6 +17,8 @@ namespace MvcApplication1.Controllers
         public ActionResult Index()
         {
             ViewData["Message"] = "Buscar destinos:";
+            var datos = Session["data"] as string;
+
             return View();
         }
 
