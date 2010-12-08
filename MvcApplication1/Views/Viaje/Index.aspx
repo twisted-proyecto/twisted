@@ -35,6 +35,9 @@
             <td>
                 <%= Html.ActionLink("Eliminar", "Delete", new { id = item.IdViaje })%>
             </td>
+              <td>
+                <%= Html.ActionLink("Destinos", "Index", "Destino",new { id = item.IdViaje },null)%>
+            </td>
         </tr>
     
     <% } %>

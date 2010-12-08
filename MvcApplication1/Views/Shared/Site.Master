@@ -58,8 +58,8 @@
                       <%}else{%>
                             <li><%= Html.ActionLink("Iniciar Sesion", "Index", "Twitter")%></li>
                       <%}%>              
-                    <li><%: Html.ActionLink("Página principal...", "Index", "Home")%></li>
-                    <li><%: Html.ActionLink("Acerca de...", "About", "Home")%></li>
+                    <li><%: Html.ActionLink("Página principal", "Index", "Home")%></li>
+                    <li><%: Html.ActionLink("Acerca de", "About", "Home")%></li>
                     <li><%= Html.ActionLink("Viajes", "Index", "Viaje")%></li>
                     <li><%= Html.ActionLink("Personas", "Index", "Persona")%></li>
                 </ul>

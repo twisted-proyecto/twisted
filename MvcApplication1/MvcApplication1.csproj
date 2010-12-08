@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DestinoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\TwitterController.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Dominio\Model\Persona.cs" />
     <Compile Include="Dominio\Model\Validation.cs" />
     <Compile Include="Dominio\Model\Viaje.cs" />
+    <Compile Include="Dominio\Repositorios\DestinoRepositorio.cs" />
     <Compile Include="Dominio\Repositorios\PersonaRepositorio.cs" />
     <Compile Include="Dominio\Repositorios\NHibernateHelper.cs" />
     <Compile Include="Dominio\Repositorios\ViajeRepositorio.cs" />
@@ -186,6 +188,10 @@
     <Content Include="Scripts\jquery.ui.datepicker-es.js" />
     <Content Include="Scripts\jquery.ui.datepicker.js" />
     <Content Include="Scripts\LocationsMap.js" />
+    <Content Include="Views\Destino\Create.aspx" />
+    <Content Include="Views\Destino\Details.aspx" />
+    <Content Include="Views\Destino\Edit.aspx" />
+    <Content Include="Views\Destino\Index.aspx" />
     <Content Include="Views\Home\Mapas.aspx" />
     <Content Include="Views\Persona\Create.aspx" />
     <Content Include="Views\Persona\Delete.aspx" />
