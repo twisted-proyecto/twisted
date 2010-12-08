@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using MvcApplication1.Dominio;
 using MvcApplication1.Dominio.Repositorios;
 using MvcApplication1.Dominio.Model;
-using MvcApplication1.Models;
 using System.Web.Security;
 
 namespace MvcApplication1.Controllers

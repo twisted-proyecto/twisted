@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.HtmlControls;
-using MvcApplication1.Models;
+using MvcApplication1.Dominio.Model;
 
 
 namespace MvcApplication1.Controllers

@@ -1,4 +1,4 @@
-namespace MvcApplication1.Models
+namespace MvcApplication1.Dominio.Model
 {
     public class Location
     {

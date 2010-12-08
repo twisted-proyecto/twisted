@@ -7,7 +7,7 @@ using System.Web.Security;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MvcApplication1;
 using MvcApplication1.Controllers;
-using MvcApplication1.Models;
+using MvcApplication1.Dominio.Model;
 
 namespace MvcApplication1.Tests.Controllers
 {

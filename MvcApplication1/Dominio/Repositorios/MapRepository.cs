@@ -1,8 +1,8 @@
-using MvcApplication1.Models;
+using MvcApplication1.Dominio.Model;
 using FlickrNet;
 using System.Collections.Generic;
 
-namespace MvcApplication1.Repositories
+namespace MvcApplication1.Dominio.Repositorios
 {
     public class MapRepository
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace MvcApplication1.Models
+namespace MvcApplication1.Dominio.Model
 {
     public class Map
     {

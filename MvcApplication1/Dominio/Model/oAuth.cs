@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web;
 
-namespace MvcApplication1.Models
+namespace MvcApplication1.Dominio.Model
 {
     public class OAuthBase
     {

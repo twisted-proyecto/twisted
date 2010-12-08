@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
-using MvcApplication1.Models;
+using MvcApplication1.Dominio.Model;
 
 namespace MvcApplication1.Controllers
 {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MvcApplication1.Repositories;
+using MvcApplication1.Dominio.Repositorios;
 using FlickrNet;
-using MvcApplication1.Models;
+using MvcApplication1.Dominio.Model;
 
 
 namespace MvcApplication1.Controllers

@@ -12,7 +12,7 @@ using System.IO;
 using System.Collections.Specialized;
 using Twitterizer;
 
-namespace MvcApplication1.Models
+namespace MvcApplication1.Dominio.Model
 {
     public class oAuthTwitter : OAuthBase
     {
