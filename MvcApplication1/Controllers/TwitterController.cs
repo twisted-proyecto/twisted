@@ -50,7 +50,7 @@ namespace MvcApplication1.Controllers
                     //xml = oAuth.oAuthWebRequest(oAuthTwitter.Method.POST, url, "status=" + oAuth.UrlEncode("D @LuisExposito Prueba Proyecto Desarrollo de Software *Twisted* @Juan0fer @JoeElNegrito @LuisExposito"));
                     // apiResponse.InnerHtml = Server.HtmlEncode(xml);
                     XmlSiteMapProvider my = new XmlSiteMapProvider();
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Verificar", "Persona");
 
 
                 }

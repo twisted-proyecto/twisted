@@ -106,11 +106,13 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\TwitterController.cs" />
     <Compile Include="Controllers\TwitterController.designer.cs">
       <DependentUpon>TwitterController.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ViajeController.cs" />
+    <Compile Include="Dominio\IRepositorioPersona.cs" />
     <Compile Include="Dominio\IRepositorio.cs" />
     <Compile Include="Dominio\Model\Amistad.cs" />
     <Compile Include="Dominio\Model\Comentario.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="Dominio\Model\Persona.cs" />
     <Compile Include="Dominio\Model\Validation.cs" />
     <Compile Include="Dominio\Model\Viaje.cs" />
+    <Compile Include="Dominio\Repositorios\PersonaRepositorio.cs" />
     <Compile Include="Dominio\Repositorios\NHibernateHelper.cs" />
     <Compile Include="Dominio\Repositorios\ViajeRepositorio.cs" />
     <Compile Include="Global.asax.cs">
@@ -184,6 +187,12 @@
     <Content Include="Scripts\jquery.ui.datepicker.js" />
     <Content Include="Scripts\LocationsMap.js" />
     <Content Include="Views\Home\Mapas.aspx" />
+    <Content Include="Views\Persona\Create.aspx" />
+    <Content Include="Views\Persona\Delete.aspx" />
+    <Content Include="Views\Persona\Details.aspx" />
+    <Content Include="Views\Persona\Edit.aspx" />
+    <Content Include="Views\Persona\Empty.aspx" />
+    <Content Include="Views\Persona\Index.aspx" />
     <Content Include="Views\Twitter\LogOut.aspx" />
     <Content Include="Views\Twitter\Index.aspx" />
     <Content Include="Views\Viaje\Details.aspx" />
@@ -206,7 +215,7 @@
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\MicrosoftAjax.js" />
     <Content Include="Scripts\MicrosoftAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="MicrosoftMvcAjax.js" />
     <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />

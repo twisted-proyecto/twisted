@@ -2,7 +2,7 @@
 <hibernate-mapping namespace="MvcApplication1.Dominio.Model" assembly="MvcApplication1" xmlns="urn:nhibernate-mapping-2.2">
 	<class name="Persona" lazy="true" table="`Persona`" schema="`dbo`">
 		<id name="Nickname" access="property" column="`nickname`" length="30">
-			<generator class="native" />
+			<generator class="assigned" />
 		</id>
 		<property name="Apellido" column="`apellido`" length="25" />
 		<property name="Email" column="`email`" length="100" />
