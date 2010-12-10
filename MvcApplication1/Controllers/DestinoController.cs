@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using MvcApplication1.Dominio;
 using MvcApplication1.Dominio.Repositorios;
 using MvcApplication1.Dominio.Model;
+using FlickrNet;
 
 namespace MvcApplication1.Controllers
 {
@@ -23,6 +24,74 @@ namespace MvcApplication1.Controllers
         public ISet<Comentario> Comentarios = null;
         public Viaje Viaje = null;
 
+
+
+        static PhotoCollection photos = new PhotoCollection();
+        public ActionResult Create()
+        {
+            ViewData["Message"] = "Buscar destinos:";
+
+
+            return View();
+        }
+
+        public ActionResult Map()
+        {
+            var mapRepository = new MapRepository();
+            var map = new Map();
+            if (photos.Count == 0)
+                map = mapRepository.SetRepositories();
+            else
+                map = mapRepository.SetRepositories(photos);
+            return Json(map, JsonRequestBehavior.AllowGet);
+        }
+
+
+        
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Create(Destino Destino,string Button)
+        {
+            if (Button == "Agregar Destino")
+            {
+                IRepositorio<Destino> repo = new DestinoRepositorio();
+                repo.Save(Destino);
+
+                return RedirectToAction("Index");
+            }
+            else {
+
+                var map = new Map();
+                UpdateModel(map);
+                int i = 0;
+                PhotoSearchOptions options = new PhotoSearchOptions();
+                //options.BoundaryBox = new BoundaryBox(-1.7, 54.9, -1.4, 55.2); // Roughly Newcastle upon Type, England
+                //options.BoundaryBox = BoundaryBox.World;
+                options.Extras |= PhotoSearchExtras.Geo;
+                options.Tags = map.Name;
+                options.HasGeo = true;
+                options.PerPage = 5;
+                Flickr flickr = new Flickr("3de826e278b4988011ef0227585a7838", "81a96df44a82b16c");
+                photos = flickr.PhotosSearch(options);
+                foreach (Photo photo in photos)
+                {
+                    ViewData["Message"] = String.Format("Lugares de \"{0}\".", map.Name);
+                    ViewData.Add(("Message" + i), photo.ThumbnailUrl);
+                    i++;
+                }
+
+                return View();
+            
+            }
+        }
+        
+     
+        
+        public ActionResult About()
+        {
+            return View();
+        }
+
+   
         //
         // GET: /Destino/
         public ActionResult Index(int id,String nada)
@@ -37,10 +106,7 @@ namespace MvcApplication1.Controllers
             return View(repo.GetById(id));
         }
 
-        public ActionResult Create()
-        {
-            return View();
-        }
+       
 
         public ActionResult Edit(int id)
         {
@@ -54,15 +120,6 @@ namespace MvcApplication1.Controllers
 
             IRepositorio<Destino> repo = new DestinoRepositorio();
             repo.Update(Destino);
-
-            return RedirectToAction("Index");
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Create(Destino Destino)
-        {
-            IRepositorio<Destino> repo = new DestinoRepositorio();
-            repo.Save(Destino);
 
             return RedirectToAction("Index");
         }
