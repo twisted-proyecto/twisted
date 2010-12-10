@@ -7,6 +7,7 @@ using MvcApplication1.Dominio.Repositorios;
 using FlickrNet;
 using MvcApplication1.Dominio.Model;
 using MvcApplication1.Dominio;
+using System.Net.Mail;
 
 
 namespace MvcApplication1.Controllers
@@ -17,13 +18,10 @@ namespace MvcApplication1.Controllers
         static PhotoCollection photos = new PhotoCollection();
         public ActionResult Index()
         {
-            ViewData["Message"] = "Buscar destinos:";
-            
-            
+            ViewData["Message"] = "Buscar destinos:";           
             return View();
         }
 
-        
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Index(FormCollection form)
@@ -50,10 +48,13 @@ namespace MvcApplication1.Controllers
             return View();
         }
 
+
         public ActionResult About()
         {
            return View();
         }
+
+
 
         public ActionResult Map()
         {
@@ -63,8 +64,10 @@ namespace MvcApplication1.Controllers
                 map = mapRepository.SetRepositories();
             else
                 map = mapRepository.SetRepositories(photos);
-            return Json(map,JsonRequestBehavior.AllowGet);
+            return Json(map, JsonRequestBehavior.AllowGet);
         }
+
+                
 
     }
 }

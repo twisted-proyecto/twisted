@@ -31,23 +31,9 @@ namespace MvcApplication1.Controllers
         {
             ViewData["Message"] = "Buscar destinos:";
 
-
             return View();
         }
 
-        public ActionResult Map()
-        {
-            var mapRepository = new MapRepository();
-            var map = new Map();
-            if (photos.Count == 0)
-                map = mapRepository.SetRepositories();
-            else
-                map = mapRepository.SetRepositories(photos);
-            return Json(map, JsonRequestBehavior.AllowGet);
-        }
-
-
-        
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create(Destino Destino,string Button)
         {
@@ -59,7 +45,6 @@ namespace MvcApplication1.Controllers
                 return RedirectToAction("Index");
             }
             else {
-
                 var map = new Map();
                 UpdateModel(map);
                 int i = 0;
@@ -78,13 +63,22 @@ namespace MvcApplication1.Controllers
                     ViewData.Add(("Message" + i), photo.ThumbnailUrl);
                     i++;
                 }
-
+                
                 return View();
-            
             }
         }
-        
-     
+
+        public ActionResult Map()
+        {
+            var mapRepository = new MapRepository();
+            var map = new Map();
+            if (photos.Count == 0)
+                map = mapRepository.SetRepositories();
+            else
+                map = mapRepository.SetRepositories(photos);
+
+            return Json(map, "1",JsonRequestBehavior.AllowGet);
+        }
         
         public ActionResult About()
         {
