@@ -16,13 +16,13 @@ namespace MvcApplication1.Test
         private Persona _model;
         private IRepositorioPersona<Persona> _repositorio;
         private string _nombreAModificar;
-        private Persona _LaPersona;
+        private Persona _laPersona;
         private Persona _personaEsperado;
 
         private Persona ObtenerPersona()
         {
-            _LaPersona = _repositorio.GetById("nicknameTest");
-            return _LaPersona;
+            _laPersona = _repositorio.GetById("nicknameTest");
+            return _laPersona;
         }
 
         [TestInitialize]
