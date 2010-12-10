@@ -192,7 +192,6 @@
     <Content Include="Views\Destino\Details.aspx" />
     <Content Include="Views\Destino\Edit.aspx" />
     <Content Include="Views\Destino\Index.aspx" />
-    <Content Include="Views\Home\Mapas.aspx" />
     <Content Include="Views\Persona\Create.aspx" />
     <Content Include="Views\Persona\Delete.aspx" />
     <Content Include="Views\Persona\Details.aspx" />

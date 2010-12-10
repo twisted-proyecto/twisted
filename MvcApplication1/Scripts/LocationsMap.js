@@ -3,10 +3,18 @@
 // make a json request to get the map data from the Map action
 $(function () {
     if (google.maps.BrowserIsCompatible()) {
-        //$.getJSON("http://" + window.location.host + "/Home/Map", initialise);
-        $.getJSON("/Home/Map", initialise);
+        // $.getJSON("http://" + window.location.host + "/Home/Map", initialise);
+        var pathArray = window.location.pathname.split('/');
+        if (pathArray[1] != "")
+            $.getJSON("/" + pathArray[1] + "/Map", initialise);
+        else
+            $.getJSON("/Home/Map", initialise);
     }
 });
+
+ 
+
+
 
 function initialise(mapData) {
     $("#mapName").text(mapData.Name);

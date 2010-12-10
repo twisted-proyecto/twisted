@@ -23,7 +23,6 @@ namespace MvcApplication1.Controllers
             return View();
         }
 
-        
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Index(FormCollection form)
@@ -49,12 +48,6 @@ namespace MvcApplication1.Controllers
 
             return View();
         }
-
-        public ActionResult About()
-        {
-           return View();
-        }
-
         public ActionResult Map()
         {
             var mapRepository = new MapRepository();
@@ -63,8 +56,18 @@ namespace MvcApplication1.Controllers
                 map = mapRepository.SetRepositories();
             else
                 map = mapRepository.SetRepositories(photos);
-            return Json(map,JsonRequestBehavior.AllowGet);
+            return Json(map, JsonRequestBehavior.AllowGet);
         }
+
+
+
+
+        public ActionResult About()
+        {
+           return View();
+        }
+
+   
 
     }
 }
