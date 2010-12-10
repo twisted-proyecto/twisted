@@ -63,6 +63,7 @@
                     <li><%: Html.ActionLink("Acerca de", "About", "Home")%></li>
                     <li><%= Html.ActionLink("Viajes", "Index", "Viaje")%></li>
                     <li><%= Html.ActionLink("Personas", "Index", "Persona")%></li>
+                    
                 </ul>
             
             </div>
