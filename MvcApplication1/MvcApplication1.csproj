@@ -139,6 +139,7 @@
     <Compile Include="Dominio\Model\oAuthTwitter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dominio\Repositorios\MapRepository.cs" />
+    <Compile Include="Test\PersonaRepositorioTest.cs" />
     <Compile Include="Test\ViajeRepositorioTest.cs" />
   </ItemGroup>
   <ItemGroup>
