@@ -42,13 +42,13 @@ namespace MvcApplication1.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, Viaje Viaje)
+        public ActionResult Edit(int id, Viaje viaje)
         {
             if (ModelState.IsValid)
             {
-                Viaje.IdViaje = id;
+                viaje.IdViaje = id;
                 IRepositorio<Viaje> repo = new ViajeRepositorio();
-                repo.Update(Viaje);
+                repo.Update(viaje);
 
                 return RedirectToAction("Index");
             }
@@ -56,16 +56,16 @@ namespace MvcApplication1.Controllers
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
             IEnumerable<string> items = new string[] { "Publico", "Privado" };
             ViewData["Privacidad"] = new SelectList(items);
-            return View(Viaje);
+            return View(viaje);
         }
 
         [HttpPost]
-        public ActionResult Create(Viaje Viaje)
+        public ActionResult Create(Viaje viaje)
         {
             if (ModelState.IsValid)
             {                
                 IRepositorio<Viaje> repo = new ViajeRepositorio();
-                repo.Save(Viaje);
+                repo.Save(viaje);
 
                 return RedirectToAction("Index");
             }
@@ -73,7 +73,7 @@ namespace MvcApplication1.Controllers
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
             IEnumerable<string> items = new string[] { "Publico", "Privado" };
             ViewData["Privacidad"] = new SelectList(items);
-            return View(Viaje);
+            return View(viaje);
         }
 
         public ActionResult Delete(int id)
