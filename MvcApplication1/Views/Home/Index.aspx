@@ -1,16 +1,19 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
 
+<asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
+	Twisted
+</asp:Content>
+
 <asp:Content ID="indexContent" ContentPlaceHolderID="MainContent" runat="server">
 
  <h2 id="mapName"></h2>
 
- <div id="map" style="width : 700px; height : 400px; margin : 0px; padding : 0px; float : left; margin-right:20px;"></div>
+    <div id="map" style="width : 700px; height : 400px; margin : 0px; padding : 0px; float : left; margin-right:20px;"></div>
   
- 
     <h2><%: ViewData["Message"] %></h2>
     
     <%using (Html.BeginForm())
-      {%>
+    { %>
     <div>
     <fieldset>
      <p>
