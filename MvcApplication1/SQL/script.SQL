@@ -1,9 +1,26 @@
-﻿/*
+/*
 Created: 24/01/2009
 Modified: 25/11/2006
 Model: MS SQL Server 2008
 Database: MS SQL Server 2008
 */
+
+USE MASTER 
+GO 
+
+-- Create Database section -------------------------------------------------
+IF EXISTS(SELECT NAME FROM SYS.DATABASES WHERE NAME = 'twisted') 
+BEGIN 
+	DROP DATABASE twisted 
+END 
+	CREATE DATABASE twisted 
+GO 
+
+PRINT 'La base de datos: twisted ha sido creada con exito. Gracias, j2l Team.' 
+GO 
+
+USE twisted 
+GO 
 
 -- Create tables section -------------------------------------------------
 
