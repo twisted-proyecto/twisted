@@ -47,8 +47,7 @@ namespace MvcApplication1.Controllers
 
             return View();
         }
-<<<<<<< HEAD
-=======
+
 
         public ActionResult About()
         {
@@ -56,7 +55,7 @@ namespace MvcApplication1.Controllers
         }
 
 
->>>>>>> f0c52c89c682f5a09c4355e454810d6a89c24c5b
+
         public ActionResult Map()
         {
             var mapRepository = new MapRepository();
@@ -68,15 +67,7 @@ namespace MvcApplication1.Controllers
             return Json(map, JsonRequestBehavior.AllowGet);
         }
 
-
-
-
-        public ActionResult About()
-        {
-           return View();
-        }
-
-   
+                
 
     }
 }
