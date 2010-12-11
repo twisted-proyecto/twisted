@@ -7,7 +7,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <h2>- Gestion de Viajes -</h2>
-
+    <% if (Model.Count() == 0)
+       { %>
+           No participas en ningun Viaje.
+       <% }
+    else
+       {%>
     <table>
         <tr>
             <th></th>
@@ -18,29 +23,34 @@
                 Fecha de Inicio
             </th>
             <th></th>
+            <th></th>
         </tr>
-    <% foreach (var item in Model) { %>
+    <%
+           foreach (var item in Model)
+           {%>
     
         <tr>
             <td>
-                <%= Html.ActionLink("Editar", "Edit", new {  id=item.IdViaje }) %> |
-                <%= Html.ActionLink("Detalles", "Details", new { id = item.IdViaje })%>
+                <%=Html.ActionLink("Editar", "Edit", new {id = item.IdViaje})%> |
+                <%=Html.ActionLink("Detalles", "Details", new {id = item.IdViaje})%>
             </td>
             <td>
-                <%= Html.Encode(item.Nombre) %>
+                <%=Html.Encode(item.Nombre)%>
             </td>
             <td>
-                <%= Html.Encode(item.FechaInicio) %>
+                <%=Html.Encode(item.FechaInicio)%>
             </td>
             <td>
-                <%= Html.ActionLink("Eliminar", "Delete", new { id = item.IdViaje })%>
+                <%=Html.ActionLink("Eliminar", "Delete", new {id = item.IdViaje})%>
             </td>
               <td>
-                <%= Html.ActionLink("Destinos", "Index", "Destino", new { idViaje = item.IdViaje }, null)%>
+                <%=Html.ActionLink("Destinos", "Index", "Destino", new {idViaje = item.IdViaje}, null)%>
             </td>
         </tr>
     
-    <% } %>
+    <%
+           }
+       }%>
 
     </table>
 

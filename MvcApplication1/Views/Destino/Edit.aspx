@@ -1,18 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Destino>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Edit
+	Editar Destino
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2>Edit</h2>
+    <h2>- Gestion de Destinos -</h2>
 
     <% using (Html.BeginForm()) {%>
         <%: Html.ValidationSummary(true) %>
         
         <fieldset>
-            <legend>Fields</legend>
+            <legend>Editar Destino:</legend>
             
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Nombre) %>
@@ -51,18 +51,18 @@
             </div>
             
             <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.Latitud, new { disabled = "disabled" })%>
+                <%: Html.TextBoxFor(model => model.Latitud)%>
             </div>
 
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Longitud) %>
             </div>
             <div class="editor-label-disable">
-                <%: Html.TextBoxFor(model => model.Longitud, new { disabled="disabled" })%>
+                <%: Html.TextBoxFor(model => model.Longitud)%>
             </div>
 
             <p>
-                <input type="submit" value="Save" />
+                <input type="submit" value="Modificar" />
             </p>
             
             <div class="editor-field-hidden">
