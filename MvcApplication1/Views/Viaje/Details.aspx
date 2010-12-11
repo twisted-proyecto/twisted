@@ -37,7 +37,7 @@
     </fieldset>
     <p>
         <%=Html.ActionLink("Editar", "Edit", new { id=Model.IdViaje }) %> |
-        <%=Html.ActionLink("Volver a la lista", "Index") %>
+        <%=Html.ActionLink("Volver a la lista", "Index", "Destino", new { idViaje = ViewData["idViaje"] }, null)%>
     </p>
 
 </asp:Content>

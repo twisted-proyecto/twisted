@@ -24,7 +24,7 @@
         <tr>
             <td>
                 <%= Html.ActionLink("Editar", "Edit", new { id = item.IdDestino, idViaje = ViewData["idViaje"] })%> |
-                <%= Html.ActionLink("Detalles", "Details", new { id = item.IdDestino })%>
+                <%= Html.ActionLink("Detalles", "Details",new { id = item.IdDestino, idViaje = ViewData["idViaje"] })%>
             </td>
             <td>
                 <%= Html.Encode(item.Nombre) %>
@@ -42,7 +42,7 @@
     </table>
 
     <p>
-        <%= Html.ActionLink("Agregar nuevo destino", "Create", new { id = ViewData["idViaje"] })%>
+        <%= Html.ActionLink("Agregar nuevo destino", "Create", new { idViaje = ViewData["idViaje"] })%>
     </p>
 
 </asp:Content>
