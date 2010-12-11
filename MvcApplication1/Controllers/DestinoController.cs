@@ -71,7 +71,7 @@ namespace MvcApplication1.Controllers
                 }
                 int id2 = idViaje;
                 ViewData["idViaje"] = id2;
-                return View(new { idViaje = id2 });
+                return View();
             }
         }
 
