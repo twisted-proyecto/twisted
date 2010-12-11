@@ -267,7 +267,7 @@ namespace MvcApplication1.Dominio.Model
             }
             catch
             {
-                throw;
+               
             }
             finally
             {

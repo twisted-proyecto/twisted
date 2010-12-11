@@ -21,7 +21,7 @@
 
     <h2>- Gestion de Viajes - </h2>
 
-    <%= Html.ValidationSummary("Ha ocurrido un error. Por favor corrijalos e intente de nuevo.") %>
+    <%= Html.ValidationSummary(true,"Ha ocurrido un error. Por favor corrijalos e intente de nuevo.") %>
 
     <% using (Html.BeginForm()) {%>
 

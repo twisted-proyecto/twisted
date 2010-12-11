@@ -24,11 +24,11 @@
         </p>
         <p>
             Fecha Inicio:
-            <%= Html.Encode(Model.FechaInicio) %>
+          <div class="display-field"><%: String.Format("{0:dd/MM/yyyy}", Model.FechaInicio)%></div>
         </p>
         <p>
             Fecha Fin:
-            <%= Html.Encode(Model.FechaFin) %>
+           <div class="display-field"><%: String.Format("{0:dd/MM/yyyy}", Model.FechaFin)%></div>
         </p>
         <p>
             Privacidad:

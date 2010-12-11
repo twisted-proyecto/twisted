@@ -24,7 +24,7 @@
         <div class="display-field"><%: Model.Estatus %></div>
         
         <div class="display-label">Fecha</div>
-        <div class="display-field"><%: String.Format("{0:g}", Model.Fecha) %></div>
+        <div class="display-field"><%: String.Format("{0:dd/MM/yyyy}", Model.Fecha)%></div>
         
         <div class="display-label">Latitud</div>
         <div class="display-field"><%: String.Format("{0:F}", Model.Latitud) %></div>

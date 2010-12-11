@@ -22,8 +22,11 @@ namespace MvcApplication1.Controllers
                 IRepositorioPersona<Persona> repo = new PersonaRepositorio();
                 IList<Persona> milista = repo.GetByPrivacidad("Publico");
                 Persona miPersona = repo.GetById(nick);
-                if (miPersona.Privacidad != "Publico")
-                    milista.Add(miPersona);
+                if (miPersona != null)
+                {
+                    if (miPersona.Privacidad != "Publico")
+                        milista.Add(miPersona);
+                }
                 return View(milista);
             }
             else
@@ -123,6 +126,7 @@ namespace MvcApplication1.Controllers
 
         public ActionResult Delete(String id)
         {
+            Session.Remove("data");
             IRepositorioPersona<Persona> repo = new PersonaRepositorio();
             repo.Delete(repo.GetById(id));
             return RedirectToAction("Index");

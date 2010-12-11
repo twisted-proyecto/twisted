@@ -5,6 +5,17 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+ <script src="../../Scripts/jquery-1.4.3.js"></script>
+    <script src="../../Scripts/jquery.ui.core.js"></script>
+    <script src="../../Scripts/jquery.ui.datepicker-es.js"></script>
+    <script src="../../Scripts/jquery.ui.datepicker.js"></script>
+    <link rel="stylesheet" href="../../Content/jquery-ui-1.8.6.custom.css">
+    <script type="text/javascript">
+        $(function () {
+            $("#Fecha").datepicker();
+        });
+	</script>
+
 
     <h2>- Gestion de Destinos -</h2>
 
@@ -42,7 +53,7 @@
                 <%: Html.LabelFor(model => model.Fecha) %>
             </div>
             <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.Fecha, String.Format("{0:g}", Model.Fecha)) %>
+                <%: Html.TextBoxFor(model => model.Fecha, String.Format("{0:dd/MM/yyyy}", Model.Fecha))%>
                 <%: Html.ValidationMessageFor(model => model.Fecha) %>
             </div>
          

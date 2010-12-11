@@ -6,14 +6,26 @@
 
    
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-  
+   <script src="../../Scripts/jquery-1.4.3.js"></script>
+    <script src="../../Scripts/jquery.ui.core.js"></script>
+    <script src="../../Scripts/jquery.ui.datepicker-es.js"></script>
+    <script src="../../Scripts/jquery.ui.datepicker.js"></script>
+    <link rel="stylesheet" href="../../Content/jquery-ui-1.8.6.custom.css">
+    <script type="text/javascript">
+        $(function () {
+            $("#Fecha").datepicker();
+        });
+	</script>
+
   <h2 id="mapName"></h2>
 
  <div id="map" style="width : 700px; height : 400px; margin : 0px; padding : 0px; float : left; margin-right:20px;"></div>
     
     <h2><%: ViewData["Message"] %></h2>
-    
+   
+
     <%Html.BeginForm();{%>
+    
     <div>
     <fieldset>
      <p>

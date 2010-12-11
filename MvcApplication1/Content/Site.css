@@ -347,7 +347,7 @@ div#title
 
 .editor-field-disable
 {
-    input[disabled="disabled"];
+    
     margin: 0.5em 0;
 }
 

@@ -39,7 +39,7 @@
                 <%=Html.Encode(item.Nombre)%>
             </td>
             <td>
-                <%=Html.Encode(item.Fecha)%>
+                 <%: String.Format("{0:dd/MM/yyyy}", item.Fecha)%>
             </td>
             <td>
                 <%=Html.ActionLink("Eliminar", "Delete",

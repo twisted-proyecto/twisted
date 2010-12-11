@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.HtmlControls;
 using MvcApplication1.Dominio.Model;
+using MvcApplication1.Dominio;
+using MvcApplication1.Dominio.Repositorios;
 
 
 namespace MvcApplication1.Controllers
@@ -41,14 +43,20 @@ namespace MvcApplication1.Controllers
                     String parametroApertura = "<screen_name>";
                     String parametroCierre = "</screen_name>";
                     String xmlParseado = parsear(xml, parametroApertura, parametroCierre);
-                 
+
                     ViewData["XML"] = xmlParseado;
                     ViewData["login"] = "Logeado Correctamente Como...";
                     Session["data"] = xmlParseado;
                     //POST Test
-                   // url = "http://twitter.com/statuses/update.xml";
-                    //xml = oAuth.oAuthWebRequest(oAuthTwitter.Method.POST, url, "status=" + oAuth.UrlEncode("D @LuisExposito Prueba Proyecto Desarrollo de Software *Twisted* @Juan0fer @JoeElNegrito @LuisExposito"));
-                    // apiResponse.InnerHtml = Server.HtmlEncode(xml);
+                    IRepositorioPersona<Persona> repo = new PersonaRepositorio();
+                    Persona p = repo.GetById(xmlParseado);
+                    if (p == null)
+                    {
+                        url = "http://twitter.com/statuses/update.xml";
+                        xml = oAuth.oAuthWebRequest(oAuthTwitter.Method.POST, url,"status=" +oAuth.UrlEncode("Yo ya me uni a la red @TwistedUCAB ... que esperas Unete! y comparte tus viajes tambien."));
+                    }
+                
+                //apiResponse.InnerHtml = Server.HtmlEncode(xml);
                     XmlSiteMapProvider my = new XmlSiteMapProvider();
                     return RedirectToAction("Verificar", "Persona");
 
