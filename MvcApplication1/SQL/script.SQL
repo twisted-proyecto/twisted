@@ -43,7 +43,7 @@ go
 CREATE TABLE [Destino]
 (
  [idDestino] Int IDENTITY(1,1)PRIMARY KEY CLUSTERED,
- [nombre] Varchar(25) NOT NULL,
+ [nombre] Varchar(60) NOT NULL,
  [latitud] Float NOT NULL,
  [longitud] Float NOT NULL,
  [estatus] Varchar(25) NOT NULL,

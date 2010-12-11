@@ -9,8 +9,11 @@
     <h2>Details</h2>
 
     <fieldset>
-        <legend>Fields</legend>
+        <legend>Detalles:</legend>
         
+        <div class="display-label">Nombre</div>
+        <div class="display-field"><%: Model.Nombre %></div>
+
         <div class="display-label">Descripcion</div>
         <div class="display-field"><%: Model.Descripcion %></div>
         
@@ -23,20 +26,14 @@
         <div class="display-label">Fecha</div>
         <div class="display-field"><%: String.Format("{0:g}", Model.Fecha) %></div>
         
-        <div class="display-label">IdDestino</div>
-        <div class="display-field"><%: Model.IdDestino %></div>
-        
         <div class="display-label">Latitud</div>
         <div class="display-field"><%: String.Format("{0:F}", Model.Latitud) %></div>
         
         <div class="display-label">Longitud</div>
         <div class="display-field"><%: String.Format("{0:F}", Model.Longitud) %></div>
         
-        <div class="display-label">Nombre</div>
-        <div class="display-field"><%: Model.Nombre %></div>
-        
-        <div class="display-label">Url</div>
-        <div class="display-field"><%: Model.Url %></div>
+        <div class="display-label">Foto referencial</div>
+        <div class="display-field"><img src="<%: Model.Url %>" alt="" /></div>
         
     </fieldset>
     <p>

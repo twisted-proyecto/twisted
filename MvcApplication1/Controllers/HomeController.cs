@@ -35,13 +35,13 @@ namespace MvcApplication1.Controllers
             options.Extras |= PhotoSearchExtras.Geo;
             options.Tags = map.Name;
             options.HasGeo = true;
-            options.PerPage = 5;
+            options.PerPage = 24;
             Flickr flickr = new Flickr("3de826e278b4988011ef0227585a7838", "81a96df44a82b16c");
             photos = flickr.PhotosSearch(options);
             foreach (Photo photo in photos)
             {
                 ViewData["Message"] = String.Format("Lugares de \"{0}\".", map.Name);
-                ViewData.Add(("Message" + i), photo.ThumbnailUrl);
+                ViewData.Add(("Message" + i), photo.SmallUrl);
                 i++;
             }
 

@@ -38,19 +38,35 @@ namespace MvcApplication1.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create(Destino Destino,string Button, int idViaje)
         {
+            var map = new Map();
+            UpdateModel(map);
             if (Button == "Agregar Destino")
             {
                 IRepositorio<Destino> repo = new DestinoRepositorio();
                 IRepositorio<Viaje> repoViaje = new ViajeRepositorio();
                 Destino.Viaje = repoViaje.GetById(idViaje);
+                PhotoSearchOptions options = new PhotoSearchOptions();
+                options.Extras |= PhotoSearchExtras.Geo;
+                options.Tags = map.Name;
+                options.HasGeo = true;
+                options.PerPage = 24;
+                Flickr flickr = new Flickr("3de826e278b4988011ef0227585a7838", "81a96df44a82b16c");
+                photos = flickr.PhotosSearch(options);
+                foreach (Photo photo in photos)
+                {
+                    if (Destino.Url.CompareTo(photo.SmallUrl) == 0)
+                    {
+                        Destino.Latitud = photo.Latitude;
+                        Destino.Longitud = photo.Longitude;
+                        Destino.Nombre = photo.Title;
+                    }
+                }
                 repo.Save(Destino);
                 int id2 = idViaje;
                 ViewData["idViaje"] = id2;
                 return RedirectToAction("Index", "Destino", new { idViaje = id2 });
             }
             else {
-                var map = new Map();
-                UpdateModel(map);
                 int i = 0;
                 PhotoSearchOptions options = new PhotoSearchOptions();
                 //options.BoundaryBox = new BoundaryBox(-1.7, 54.9, -1.4, 55.2); // Roughly Newcastle upon Type, England
@@ -58,15 +74,13 @@ namespace MvcApplication1.Controllers
                 options.Extras |= PhotoSearchExtras.Geo;
                 options.Tags = map.Name;
                 options.HasGeo = true;
-                options.PerPage = 5;
+                options.PerPage = 24;
                 Flickr flickr = new Flickr("3de826e278b4988011ef0227585a7838", "81a96df44a82b16c");
                 photos = flickr.PhotosSearch(options);
-                ViewData["Message"] = String.Format("Lugares de \"{0}\".", map.Name);
                 foreach (Photo photo in photos)
                 {
-                    ViewData.Add(("Message" + i), photo.ThumbnailUrl);
-                    ViewData.Add(("Latitude" + i), photo.Latitude);
-                    ViewData.Add(("Longitude" + i), photo.Longitude);
+                    ViewData["Message"] = String.Format("Lugares de \"{0}\".", map.Name);
+                    ViewData.Add(("Message" + i), photo.SmallUrl);
                     i++;
                 }
                 int id2 = idViaje;

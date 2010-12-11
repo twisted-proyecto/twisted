@@ -13,6 +13,7 @@ body
     color: #696969;
 }
 
+
 a:link
 {
     color: #034af3;
@@ -336,6 +337,18 @@ div#title
 {
      margin: 0.5em 0;
      font-weight:bold;
+}
+
+.editor-field-hidden
+{
+    visibility: hidden;
+    margin: 0.5em 0;
+}
+
+.editor-field-disable
+{
+    input[disabled="disabled"];
+    margin: 0.5em 0;
 }
 
 .text-box
