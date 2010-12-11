@@ -12,5 +12,6 @@ namespace MvcApplication1.Dominio
         void Delete(T entiy);
         T GetById(String id);
         IList<T> GetAll();
+        IList<T> GetByPrivacidad(String privacidad);
     }
 }

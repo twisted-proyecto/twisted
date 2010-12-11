@@ -59,7 +59,18 @@ namespace MvcApplication1.Dominio.Repositorios
             using (ISession session = NHibernateHelper.OpenSession())
             {
                 ICriteria criteria = session.CreateCriteria(typeof(Persona));
+               
                 return criteria.List<Persona>();
+            }
+        }
+
+        IList<Persona> IRepositorioPersona<Persona>.GetByPrivacidad(String privacidad)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                ICriteria criteria = session.CreateCriteria(typeof(Persona)).Add(Restrictions.Eq("Privacidad", privacidad));
+                return criteria.List<Persona>();
+
             }
         }
 
