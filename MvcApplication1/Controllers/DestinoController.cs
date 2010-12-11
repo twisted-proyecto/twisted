@@ -22,27 +22,31 @@ namespace MvcApplication1.Controllers
         public string Nombre = null;      
         public string Url = null;
         public ISet<Comentario> Comentarios = null;
-        public Viaje Viaje = null;
-
+        public Viaje viaje;
+        private IRepositorio<Viaje> repoViaje;
 
 
         static PhotoCollection photos = new PhotoCollection();
-        public ActionResult Create()
+        public ActionResult Create(int idViaje)
         {
+            int id2 = idViaje;
+            ViewData["idViaje"] = id2;
             ViewData["Message"] = "Buscar destinos:";
-
-            return View();
+            return View( );
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Create(Destino Destino,string Button)
+        public ActionResult Create(Destino Destino,string Button, int idViaje)
         {
             if (Button == "Agregar Destino")
             {
                 IRepositorio<Destino> repo = new DestinoRepositorio();
+                IRepositorio<Viaje> repoViaje = new ViajeRepositorio();
+                Destino.Viaje = repoViaje.GetById(idViaje);
                 repo.Save(Destino);
-
-                return RedirectToAction("Index");
+                int id2 = idViaje;
+                ViewData["idViaje"] = id2;
+                return RedirectToAction("Index", "Destino", new { idViaje = id2 });
             }
             else {
                 var map = new Map();
@@ -57,13 +61,16 @@ namespace MvcApplication1.Controllers
                 options.PerPage = 5;
                 Flickr flickr = new Flickr("3de826e278b4988011ef0227585a7838", "81a96df44a82b16c");
                 photos = flickr.PhotosSearch(options);
+                ViewData["Message"] = String.Format("Lugares de \"{0}\".", map.Name);
                 foreach (Photo photo in photos)
                 {
-                    ViewData["Message"] = String.Format("Lugares de \"{0}\".", map.Name);
                     ViewData.Add(("Message" + i), photo.ThumbnailUrl);
+                    ViewData.Add(("Latitude" + i), photo.Latitude);
+                    ViewData.Add(("Longitude" + i), photo.Longitude);
                     i++;
                 }
-                
+                int id2 = idViaje;
+                ViewData["idViaje"] = id2;
                 return View();
             }
         }
@@ -80,49 +87,57 @@ namespace MvcApplication1.Controllers
             return Json(map, "1",JsonRequestBehavior.AllowGet);
         }
         
-        public ActionResult About()
-        {
-            return View();
-        }
-
-   
         //
         // GET: /Destino/
-        public ActionResult Index(int id,String nada)
+        public ActionResult Index(int idViaje)
         {
+            int id2 = idViaje;
+            ViewData["idViaje"] = id2;
             IRepositorio<Destino> repo = new DestinoRepositorio();
             return View(repo.GetAll());
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, int idViaje)
         {
+            int id2 = idViaje;
+            ViewData["idViaje"] = id2;
             IRepositorio<Destino> repo = new DestinoRepositorio();
             return View(repo.GetById(id));
         }
 
-       
 
-        public ActionResult Edit(int id)
+
+        public ActionResult Edit(int id, int idViaje)
         {
+            int id2 = idViaje;
+            ViewData["idViaje"] = id2;
             IRepositorio<Destino> repo = new DestinoRepositorio();
             return View(repo.GetById(id));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Edit(int id, Destino Destino)
+        public ActionResult Edit(Destino Destino, int id, int idViaje)
         {
-
+            IRepositorio<Viaje> repoViaje = new ViajeRepositorio();
+            Destino.Viaje = repoViaje.GetById(idViaje);
             IRepositorio<Destino> repo = new DestinoRepositorio();
             repo.Update(Destino);
-
-            return RedirectToAction("Index");
+            int id2 = idViaje;
+            ViewData["idViaje"] = id2;
+            return RedirectToAction("Index", "Destino", new { idViaje = id2 });
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, int idViaje)
         {
+            IRepositorio<Viaje> repoViaje = new ViajeRepositorio();
             IRepositorio<Destino> repo = new DestinoRepositorio();
-            repo.Delete(repo.GetById(id));
-            return RedirectToAction("Index");
+            Destino Destino = repo.GetById(id);
+            Destino.Viaje = repoViaje.GetById(idViaje);
+            repo.Delete(Destino);
+            int id2 = idViaje;
+            ViewData["idViaje"] = id2;
+            return RedirectToAction("Index", "Destino", new { idViaje = id2 });
         }
+       
     }
 }

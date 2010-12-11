@@ -325,12 +325,17 @@ div#title
 
 /* Estilos para aplicaciones auxiliares de editor y visualización
 ----------------------------------------------------------*/
-.display-label,
-.editor-label,
 .display-field,
+.editor-label,
 .editor-field
 {
     margin: 0.5em 0;
+    
+}
+.display-label
+{
+     margin: 0.5em 0;
+     font-weight:bold;
 }
 
 .text-box

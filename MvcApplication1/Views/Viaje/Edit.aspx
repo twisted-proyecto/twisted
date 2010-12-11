@@ -83,7 +83,7 @@
     <% } %>
 
     <div>
-        <%=Html.ActionLink("Regresar a la lista", "Index") %>
+       <%=Html.ActionLink("Volver a la lista", "Index", "Destino", new { idViaje = ViewData["idViaje"] }, null)%>
     </div>
 
 </asp:Content>

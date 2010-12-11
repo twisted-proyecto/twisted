@@ -201,7 +201,6 @@
     <Content Include="Views\Persona\Delete.aspx" />
     <Content Include="Views\Persona\Details.aspx" />
     <Content Include="Views\Persona\Edit.aspx" />
-    <Content Include="Views\Persona\Empty.aspx" />
     <Content Include="Views\Persona\Index.aspx" />
     <Content Include="Views\Twitter\LogOut.aspx" />
     <Content Include="Views\Twitter\Index.aspx" />

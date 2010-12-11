@@ -5,6 +5,16 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <script src="../../Scripts/jquery-1.4.3.js"></script>
+    <script src="../../Scripts/jquery.ui.core.js"></script>
+    <script src="../../Scripts/jquery.ui.datepicker-es.js"></script>
+    <script src="../../Scripts/jquery.ui.datepicker.js"></script>
+    <link rel="stylesheet" href="../../Content/jquery-ui-1.8.6.custom.css">
+    <script type="text/javascript">
+        $(function () {
+            $("#FechaNacimiento").datepicker();
+        });
+	</script>
 
     <h2>Edit</h2>
 
@@ -14,12 +24,29 @@
         <fieldset>
             <legend>Fields</legend>
             
+
+              <div class="editor-label">
+                <%: Html.LabelFor(model => model.Nombre) %>
+            </div>
+            <div class="editor-field">
+                <%: Html.TextBoxFor(model => model.Nombre) %>
+                <%: Html.ValidationMessageFor(model => model.Nombre) %>
+            </div>
+            
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Apellido) %>
             </div>
             <div class="editor-field">
                 <%: Html.TextBoxFor(model => model.Apellido) %>
                 <%: Html.ValidationMessageFor(model => model.Apellido) %>
+            </div>
+
+            <div class="editor-label">
+                <%: Html.LabelFor(model => model.FechaNacimiento) %>
+            </div>
+            <div class="editor-field">
+                <%: Html.TextBoxFor(model => model.FechaNacimiento, String.Format("{0:dd/MM/yyyy}", Model.FechaNacimiento))%>
+                <%: Html.ValidationMessageFor(model => model.FechaNacimiento) %>
             </div>
             
             <div class="editor-label">
@@ -38,38 +65,15 @@
                 <%: Html.ValidationMessageFor(model => model.Estatus) %>
             </div>
             
+                          
             <div class="editor-label">
-                <%: Html.LabelFor(model => model.FechaNacimiento) %>
+                <label for="Privacidad"> Privacidad:</label>
             </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.FechaNacimiento, String.Format("{0:g}", Model.FechaNacimiento)) %>
-                <%: Html.ValidationMessageFor(model => model.FechaNacimiento) %>
+            <div>
+                <%= Html.DropDownList("Privacidad") %>
+                <%= Html.ValidationMessage("Privacidad", "*") %>
             </div>
             
-                       
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.Nombre) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.Nombre) %>
-                <%: Html.ValidationMessageFor(model => model.Nombre) %>
-            </div>
-            
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.Privacidad) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.Privacidad) %>
-                <%: Html.ValidationMessageFor(model => model.Privacidad) %>
-            </div>
-            
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.Twitter) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.Twitter) %>
-                <%: Html.ValidationMessageFor(model => model.Twitter) %>
-            </div>
             
             <p>
                 <input type="submit" value="Save" />

@@ -23,8 +23,8 @@
     
         <tr>
             <td>
-                <%= Html.ActionLink("Editar", "Edit", new {  id=item.IdDestino }) %> |
-                <%= Html.ActionLink("Detalles", "Details", new { id = item.IdDestino })%>
+                <%= Html.ActionLink("Editar", "Edit", new { id = item.IdDestino, idViaje = ViewData["idViaje"] })%> |
+                <%= Html.ActionLink("Detalles", "Details",new { id = item.IdDestino, idViaje = ViewData["idViaje"] })%>
             </td>
             <td>
                 <%= Html.Encode(item.Nombre) %>
@@ -33,7 +33,7 @@
                 <%= Html.Encode(item.Fecha) %>
             </td>
             <td>
-                <%= Html.ActionLink("Eliminar", "Delete", new { id = item.IdDestino })%>
+                <%= Html.ActionLink("Eliminar", "Delete", new { id = item.IdDestino, idViaje = ViewData["idViaje"] })%>
             </td>
         </tr>
     
@@ -42,9 +42,7 @@
     </table>
 
     <p>
-        <%= Html.ActionLink("Agregar nuevo destino", "Create") %>
+        <%= Html.ActionLink("Agregar nuevo destino", "Create", new { idViaje = ViewData["idViaje"] })%>
     </p>
 
 </asp:Content>
-
-
