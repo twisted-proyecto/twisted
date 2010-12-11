@@ -139,6 +139,7 @@
     <Compile Include="Dominio\Model\oAuthTwitter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dominio\Repositorios\MapRepository.cs" />
+    <Compile Include="Test\PersonaRepositorioTest.cs" />
     <Compile Include="Test\ViajeRepositorioTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -258,7 +259,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>53953</DevelopmentServerPort>
+          <DevelopmentServerPort>49309</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

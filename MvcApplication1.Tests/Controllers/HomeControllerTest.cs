@@ -23,7 +23,7 @@ namespace MvcApplication1.Tests.Controllers
 
             // Declarar
             ViewDataDictionary viewData = result.ViewData;
-            Assert.AreEqual("ASP.NET MVC", viewData["Message"]);
+            Assert.AreEqual("Buscar destinos:", viewData["Message"]);
         }
 
         [TestMethod]
