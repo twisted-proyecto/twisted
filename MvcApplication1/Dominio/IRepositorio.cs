@@ -7,10 +7,11 @@ namespace MvcApplication1.Dominio
 {
     public interface IRepositorio<T>
     {
-        void Save(T entity);
+        bool Save(T entity);
         void Update(T entity);
         void Delete(T entiy);
         T GetById(int id);
         IList<T> GetAll();
+       
     }
 }

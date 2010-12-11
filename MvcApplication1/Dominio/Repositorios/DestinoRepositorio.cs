@@ -12,14 +12,24 @@ namespace MvcApplication1.Dominio.Repositorios
     {
         #region IRepositorio<Destino> Members
 
-        void IRepositorio<Destino>.Save(Destino entity)
+        bool IRepositorio<Destino>.Save(Destino entity)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
                 using (ITransaction transaction = session.BeginTransaction())
                 {
-                    session.Save(entity);
-                    transaction.Commit();
+                    try
+                    {
+                        session.Save(entity);
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        return false;
+                    }
+                    
                 }
             }
         }
@@ -53,6 +63,8 @@ namespace MvcApplication1.Dominio.Repositorios
             using (ISession session = NHibernateHelper.OpenSession())
                 return session.CreateCriteria<Destino>().Add(Restrictions.Eq("IdDestino", id)).UniqueResult<Destino>();
         }
+
+       
 
         IList<Destino> IRepositorio<Destino>.GetAll()
         {
