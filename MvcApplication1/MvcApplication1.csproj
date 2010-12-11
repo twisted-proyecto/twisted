@@ -183,10 +183,12 @@
     <Content Include="Content\MicrosoftAjax.js" />
     <Content Include="Content\MicrosoftMvcAjax.debug.js" />
     <Content Include="Content\MicrosoftMvcAjax.js" />
+    <Content Include="Content\style.css" />
     <Content Include="Global.asax" />
     <Content Include="hibernate.cfg.xml" />
     <Content Include="log4net.xml" />
     <Content Include="Scripts\jquery-1.4.3.js" />
+    <Content Include="Scripts\jquery.transform-0.9.1.min.js" />
     <Content Include="Scripts\jquery.ui.core.js" />
     <Content Include="Scripts\jquery.ui.datepicker-es.js" />
     <Content Include="Scripts\jquery.ui.datepicker.js" />
