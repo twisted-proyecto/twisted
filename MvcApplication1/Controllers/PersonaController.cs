@@ -33,8 +33,9 @@ namespace MvcApplication1.Controllers
 
         }
 
-        public ActionResult Details(String id)
+        public ActionResult Details()
         {
+            string id = Session["data"] as string;
             IRepositorioPersona<Persona> repo = new PersonaRepositorio();
             return View(repo.GetById(id));
         }
@@ -51,30 +52,31 @@ namespace MvcApplication1.Controllers
         // POST: /Persona/Create
 
         [HttpPost]
-        public ActionResult Create(Persona Persona, String id)
+        public ActionResult Create(Persona persona, String id)
         {
             if (ModelState.IsValid)
             {
                 if (Session["data"]!=null)
-                Persona.Nickname = Session["data"] as string;
+                persona.Nickname = Session["data"] as string;
 
                 IRepositorioPersona<Persona> repo = new PersonaRepositorio();
-                repo.Save(Persona);
+                repo.Save(persona);
 
 
-                return RedirectToAction("Correo",Persona);
+                return RedirectToAction("Correo",persona);
             }
 
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
 
-            return View(Persona);
+            return View(persona);
         }
         
         //
         // GET: /Persona/Edit/5
  
-        public ActionResult Edit(String id)
+        public ActionResult Edit()
         {
+            String id = Session["data"] as string;
             IRepositorioPersona<Persona> repo = new PersonaRepositorio();
             return View(repo.GetById(id));
         }
@@ -83,10 +85,11 @@ namespace MvcApplication1.Controllers
         // POST: /Persona/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(String id, Persona Persona)
+        public ActionResult Edit(Persona Persona)
         {
             if (ModelState.IsValid)
             {
+                String id = Session["data"] as string;
                  Persona.Nickname = id;
                  IRepositorioPersona<Persona> repo = new PersonaRepositorio();
                 repo.Update(Persona);
@@ -102,8 +105,9 @@ namespace MvcApplication1.Controllers
         //
         // GET: /Persona/Delete/5
  
-        public ActionResult Delete(String id)
+        public ActionResult Delete()
         {
+            String id = Session["data"] as string;
             IRepositorioPersona<Persona> repo = new PersonaRepositorio();
             repo.Delete(repo.GetById(id));
             return RedirectToAction("Index");
