@@ -27,8 +27,9 @@
     
     <p id="info"></p>
     <div>
-     <% for (int i = 0; i < ViewData.Count-1; i++)
+     <% for (int i = 0; i < (ViewData.Count-1)/3; i++)
         {%>
+        <%= Html.RadioButton("destinoSelected",i)%>        
         <img id="image" src="<%: ViewData["Message"+i] %>" alt=""/>
      <% } %>
      </div>
@@ -51,7 +52,31 @@
 
         <fieldset>
             <legend>Fields</legend>
-            
+                 
+            <div class="editor-field">
+                <input type="text" name="Url" id="Url" value="luis" />
+            </div>
+
+            <div class="editor-field">
+                <input type="text" name="Latitud" id="Latitud" value="11" />
+            </div>
+
+            <div class="editor-field">
+                <input type="text" name="Longitud" value="11" />
+            </div>
+
+            <div class="editor-field">
+                <input type="text" name="Estatus" value="algo" />
+            </div>
+
+            <div class="editor-field">
+                <input type="text" name="Nombre" value="algo" />
+            </div>
+
+            <div class="editor-field">
+                <input type="text" name="idViaje" value="<%: ViewData["idViaje"] %>" />
+            </div>
+
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Descripcion)%>
             </div>
