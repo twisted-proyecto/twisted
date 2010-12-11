@@ -12,13 +12,26 @@ namespace MvcApplication1.Controllers
 {
     public class PersonaController : Controller
     {
-        
+
 
         public ActionResult Index()
         {
-
-            IRepositorioPersona<Persona> repo = new PersonaRepositorio();
-            return View(repo.GetAll());
+            if (Session["data"] != null)
+            {
+                string nick = Session["data"] as string;
+                IRepositorioPersona<Persona> repo = new PersonaRepositorio();
+                IList<Persona> milista = repo.GetByPrivacidad("Publico");
+                Persona miPersona = repo.GetById(nick);
+                if (miPersona.Privacidad != "Publico")
+                    milista.Add(miPersona);
+                return View(milista);
+            }
+            else
+            {
+                IRepositorioPersona<Persona> repo = new PersonaRepositorio();
+                IList<Persona> milista = repo.GetByPrivacidad("Publico");
+                return View(milista);
+            }
         }
 
 
@@ -33,9 +46,8 @@ namespace MvcApplication1.Controllers
 
         }
 
-        public ActionResult Details()
+        public ActionResult Details(String id)
         {
-            string id = Session["data"] as string;
             IRepositorioPersona<Persona> repo = new PersonaRepositorio();
             return View(repo.GetById(id));
         }
@@ -45,38 +57,42 @@ namespace MvcApplication1.Controllers
 
         public ActionResult Create()
         {
+            IEnumerable<string> items = new string[] { "Publico", "Privado" };
+            ViewData["Privacidad"] = new SelectList(items);
             return View();
-        } 
+        }
 
         //
         // POST: /Persona/Create
 
         [HttpPost]
-        public ActionResult Create(Persona persona, String id)
+        public ActionResult Create(Persona Persona, String id)
         {
             if (ModelState.IsValid)
             {
-                if (Session["data"]!=null)
-                persona.Nickname = Session["data"] as string;
+                if (Session["data"] != null)
+                    Persona.Nickname = Session["data"] as string;
 
                 IRepositorioPersona<Persona> repo = new PersonaRepositorio();
-                repo.Save(persona);
+                repo.Save(Persona);
 
 
-                return RedirectToAction("Correo",persona);
+                return RedirectToAction("Correo", Persona);
             }
 
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
-
-            return View(persona);
+            IEnumerable<string> items = new string[] { "Publico", "Privado" };
+            ViewData["Privacidad"] = new SelectList(items);
+            return View(Persona);
         }
-        
+
         //
         // GET: /Persona/Edit/5
- 
-        public ActionResult Edit()
+
+        public ActionResult Edit(String id)
         {
-            String id = Session["data"] as string;
+            IEnumerable<string> items = new string[] { "Publico", "Privado" };
+            ViewData["Privacidad"] = new SelectList(items);
             IRepositorioPersona<Persona> repo = new PersonaRepositorio();
             return View(repo.GetById(id));
         }
@@ -85,29 +101,28 @@ namespace MvcApplication1.Controllers
         // POST: /Persona/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Persona Persona)
+        public ActionResult Edit(String id, Persona Persona)
         {
             if (ModelState.IsValid)
             {
-                String id = Session["data"] as string;
-                 Persona.Nickname = id;
-                 IRepositorioPersona<Persona> repo = new PersonaRepositorio();
+                Persona.Nickname = id;
+                IRepositorioPersona<Persona> repo = new PersonaRepositorio();
                 repo.Update(Persona);
 
                 return RedirectToAction("Index");
             }
 
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
-           
+            IEnumerable<string> items = new string[] { "Publico", "Privado" };
+            ViewData["Privacidad"] = new SelectList(items);
             return View(Persona);
         }
 
         //
         // GET: /Persona/Delete/5
- 
-        public ActionResult Delete()
+
+        public ActionResult Delete(String id)
         {
-            String id = Session["data"] as string;
             IRepositorioPersona<Persona> repo = new PersonaRepositorio();
             repo.Delete(repo.GetById(id));
             return RedirectToAction("Index");
@@ -140,7 +155,7 @@ namespace MvcApplication1.Controllers
             msg.From = new MailAddress("twisted.j2l@gmail.com", "Twisted", System.Text.Encoding.UTF8);
             msg.Subject = "Bienvenido a Twisted ";
             msg.SubjectEncoding = System.Text.Encoding.UTF8;
-            msg.Body = "Hola "+ p.Nombre+ " "+ p.Apellido +" bienvenido a Twisted\nTe invitamos a Seguirnos @TwistedUCAB  \n\nSaludos, \nj2l Team © ";
+            msg.Body = "Hola " + p.Nombre + " " + p.Apellido + " bienvenido a Twisted\nTe invitamos a Seguirnos @TwistedUCAB  \n\nSaludos, \nj2l Team © ";
             msg.BodyEncoding = System.Text.Encoding.UTF8;
             msg.IsBodyHtml = false;
 
