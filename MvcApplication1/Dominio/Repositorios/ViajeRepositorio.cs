@@ -12,14 +12,24 @@ namespace MvcApplication1.Dominio.Repositorios
     {
         #region IRepositorio<Viaje> Members
 
-        void IRepositorio<Viaje>.Save(Viaje entity)
+        bool IRepositorio<Viaje>.Save(Viaje entity)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
                 using (ITransaction transaction = session.BeginTransaction())
                 {
-                    session.Save(entity);
-                    transaction.Commit();
+                    try
+                    {
+                        session.Save(entity);
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                       Console.Write(e.Message);
+                        return false;
+                    }
+                    
                 }
             }
         }
@@ -63,6 +73,7 @@ namespace MvcApplication1.Dominio.Repositorios
             }
         }
 
+      
         #endregion
     }
 }
