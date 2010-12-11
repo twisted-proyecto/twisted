@@ -50,6 +50,11 @@
                         { %>
                             <%: Html.ActionLink("Delete", "Delete", new {  id=item.Nickname })%>
                       <%}%> 
+
+                <% if ((this.Session["data"]!=null) &&(this.Session["data"] as string ==item.Nickname))
+                        { %>
+                            <%: Html.ActionLink("Viajes", "Index","Viaje", new {  id=item.Nickname })%>
+                      <%}%> 
                
             </td>
             <td>

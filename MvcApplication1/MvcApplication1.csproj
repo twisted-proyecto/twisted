@@ -113,6 +113,7 @@
       <DependentUpon>TwitterController.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ViajeController.cs" />
+    <Compile Include="Dominio\IRepositorioParticipante.cs" />
     <Compile Include="Dominio\IRepositorioPersona.cs" />
     <Compile Include="Dominio\IRepositorio.cs" />
     <Compile Include="Dominio\Model\Amistad.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Dominio\Model\Persona.cs" />
     <Compile Include="Dominio\Model\Validation.cs" />
     <Compile Include="Dominio\Model\Viaje.cs" />
+    <Compile Include="Dominio\Repositorios\ParticipanteRepositorio.cs" />
     <Compile Include="Dominio\Repositorios\DestinoRepositorio.cs" />
     <Compile Include="Dominio\Repositorios\PersonaRepositorio.cs" />
     <Compile Include="Dominio\Repositorios\NHibernateHelper.cs" />
