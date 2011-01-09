@@ -1,0 +1,72 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
+    <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="HeaderContent" runat="server">
+    <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="content ui-helper-clearfix">
+        <div class="content-main">
+            <div class="navarea">
+                <div class="menu ui-tabs ui-widget ui-corner-all ui-widget-content">
+                    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-top">
+                        <li class="ui-state-default ui-corner-top <%:Html.IsActiveTab("Home") %>">
+                            <%: Html.ActionLink("Principal", "Index", "Home")%>
+                        </li>
+                        <li class="ui-state-default ui-corner-top <%:Html.IsActiveTab("Viaje") %>">
+                            <%: Html.ActionLink("Viajes", "Index", "Viaje")%>
+                        </li>
+                        <li class="ui-state-default ui-corner-top <%:Html.IsActiveTab("Persona") %>">
+                            <%: Html.ActionLink("Perfiles Publicos", "Index", "Persona")%>
+                        </li>
+                        <li class="ui-state-default ui-corner-top <%:Html.IsActiveTab("About") %>">
+                            <%: Html.ActionLink("About", "About", "Home")%>
+                        </li>
+                        <li class="ui-state-default ui-corner-top <%:Html.IsActiveTab("Contact") %>">
+                            <%: Html.ActionLink("Contact", "Contact", "Home")%>
+                        </li>
+                    </ul>
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+        <div class="content-side">
+            <div class="sidebox ui-widget ui-widget-content ui-corner-all">
+                <div class="sidebox-header ui-widget-header ui-corner-top ui-state-default"><span>Informacion Personal</span></div>
+                <% if(Session["data"] == null)
+                   { %>
+                        UNETE A TWISTED
+                 <%}
+                   else
+                   { %>
+                      <p>
+                        <%= Html.Action("Detalles", "Shared", new {id = Session["data"]})%>
+                        <%: Html.ActionLink("Mis Viajes", "VerViajes", "Viaje", new {  id=Session["data"]},null)%>
+                      </p>
+                 <%
+                   }%>
+                <p>
+                
+                </p>
+            </div>
+
+             <div class="sidebox ui-widget ui-widget-content ui-corner-all">
+                <div class="sidebox-header ui-widget-header ui-corner-top ui-state-default"><span>Another sidebar box</span></div>
+                <p>
+                Suspendisse ipsum tortor, tempus ac tempor nec, fermentum sit amet 
+                lorem. Integer eget lacus dolor, rhoncus suscipit nunc. Vestibulum sit 
+                amet auctor ante. Vivamus convallis risus in urna scelerisque non 
+                vulputate sem rhoncus. Mauris quam libero, sagittis at pellentesque a, 
+                dignissim in erat. Nulla consectetur erat euismod leo lacinia auctor. 
+                Morbi nulla sem
+                </p>
+            </div>
+
+            <asp:ContentPlaceHolder ID="SideContent" runat="server">
+
+            </asp:ContentPlaceHolder>
+        </div>
+    </div>
+</asp:Content>

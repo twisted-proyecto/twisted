@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Viaje>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/TwoColumn.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Viaje>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Agregar un nuevo Viaje
@@ -9,7 +9,6 @@
     <script src="../../Scripts/jquery.ui.core.js"></script>
     <script src="../../Scripts/jquery.ui.datepicker-es.js"></script>
     <script src="../../Scripts/jquery.ui.datepicker.js"></script>
-    <link rel="stylesheet" href="../../Content/jquery-ui-1.8.6.custom.css">
     <script type="text/javascript">
         $(function () {
             $("#fechaInicio").datepicker();
@@ -18,8 +17,6 @@
             $("#fechaFin").datepicker();
         });
 	</script>
-
-    <h2>- Gestion de Viajes - </h2>
 
     <%= Html.ValidationSummary(true,"Ha ocurrido un error. Por favor corrijalos e intente de nuevo.") %>
 
@@ -31,15 +28,15 @@
             <div class="editor-label">
                 <label for="Nombre">Nombre:</label>
             </div>
-            <div>
-            <%= Html.TextBox("Nombre") %>
+            <div class="editor-field">
+            <%= Html.TextBox("Nombre",null, new { @class = "text-box" })%>
             <%= Html.ValidationMessage("Nombre", "*") %>
             </div>
             
             <div class="editor-label">
                 <label for="Privacidad"> Privacidad:</label>
             </div>
-            <div>
+            <div class="editor-field">
                 <%= Html.DropDownList("Privacidad") %>
                 <%= Html.ValidationMessage("Privacidad", "*") %>
             </div>
@@ -47,43 +44,45 @@
             <div class="editor-label">
                 <label for="fechaInicio"> Fecha inicio:</label>
             </div>
-            <div>
-                <%= Html.TextBox("fechaInicio")%>
+            <div class="editor-field">
+                <%= Html.TextBox("fechaInicio",null, new { @class = "text-box" })%>
                 <%= Html.ValidationMessage("fechaInicio", "*") %>
             </div>
 
             <div class="editor-label">
                 <label for="fechaFin"> Fecha fin:</label>
             </div>
-            <div>
-                <%= Html.TextBox("fechaFin")%>
+            <div class="editor-field">
+                <%= Html.TextBox("fechaFin",null, new { @class = "text-box" })%>
                 <%= Html.ValidationMessage("fechaFin", "*") %>
             </div>
             
             <div class="editor-label">
                 <label for="Destino"> Destino:</label>
             </div>
-            <div>  
-                <%= Html.TextBox("Destino") %>
+            <div class="editor-field">  
+                <%= Html.TextBox("Destino",null, new { @class = "text-box" })%>
                 <%= Html.ValidationMessage("Destino", "*") %>
             </div>
 
             <div class="editor-label">
                 <label for="Hospedaje"> Hospedaje:</label>
             </div>
-            <div>  
-                <%= Html.TextBox("Hospedaje") %>
+            <div class="editor-field">
+                <%= Html.TextBox("Hospedaje", null, new { @class = "text-box" })%>
             </div>
             
-            <p>
-                <input type="submit" value="Aceptar" />
-            </p>
+            <div class="editor-label">
+                <input type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" value="Agregar" />
+            </div>
         </fieldset>
 
     <% } %>
 
     <div>
-        <%: Html.ActionLink("Volver a la lista", "Index") %>
+    <a title="Volver" href="<%= Url.Action("Index", "Viaje") %>">
+          <img src="<%= Url.Content("~/Content/atras.png") %>" height="15px" width="15px" /></a>
+        <%: Html.ActionLink("Volver...", "Index") %>
     </div>
 
 </asp:Content>

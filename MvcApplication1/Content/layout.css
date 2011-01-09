@@ -1,0 +1,174 @@
+﻿body
+{
+	margin:0;
+}
+
+.main
+{
+    margin: auto;
+    width:960px;
+}
+
+.header
+{
+    height:100px;
+    margin-bottom:5px;
+}
+
+.footer
+{
+    margin-top:5px;
+    height:70px;
+    text-align:center;
+}
+
+.footer div
+{
+    padding-top:25px;
+}
+
+.footer li
+{
+    display:inline;   
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.footer li a
+{
+    display:inline;   
+}
+
+.logo
+{
+    background: url('logo.png') no-repeat left top;
+    float:left;
+    height:100px;
+    width:250px;
+    margin:5px;
+}
+
+.usermenu
+{
+    float:right;
+    padding:4px;
+}
+
+.usermenu li
+{
+    display:inline;
+}
+
+.usermenu li img
+{
+	margin-top:-5px;
+	width:24px;
+	height:24px;
+	vertical-align:middle;	
+	padding:4px 2px 2px 4px;    
+}
+
+.usermenu li a
+{
+    padding:5px;
+}
+
+.menu
+{
+}
+
+.navarea
+{
+}
+
+.content
+{
+    padding:5px;
+}
+
+.content-main
+{
+    margin-top:0 auto;
+    width:720px;
+    float:left;  
+}
+
+.content-side
+{
+    padding-right:5px;      
+    float:right;
+    width:200px;
+}
+
+.sidebox
+{
+    padding:0.2em 0.2em 0;
+    margin-bottom:5px;
+}
+
+.sidebox-header
+{
+    padding:0.7em;
+}
+
+#usertabs
+{
+    height:90%;
+}
+
+.editor-row
+{
+    clear:left;
+    padding: 4px 0;
+}
+
+.editor-label
+{
+    clear:left;
+    float:left;
+    padding: 1px;
+    width:150px;
+}
+
+.editor-field
+{
+    float:left;  
+    padding: 1px;      
+    width:250px;
+}
+
+.editor-field input
+{
+    width:100%;
+}
+
+.editor-field select
+{
+    width:100%;
+}
+
+.editor-field-error
+{
+    float:left;  
+    margin-left:5px;    
+}
+
+#busyIndicator
+{
+    /*
+    width:300px;
+    height:300px;
+    position: relative;*/
+}
+
+#busyIndicator img
+{
+   position:absolute;
+   top:50%;
+   left:50%;
+   width:64px;
+   height:64px;
+   margin-top:-32px;
+   margin-left:-32px;
+
+}

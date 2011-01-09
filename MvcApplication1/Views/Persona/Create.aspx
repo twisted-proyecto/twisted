@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Persona>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/TwoColumn.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Persona>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Create
@@ -15,13 +15,13 @@
             $("#FechaNacimiento").datepicker();
         });
 	</script>
-    <h2>Create</h2>
+    <br />
 
     <% using (Html.BeginForm()) {%>
         <%: Html.ValidationSummary(true) %>
 
         <fieldset>
-            <legend>Fields</legend>
+            <legend>Resgitro:</legend>
             
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Nombre) %>
@@ -53,29 +53,20 @@
             <div class="editor-field">
                 <%: Html.TextBoxFor(model => model.Email) %>
                 <%: Html.ValidationMessageFor(model => model.Email) %>
-            </div>
-            
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.Estatus) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.Estatus) %>
-                <%: Html.ValidationMessageFor(model => model.Estatus) %>
-            </div>
-                                 
+            </div>                                 
                        
             <div class="editor-label">
                 <label for="Privacidad"> Privacidad:</label>
             </div>
-            <div>
+            <div class="editor-field">
                 <%= Html.DropDownList("Privacidad") %>
                 <%= Html.ValidationMessage("Privacidad", "*") %>
             </div>
             
                         
-            <p>
-                <input type="submit" value="Create" />
-            </p>
+            <div class="editor-label">
+                <input type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" value="Registrar" />
+            </div>
         </fieldset>
 
     <% } %>

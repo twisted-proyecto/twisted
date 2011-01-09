@@ -12,10 +12,6 @@ $(function () {
     }
 });
 
- 
-
-
-
 function initialise(mapData) {
     $("#mapName").text(mapData.Name);
     //var map = new GMap2($("#map")[0]);

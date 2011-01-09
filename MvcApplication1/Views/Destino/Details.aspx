@@ -1,12 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Destino>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/TwoColumn.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Destino>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Detalles de Destinos
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-    <h2>- Gestion de Destinos -</h2>
 
     <fieldset>
         <legend>Detalles:</legend>
@@ -37,7 +35,7 @@
         
     </fieldset>
     <p>
-        <%=Html.ActionLink("Volver a la lista", "Index", "Destino", new { idViaje = ViewData["idViaje"] }, null)%>
+        <%=Html.ActionLink("Volver...", "Index", "Destino", new { idViaje = ViewData["idViaje"] }, null)%>
     </p>
 
 </asp:Content>

@@ -1,38 +1,44 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Destino>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/TwoColumn.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Destino>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Create
+	Agregar Destinos
 </asp:Content>
 
    
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-   <script src="../../Scripts/jquery-1.4.3.js"></script>
+    <style type="text/css">
+      @import url("http://www.google.com/uds/css/gsearch.css");
+      @import url("http://www.google.com/uds/solutions/localsearch/gmlocalsearch.css");
+    </style>
+
+    <script src="../../Scripts/jquery-1.4.3.js"></script>
     <script src="../../Scripts/jquery.ui.core.js"></script>
     <script src="../../Scripts/jquery.ui.datepicker-es.js"></script>
     <script src="../../Scripts/jquery.ui.datepicker.js"></script>
-    <link rel="stylesheet" href="../../Content/jquery-ui-1.8.6.custom.css">
+    <script src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAAp0Kj6-TRULdy9KWugN_GfxTAdLk6fhpyuNdDdRr81ySzv4W5CRSHcX_iuexOywKZQSEdjN-rXx8BAA" type="text/javascript"></script>
+    <script src="http://www.google.com/jsapi?key=ABQIAAAAp0Kj6-TRULdy9KWugN_GfxTAdLk6fhpyuNdDdRr81ySzv4W5CRSHcX_iuexOywKZQSEdjN-rXx8BAA" type="text/javascript"></script>
+    <script src="../../Scripts/LocationsMap.js" type="text/javascript" ></script>
+    <script src="http://www.google.com/uds/solutions/localsearch/gmlocalsearch.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../../Content/style.css">
     <script type="text/javascript">
         $(function () {
             $("#Fecha").datepicker();
         });
 	</script>
-
+  <br />
   <h2 id="mapName"></h2>
-
- <div id="map" style="width : 700px; height : 400px; margin : 0px; padding : 0px; float : left; margin-right:20px;"></div>
-    
-    <h2><%: ViewData["Message"] %></h2>
-   
+  <div id="map" style="width : 700px; height : 400px; margin : 0px; padding : 0px; float : left; margin-right:20px;"></div> 
 
     <%Html.BeginForm();{%>
     
     <div>
     <fieldset>
+    <legend><%: ViewData["Message"] %></legend>
      <p>
        <label for="Name">Lugar:</label>
        <%= Html.TextBox("Name")%>
      </p>
-     <input type="submit" value="Buscar" name="Button"/>
+     <input type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" value="Buscar" name="Button"/>
     </fieldset>
     </div>
     <% } %>
@@ -58,28 +64,13 @@
             d++;
         } %>
      </div>
-    <div style="clear:both;"></div>
-    <script src="../../Scripts/jquery-1.4.3.js"></script>
-    <script src="../../Scripts/jquery.ui.core.js"></script>
-    <script src="../../Scripts/jquery.ui.datepicker-es.js"></script>
-    <script src="../../Scripts/jquery.ui.datepicker.js"></script>
-
-    <link rel="stylesheet" href="../../Content/jquery-ui-1.8.6.custom.css">
-    <link rel="stylesheet" href="../../Content/style.css">
-    <script type="text/javascript">
-        $(function () {
-            $("#Fecha").datepicker();
-        });
-	</script>
-
       <form id="form1" runat="server">
-    <h2>Create</h2>
 
     <% Html.BeginForm();{%>
         <%: Html.ValidationSummary(true)%>
 
         <fieldset>
-            <legend>Fields</legend>
+            <legend>Datos adicionales:</legend>
                  
             <div class="editor-field">
                 <input type="hidden" name="Url" id="Url" />
@@ -117,15 +108,17 @@
                 <%: Html.ValidationMessageFor(model => model.Fecha)%>
             </div>
 
-            <p>
-                <input type="submit" value="Agregar Destino" name="Button" />
-            </p>
+            <div class="editor-label">
+                <input type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" value="Agregar Destino" name="Button" />
+            </div>
         </fieldset>
 
     <% } %>
 
     <div>
-      <%=Html.ActionLink("Volver a la lista", "Index", "Destino", new { idViaje = ViewData["idViaje"] }, null)%>   
+    <a title="Volver" href="<%= Url.Action("Index", "Destino") %>">
+          <img src="<%= Url.Content("~/Content/atras.png") %>" height="15px" width="15px" /></a>
+      <%=Html.ActionLink("Volver...", "Index", "Destino", new { idViaje = ViewData["idViaje"] }, null)%>   
     </div>
       </form>
       <div id="im_loading" class="im_loading"></div>

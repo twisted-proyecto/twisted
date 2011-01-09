@@ -7,11 +7,23 @@ using MvcApplication1.Dominio;
 using MvcApplication1.Dominio.Model;
 using MvcApplication1.Dominio.Repositorios;
 using System.Net.Mail;
+using System.Web.Security;
+using System.Web.Routing;
 
 namespace MvcApplication1.Controllers
 {
     public class PersonaController : Controller
     {
+        public IFormsAuthenticationService FormsService { get; set; }
+        public IMembershipService MembershipService { get; set; }
+
+        protected override void Initialize(RequestContext requestContext)
+        {
+            if (FormsService == null) { FormsService = new FormsAuthenticationService(); }
+            if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
+
+            base.Initialize(requestContext);
+        }
 
 
         public ActionResult Index()
@@ -24,8 +36,7 @@ namespace MvcApplication1.Controllers
                 Persona miPersona = repo.GetById(nick);
                 if (miPersona != null)
                 {
-                    if (miPersona.Privacidad != "Publico")
-                        milista.Add(miPersona);
+                    milista.Remove(miPersona);
                 }
                 return View(milista);
             }
@@ -43,7 +54,10 @@ namespace MvcApplication1.Controllers
             string nick = Session["data"] as string;
             IRepositorioPersona<Persona> repo = new PersonaRepositorio();
             if (repo.GetById(nick) != null)
+            {
+                FormsService.SignIn(nick, false /* createPersistentCookie */);
                 return RedirectToAction("Index", "Home");
+            }
             else
                 return RedirectToAction("Create", "Persona");
 
@@ -75,7 +89,12 @@ namespace MvcApplication1.Controllers
             {
                 if (Session["data"] != null)
                     Persona.Nickname = Session["data"] as string;
-
+                Persona.Estatus = "Activo";
+                MembershipCreateStatus createStatus = MembershipService.CreateUser(Persona.Nickname, "12345678", Persona.Email);
+                if (createStatus == MembershipCreateStatus.Success)
+                {
+                    FormsService.SignIn(Persona.Nickname, false /* createPersistentCookie */);
+                }
                 IRepositorioPersona<Persona> repo = new PersonaRepositorio();
                 repo.Save(Persona);
 
@@ -96,6 +115,8 @@ namespace MvcApplication1.Controllers
         {
             IEnumerable<string> items = new string[] { "Publico", "Privado" };
             ViewData["Privacidad"] = new SelectList(items);
+            IEnumerable<string> items2 = new string[] { "Activo", "Desactivado" };
+            ViewData["Estatus"] = new SelectList(items2);
             IRepositorioPersona<Persona> repo = new PersonaRepositorio();
             return View(repo.GetById(id));
         }
@@ -112,12 +133,14 @@ namespace MvcApplication1.Controllers
                 IRepositorioPersona<Persona> repo = new PersonaRepositorio();
                 repo.Update(Persona);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
 
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
             IEnumerable<string> items = new string[] { "Publico", "Privado" };
             ViewData["Privacidad"] = new SelectList(items);
+            IEnumerable<string> items2 = new string[] { "Activo", "Desactivado" };
+            ViewData["Estatus"] = new SelectList(items2);
             return View(Persona);
         }
 
@@ -179,6 +202,12 @@ namespace MvcApplication1.Controllers
                 Console.ReadLine();
             }
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Viajes(String id)
+        {
+
+            return RedirectToAction("VerViajes", "Viaje", new { nick = id });
         }
 
 

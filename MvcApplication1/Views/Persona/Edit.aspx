@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Persona>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Edit
+	Editar Perfil
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -9,20 +9,19 @@
     <script src="../../Scripts/jquery.ui.core.js"></script>
     <script src="../../Scripts/jquery.ui.datepicker-es.js"></script>
     <script src="../../Scripts/jquery.ui.datepicker.js"></script>
-    <link rel="stylesheet" href="../../Content/jquery-ui-1.8.6.custom.css">
     <script type="text/javascript">
         $(function () {
             $("#FechaNacimiento").datepicker();
         });
 	</script>
-
-    <h2>Edit</h2>
+    
+    <br />
 
     <% using (Html.BeginForm()) {%>
         <%: Html.ValidationSummary(true) %>
         
         <fieldset>
-            <legend>Fields</legend>
+            <legend>Editar Perfil:</legend>
             
 
               <div class="editor-label">
@@ -58,33 +57,28 @@
             </div>
             
             <div class="editor-label">
-                <%: Html.LabelFor(model => model.Estatus) %>
+                <label for="Estatus"> Estatus:</label>
             </div>
             <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.Estatus) %>
-                <%: Html.ValidationMessageFor(model => model.Estatus) %>
+                <%= Html.DropDownList("Estatus")%>
+                <%= Html.ValidationMessage("Estatus", "*")%>
             </div>
-            
                           
             <div class="editor-label">
                 <label for="Privacidad"> Privacidad:</label>
             </div>
-            <div>
+            <div class="editor-field">
                 <%= Html.DropDownList("Privacidad") %>
                 <%= Html.ValidationMessage("Privacidad", "*") %>
             </div>
             
-            
-            <p>
-                <input type="submit" value="Save" />
-            </p>
+            <div class="editor-label">
+                <input type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" value="Actualizar" />
+            </div>
         </fieldset>
 
     <% } %>
 
-    <div>
-        <%: Html.ActionLink("Back to List", "Index") %>
-    </div>
 
 </asp:Content>
 

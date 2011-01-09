@@ -108,7 +108,19 @@ namespace MvcApplication1.Controllers
             int id2 = idViaje;
             ViewData["idViaje"] = id2;
             IRepositorio<Destino> repo = new DestinoRepositorio();
-            return View(repo.GetAll());
+            IList<Destino> destinos = repo.GetAll();
+            IList<Destino> destinosViaje = new List<Destino>();
+
+            foreach (Destino destino in destinos)
+            {
+                if (destino.Viaje.IdViaje == id2)
+                {
+                    destinosViaje.Add(destino);
+                }
+            }
+
+           
+            return View(destinosViaje);
         }
 
         public ActionResult Details(int id, int idViaje)
@@ -118,7 +130,6 @@ namespace MvcApplication1.Controllers
             IRepositorio<Destino> repo = new DestinoRepositorio();
             return View(repo.GetById(id));
         }
-
 
 
         public ActionResult Edit(int id, int idViaje)

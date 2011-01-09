@@ -77,7 +77,7 @@ namespace MvcApplication1.Dominio.Repositorios
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
-                ICriteria criteria = session.CreateCriteria(typeof(Persona)).Add(Restrictions.Eq("Nickname", id));
+                ICriteria criteria = session.CreateCriteria<Participante>().Add(Restrictions.Eq("Nickname", id));
                 return criteria.List<Participante>();
 
             }

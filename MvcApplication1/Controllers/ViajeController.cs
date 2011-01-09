@@ -82,5 +82,21 @@ namespace MvcApplication1.Controllers
             repo.Delete(repo.GetById(id));
             return RedirectToAction("Index");
         }
+
+        public ActionResult VerViajes(String nick)
+        {
+            IRepositorio<Viaje> repo = new ViajeRepositorio();
+            IRepositorioParticipante<Participante> repoP = new ParticipanteRepositorio();
+            IList<Viaje> Viajes = new List<Viaje>();
+            IList<Participante> Participantes = repoP.GetAllByNick(nick);
+
+            foreach (var item in Participantes)
+            {
+                Viajes.Add(repo.GetById(item.IdViaje));
+            }
+
+            return View(Viajes); ;
+        }
+
     }
 }

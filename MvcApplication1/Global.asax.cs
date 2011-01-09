@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-
-namespace MvcApplication1
+﻿namespace MvcApplication1
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Web.Mvc;
+    using System.Web.Routing;
     // Nota: para obtener instrucciones sobre cómo habilitar el modo clásico de IIS6 o IIS7, 
     // visite http://go.microsoft.com/?LinkId=9394801
 
@@ -26,6 +24,19 @@ namespace MvcApplication1
 
         protected void Application_Start()
         {
+            // build the list of themes
+            string physicalPath = Server.MapPath("~/content/themes");
+            string[] themeDirs = Directory.GetDirectories(physicalPath);
+            IList<string> themes = new List<string>();
+            foreach (string themeDir in themeDirs)
+            {
+                string theme = themeDir.Split(new char[] { '\\' }).Last();
+                if (theme != "base")
+                    themes.Add(theme);
+            }
+
+            Application.Add("themes", themes);
+
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);

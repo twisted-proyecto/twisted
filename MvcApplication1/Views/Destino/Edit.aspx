@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Destino>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/TwoColumn.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Destino>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Editar Destino
@@ -9,7 +9,6 @@
     <script src="../../Scripts/jquery.ui.core.js"></script>
     <script src="../../Scripts/jquery.ui.datepicker-es.js"></script>
     <script src="../../Scripts/jquery.ui.datepicker.js"></script>
-    <link rel="stylesheet" href="../../Content/jquery-ui-1.8.6.custom.css">
     <script type="text/javascript">
         $(function () {
             $("#Fecha").datepicker();
@@ -17,8 +16,7 @@
 	</script>
 
 
-    <h2>- Gestion de Destinos -</h2>
-
+    
     <% using (Html.BeginForm()) {%>
         <%: Html.ValidationSummary(true) %>
         
@@ -68,13 +66,13 @@
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Longitud) %>
             </div>
-            <div class="editor-label-disable">
+            <div class="editor-field">
                 <%: Html.TextBoxFor(model => model.Longitud)%>
             </div>
 
-            <p>
-                <input type="submit" value="Modificar" />
-            </p>
+            <div class="editor-label">
+                <input type="submit"  class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" value="Modificar" />
+            </div>
             
             <div class="editor-field-hidden">
                 <%: Html.TextBoxFor(model => model.Estatus)%>
@@ -94,7 +92,9 @@
     <% } %>
 
     <div>
-      <%=Html.ActionLink("Volver a la lista", "Index", "Destino", new { idViaje = ViewData["idViaje"] }, null)%>
+    <a title="Volver" href="<%= Url.Action("Index", "Destino") %>">
+          <img src="<%= Url.Content("~/Content/atras.png") %>" height="15px" width="15px" /></a>
+      <%=Html.ActionLink("Volver...", "Index", "Destino", new { idViaje = ViewData["idViaje"] }, null)%>
     </div>
 
 </asp:Content>

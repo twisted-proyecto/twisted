@@ -1,14 +1,34 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
-<%
-    if (Request.IsAuthenticated) {
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<dynamic>" %>
+<%@ Import Namespace="MvcApplication1" %>
+<% if (Request.IsAuthenticated && this.Session["data"]!= null)
+   {
 %>
-        ¡Le damos la bienvenida<b><%: Page.User.Identity.Name %></b>!
-        [ <%: Html.ActionLink("Cerrar sesión", "LogOff", "Account") %> ]
-<%
-    }
-    else {
-%> 
-        [ <%: Html.ActionLink("Iniciar sesión", "LogOn", "Account") %> ]
-<%
-    }
+<ul>
+    <li>
+        <img alt="avatar" src="<%:Html.GetGravatarUrl(24)%>" width="24px" height="24px" />
+    </li>
+    <li>
+        <a class="ui-button ui-state-default ui-corner-all ui-button-text-only" href="<%: Url.Content("~/account/editprofile/") %>">
+            <%: Page.User.Identity.Name %>
+        </a>
+    </li>
+    <li>
+        <a class="ui-button ui-state-default ui-corner-all ui-button-text-only" href="<%: Url.Content("~/account/logoff/") %>">
+        Cerrar Sesion
+        </a>
+    </li>
+</ul>
+<% }
+   else
+   {
 %>
+<ul>
+    <li></li>
+    <li>
+        <li><%= Html.ActionLink("Iniciar Sesion", "Index", "Twitter",null, new { @class = "ui-state-default ui-button-text-only ui-corner-all ui-button" })%></li>
+        
+    </li>
+</ul>
+<%} %>
+
+
