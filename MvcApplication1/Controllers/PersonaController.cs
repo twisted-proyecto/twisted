@@ -89,7 +89,6 @@ namespace MvcApplication1.Controllers
             {
                 if (Session["data"] != null)
                     Persona.Nickname = Session["data"] as string;
-                Persona.Estatus = "Activo";
                 MembershipCreateStatus createStatus = MembershipService.CreateUser(Persona.Nickname, "12345678", Persona.Email);
                 if (createStatus == MembershipCreateStatus.Success)
                 {

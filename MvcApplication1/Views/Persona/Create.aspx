@@ -63,6 +63,9 @@
                 <%= Html.ValidationMessage("Privacidad", "*") %>
             </div>
             
+            <div class="editor-field">
+                <input type="hidden" name="Estatus" value="Activo" />
+            </div>
                         
             <div class="editor-label">
                 <input type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" value="Registrar" />

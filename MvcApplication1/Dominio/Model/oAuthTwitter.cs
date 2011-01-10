@@ -264,16 +264,13 @@ namespace MvcApplication1.Dominio.Model
             {
                 responseReader = new StreamReader(webRequest.GetResponse().GetResponseStream());
                 responseData = responseReader.ReadToEnd();
-            }
-            catch
-            {
-               
-            }
-            finally
-            {
                 webRequest.GetResponse().GetResponseStream().Close();
                 responseReader.Close();
                 responseReader = null;
+            }
+            catch
+            {
+                   
             }
 
             return responseData;

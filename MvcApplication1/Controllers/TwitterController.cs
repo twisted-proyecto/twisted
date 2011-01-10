@@ -53,7 +53,7 @@ namespace MvcApplication1.Controllers
                     if (p == null)
                     {
                         url = "http://twitter.com/statuses/update.xml";
-                        xml = oAuth.oAuthWebRequest(oAuthTwitter.Method.POST, url,"status=" +oAuth.UrlEncode("Yo ya me uni a la red @TwistedUCAB ... que esperas Unete! y comparte tus viajes tambien."));
+                        xml = oAuth.oAuthWebRequest(oAuthTwitter.Method.POST, url,"status=" +oAuth.UrlEncode("Yo, ya me uni a la red @TwistedUCAB ... que esperas Unete! y comparte tus viajes tambien."));
                     }
                 
                 //apiResponse.InnerHtml = Server.HtmlEncode(xml);
