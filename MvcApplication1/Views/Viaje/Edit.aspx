@@ -81,7 +81,7 @@
 
     <div>
     <a title="Volver" href="<%= Url.Action("Index", "Viaje") %>">
-          <img src="<%= Url.Content("~/Content/atras.png") %>" height="15px" width="15px" /></a>
+          <img src="<%= Url.Content("~/Content/atras.png") %>" height="25px" width="25px" /></a>
        <%=Html.ActionLink("Volver...", "Index")%>
     </div>
 

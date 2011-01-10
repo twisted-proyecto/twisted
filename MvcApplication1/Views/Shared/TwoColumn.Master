@@ -35,15 +35,28 @@
         <div class="content-side">
             <div class="sidebox ui-widget ui-widget-content ui-corner-all">
                 <div class="sidebox-header ui-widget-header ui-corner-top ui-state-default"><span>Informacion Personal</span></div>
-                <% if(Session["data"] == null)
+                <% if (!Request.IsAuthenticated || Session["data"] == null)
                    { %>
-                        UNETE A TWISTED
+                   <br />
+                        <h3>Bienvenido, Guest!</h3>
+                   <br />
                  <%}
                    else
                    { %>
                       <p>
-                        <%= Html.Action("Detalles", "Shared", new {id = Session["data"]})%>
-                        <%: Html.ActionLink("Mis Viajes", "VerViajes", "Viaje", new {  id=Session["data"]},null)%>
+                        Bienvenido,
+                        <br />
+                        <%= Html.Action("Detalles", "Shared", new {id = Session["data"]})%> 
+                        <br />
+                        <br />
+                        <a title="Mis Viajes" href="<%= Url.Action("Viajes", "Persona") %>">
+                            <img src="<%= Url.Content("~/Content/viajes.png") %>" height="25px" width="25px" /></a>
+                        <%: Html.ActionLink("Mis Viajes", "Viajes", "Persona", new { id = Session["data"] }, null)%>
+
+                        <br />
+                        <a title="Mis Amigos" href="#">
+                            <img src="<%= Url.Content("~/Content/amigos.png") %>" height="25px" width="25px" /></a>
+                        <%: Html.ActionLink("Mis Amigos", "#", "#")%>
                       </p>
                  <%
                    }%>
@@ -53,16 +66,38 @@
             </div>
 
              <div class="sidebox ui-widget ui-widget-content ui-corner-all">
-                <div class="sidebox-header ui-widget-header ui-corner-top ui-state-default"><span>Another sidebar box</span></div>
-                <p>
-                Suspendisse ipsum tortor, tempus ac tempor nec, fermentum sit amet 
-                lorem. Integer eget lacus dolor, rhoncus suscipit nunc. Vestibulum sit 
-                amet auctor ante. Vivamus convallis risus in urna scelerisque non 
-                vulputate sem rhoncus. Mauris quam libero, sagittis at pellentesque a, 
-                dignissim in erat. Nulla consectetur erat euismod leo lacinia auctor. 
-                Morbi nulla sem
-                </p>
-            </div>
+                <script src="http://widgets.twimg.com/j/2/widget.js"></script>
+                <script>
+                    new TWTR.Widget({
+                        version: 2,
+                        type: 'search',
+                        search:"TwistedUCAB",
+                        interval: 6000,
+                        width: 'auto',
+                        height: 300,
+                        theme: {
+                            shell: {
+                                background: '#54a9d1',
+                                color: '#ffffff'
+                            },
+                            tweets: {
+                                background: '#ffffff',
+                                color: '#030303',
+                                links: '#0726eb'
+                            }
+                        },
+                        features: {
+                            scrollbar: false,
+                            loop: true,
+                            live: true,
+                            hashtags: true,
+                            timestamp: true,
+                            avatars: true,
+                            toptweets: true,
+                            behavior: 'default'
+                        }
+                    }).render().start();
+                </script>
 
             <asp:ContentPlaceHolder ID="SideContent" runat="server">
 

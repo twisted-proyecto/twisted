@@ -6,7 +6,7 @@
 			<key-property name="Nickname" column="`nickname`" />
 		</composite-id>
 		<property name="Tipo" column="`tipo`" length="25" />
-		<many-to-one name="Persona" class="Persona" column="`nickname`" not-null="true" fetch="select" update="true" insert="true" />
-		<many-to-one name="Viaje" class="Viaje" column="`idViaje`" not-null="true" fetch="select" update="true" insert="true" />
+		<many-to-one name="Persona" class="Persona" column="`nickname`" not-null="true" fetch="select" update="false" insert="false" />
+		<many-to-one name="Viaje" class="Viaje" column="`idViaje`" not-null="true" fetch="select" update="false" insert="false" />
 	</class>
 </hibernate-mapping>

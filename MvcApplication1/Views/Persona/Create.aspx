@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/TwoColumn.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Persona>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Create
+	Agregar Perfil
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -9,7 +9,6 @@
     <script src="../../Scripts/jquery.ui.core.js"></script>
     <script src="../../Scripts/jquery.ui.datepicker-es.js"></script>
     <script src="../../Scripts/jquery.ui.datepicker.js"></script>
-    <link rel="stylesheet" href="../../Content/jquery-ui-1.8.6.custom.css">
     <script type="text/javascript">
         $(function () {
             $("#FechaNacimiento").datepicker();
@@ -18,7 +17,7 @@
     <br />
 
     <% using (Html.BeginForm()) {%>
-        <%: Html.ValidationSummary(true) %>
+        <%= Html.ValidationSummary(true,"Ha ocurrido un error. Por favor corrijalos e intente de nuevo.") %>
 
         <fieldset>
             <legend>Resgitro:</legend>

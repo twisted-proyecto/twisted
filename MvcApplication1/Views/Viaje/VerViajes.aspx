@@ -23,10 +23,10 @@
 	-webkit-box-shadow:0 0 10px #000;
 }
 </style>
-    <h2>- Gestion de Viajes -</h2>
+    <h2> Gestion de Viajes </h2>
     <% if (Model.Count() == 0)
        { %>
-           No participas en ningun Viaje.
+           <h3>No participas en ningun Viaje.</h3>
        <% }
     else
        {%>
@@ -105,8 +105,10 @@
        }%>
 
     </table>
-
+    <br />
     <p>
+        <a title="Agregar" href="<%= Url.Action("Create", "Viaje") %>">
+          <img src="<%= Url.Content("~/Content/agregar.png") %>" height="25px" width="25px" /></a>
         <%= Html.ActionLink("Agregar nuevo viaje", "Create") %>
     </p>
     <script>

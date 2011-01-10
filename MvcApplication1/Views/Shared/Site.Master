@@ -25,7 +25,7 @@
 <body>
     <div class="main">
         <div class="header ui-widget-content ui-corner-bottom ui-helper-clearfix">
-            <a class="logo" href="../">
+            <a class="logo" href="http://localhost:53953/">
             </a>
             <div class="usermenu ui-widget ui-widget-header ui-corner-bottom">
                 <% Html.RenderPartial("LogOnUserControl"); %>

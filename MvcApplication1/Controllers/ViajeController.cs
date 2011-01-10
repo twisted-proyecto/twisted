@@ -16,8 +16,17 @@ namespace MvcApplication1.Controllers
         // GET: /Viaje/
         public ActionResult Index()
         {
+          
             IRepositorio<Viaje> repo = new ViajeRepositorio();
-            return View(repo.GetAll());
+            IList<Viaje> Viajes = repo.GetAll();
+            IList<Viaje> ViajesPublicos = new List<Viaje>();
+            foreach (var item in Viajes)
+            {
+                if(item.Privacidad == "Publico")
+                  ViajesPublicos.Add(item);
+            }
+            
+            return View(ViajesPublicos);
         }
 
         public ActionResult Details(int id)
@@ -63,10 +72,38 @@ namespace MvcApplication1.Controllers
         public ActionResult Create(Viaje viaje)
         {
             if (ModelState.IsValid)
-            {                
-                IRepositorio<Viaje> repo = new ViajeRepositorio();
-                repo.Save(viaje);
+            {
+                if (viaje.FechaInicio < viaje.FechaFin)
+                {
+                    if (Session["data"]!=null)
+                    {
+                        IRepositorio<Viaje> repo = new ViajeRepositorio();
+                        repo.Save(viaje);
+                        IRepositorioParticipante<Participante> repoPar = new ParticipanteRepositorio();
+                        Participante par = new Participante();
+                        IRepositorioPersona<Persona> repoPer = new PersonaRepositorio();
+                        Persona per = new Persona();
+                        per = repoPer.GetById(Session["data"] as String);
+                        par.IdViaje = viaje.IdViaje;
+                        par.Nickname = per.Nickname;
+                        par.Tipo = "creador";
+                        par.Viaje = viaje;
+                        par.Persona = per;
 
+                        if (repoPar.Save(par))
+                        {
+                            par.Tipo = "creador";
+                        }
+                        else
+                        {
+                            par.Tipo = "creador";
+                        }
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "La fecha de inicio debe ser menor a la fecha fin.");
+                }
                 return RedirectToAction("Index");
             }
 

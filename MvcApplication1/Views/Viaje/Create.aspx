@@ -19,7 +19,6 @@
 	</script>
 
     <%= Html.ValidationSummary(true,"Ha ocurrido un error. Por favor corrijalos e intente de nuevo.") %>
-
     <% using (Html.BeginForm()) {%>
 
         <fieldset>
@@ -70,6 +69,7 @@
             </div>
             <div class="editor-field">
                 <%= Html.TextBox("Hospedaje", null, new { @class = "text-box" })%>
+                <%= Html.ValidationMessage("Hospedaje", "*") %>
             </div>
             
             <div class="editor-label">
@@ -81,7 +81,7 @@
 
     <div>
     <a title="Volver" href="<%= Url.Action("Index", "Viaje") %>">
-          <img src="<%= Url.Content("~/Content/atras.png") %>" height="15px" width="15px" /></a>
+          <img src="<%= Url.Content("~/Content/atras.png") %>" height="25px" width="25px" /></a>
         <%: Html.ActionLink("Volver...", "Index") %>
     </div>
 

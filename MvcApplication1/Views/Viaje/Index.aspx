@@ -52,10 +52,10 @@
         <tr>
             <td>
                 <a title="Editar" href="<%=Url.Action("Edit", "Viaje", new {id = item.IdViaje}, null)%>">
-                  <img src="<%=Url.Content("~/Content/editar.png")%>" height="15px" width="15px" /></a>
-                |
+                  <img src="<%=Url.Content("~/Content/editar.png")%>" height="25px" width="25px" /></a>
+                
                 <a title="Eliminar" href="<%=Url.Action("Delete", "Viaje", new {id = item.IdViaje}, null)%>">
-                    <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="15px" width="15px" /></a>
+                    <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="25px" width="25px" /></a>
             </td>
             <td>
                 <%=Html.Encode(item.Nombre)%>
@@ -65,11 +65,11 @@
             </td>
             <td>
                 <a title="Destinos de este viaje" href="<%=Url.Action("Index", "Destino", new {idViaje = item.IdViaje}, null)%>">
-                    <img src="<%=Url.Content("~/Content/destinos.png")%>" height="15px" width="15px" /></a>
+                    <img src="<%=Url.Content("~/Content/destinos.png")%>" height="23px" width="23px" /></a>
             </td>
               <td>
                 <details> <a title="Detalles" href="#">
-                <img src="<%=Url.Content("~/Content/consultar.png")%>" height="15px" width="15px" /></a></details>
+                <img src="<%=Url.Content("~/Content/consultar.png")%>" height="25px" width="25px" /></a></details>
 
                 <div class="tooltip"><fieldset>
                 <legend>Detalles:</legend>
@@ -107,12 +107,15 @@
        }%>
 
     </table>
-
+    <% if (Request.IsAuthenticated && this.Session["data"]!= null)
+       { %>
     <p>
         <a title="Agregar" href="<%= Url.Action("Create", "Viaje") %>">
-          <img src="<%= Url.Content("~/Content/agregar.png") %>" height="15px" width="15px" /></a>
+          <img src="<%= Url.Content("~/Content/agregar.png") %>" height="25px" width="25px" /></a>
         <%= Html.ActionLink("Agregar nuevo viaje", "Create") %>
     </p>
+    <%     
+       }%>
     <script>
         $(document).ready(function () {
 

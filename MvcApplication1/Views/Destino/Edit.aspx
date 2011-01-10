@@ -93,7 +93,7 @@
 
     <div>
     <a title="Volver" href="<%= Url.Action("Index", "Destino") %>">
-          <img src="<%= Url.Content("~/Content/atras.png") %>" height="15px" width="15px" /></a>
+          <img src="<%= Url.Content("~/Content/atras.png") %>" height="25px" width="25px" /></a>
       <%=Html.ActionLink("Volver...", "Index", "Destino", new { idViaje = ViewData["idViaje"] }, null)%>
     </div>
 

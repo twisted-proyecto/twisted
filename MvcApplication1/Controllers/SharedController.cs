@@ -15,9 +15,8 @@ namespace MvcApplication1.Controllers
 
         public String Detalles(String id)
         {
-            //IRepositorioPersona<Persona> repo = new PersonaRepositorio();
-            //return repo.GetById(id).Nombre+' '+repo.GetById(id).Apellido;
-            return "Pruebas";
+            IRepositorioPersona<Persona> repo = new PersonaRepositorio();
+            return repo.GetById(id).Nombre+' '+repo.GetById(id).Apellido;
         }
 
     }
