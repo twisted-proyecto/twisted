@@ -35,8 +35,9 @@
     <table>
         <tr>
             <th></th>
+            <th></th>
             <th>
-                Nombre del Destino
+                Nombre
             </th>
             <th>
                 Fecha tentativa
@@ -48,19 +49,6 @@
            {%>
     
         <tr>
-            <td>
-                <a title="Editar" href="<%= Url.Action("Edit", "Destino", new {id = item.IdDestino, idViaje = ViewData["idViaje"]}, null) %>">
-                  <img src="<%= Url.Content("~/Content/editar.png") %>" height="25px" width="25px" /></a>
-                
-                <a title="Eliminar" href="<%= Url.Action("Delete", "Destino", new {id = item.IdDestino, idViaje = ViewData["idViaje"]}, null) %>">
-                  <img src="<%= Url.Content("~/Content/eliminar.png") %>" height="25px" width="25px" /></a>
-            </td>
-            <td>
-                <%=Html.Encode(item.Nombre)%>
-            </td>
-            <td>
-                 <%: String.Format("{0:dd/MM/yyyy}", item.Fecha)%>
-            </td>
             <td>
                 <details>
                 <a title="Detalles" href="#">
@@ -103,6 +91,20 @@
                 </fieldset>
                 </div>
             </td>
+            <td>
+                <a title="Editar" href="<%= Url.Action("Edit", "Destino", new {id = item.IdDestino, idViaje = ViewData["idViaje"]}, null) %>">
+                  <img src="<%= Url.Content("~/Content/editar.png") %>" height="25px" width="25px" /></a>
+            </td>
+            <td>
+                <%=Html.Encode(item.Nombre)%>
+            </td>
+            <td>
+                 <%: String.Format("{0:dd/MM/yyyy}", item.Fecha)%>
+            </td>
+            <td>
+                <a title="Eliminar" href="<%= Url.Action("Delete", "Destino", new {id = item.IdDestino, idViaje = ViewData["idViaje"]}, null) %>">
+                  <img src="<%= Url.Content("~/Content/eliminar.png") %>" height="25px" width="25px" /></a>
+            </td>
         </tr>
     
     <%
@@ -121,7 +123,7 @@
        }%>
     <script>
         $(document).ready(function () {
-            $("details").tooltip({ offset: [90, 20], effect: 'slide' });
+            $("details").tooltip({ offset: [90, -350], effect: 'slide' });
         });
     </script>
 </asp:Content>

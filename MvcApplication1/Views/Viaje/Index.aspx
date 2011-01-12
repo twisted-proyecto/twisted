@@ -35,6 +35,7 @@
     <table>
         <tr>
             <th></th>
+            <th></th>
             <th>
                 Nombre del Viaje
             </th>
@@ -51,23 +52,6 @@
     
         <tr>
             <td>
-                <a title="Editar" href="<%=Url.Action("Edit", "Viaje", new {id = item.IdViaje}, null)%>">
-                  <img src="<%=Url.Content("~/Content/editar.png")%>" height="25px" width="25px" /></a>
-                
-                <a title="Eliminar" href="<%=Url.Action("Delete", "Viaje", new {id = item.IdViaje}, null)%>">
-                    <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="25px" width="25px" /></a>
-            </td>
-            <td>
-                <%=Html.Encode(item.Nombre)%>
-            </td>
-            <td>
-                <%:String.Format("{0:dd/MM/yyyy}", item.FechaInicio)%>
-            </td>
-            <td>
-                <a title="Destinos de este viaje" href="<%=Url.Action("Index", "Destino", new {idViaje = item.IdViaje}, null)%>">
-                    <img src="<%=Url.Content("~/Content/destinos.png")%>" height="23px" width="23px" /></a>
-            </td>
-              <td>
                 <details> <a title="Detalles" href="#">
                 <img src="<%=Url.Content("~/Content/consultar.png")%>" height="25px" width="25px" /></a></details>
 
@@ -100,6 +84,24 @@
                 </fieldset>
                 </div>
             </td>
+            <td>
+                <a title="Editar" href="<%=Url.Action("Edit", "Viaje", new {id = item.IdViaje}, null)%>">
+                  <img src="<%=Url.Content("~/Content/editar.png")%>" height="25px" width="25px" /></a>
+            </td>
+            <td>
+                <%=Html.Encode(item.Nombre)%>
+            </td>
+            <td>
+                <%:String.Format("{0:dd/MM/yyyy}", item.FechaInicio)%>
+            </td>
+            <td>
+                <a title="Destinos de este viaje" href="<%=Url.Action("Index", "Destino", new {idViaje = item.IdViaje}, null)%>">
+                    <img src="<%=Url.Content("~/Content/destinos.png")%>" height="23px" width="23px" /></a>
+            </td>
+            <td>
+                <a title="Eliminar" href="<%=Url.Action("Delete", "Viaje", new {id = item.IdViaje}, null)%>">
+                    <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="25px" width="25px" /></a>
+            </td>
         </tr>
    
     <%     
@@ -119,7 +121,7 @@
     <script>
         $(document).ready(function () {
 
-            $("details").tooltip({ offset: [30, 10], effect: 'slide' });
+            $("details").tooltip({ offset: [30, -330], effect: 'slide' });
         });
     </script>
 </asp:Content>
