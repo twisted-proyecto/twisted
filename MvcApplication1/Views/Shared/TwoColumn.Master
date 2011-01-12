@@ -54,9 +54,9 @@
                         <%: Html.ActionLink("Mis Viajes", "Viajes", "Persona", new { id = Session["data"] }, null)%>
 
                         <br />
-                        <a title="Mis Amigos" href="#">
+                        <a title="Mis Amigos" href="<%= Url.Action("Amigos", "Persona") %>">
                             <img src="<%= Url.Content("~/Content/amigos.png") %>" height="25px" width="25px" /></a>
-                        <%: Html.ActionLink("Mis Amigos", "#", "#")%>
+                        <%: Html.ActionLink("Mis Amigos", "Amigos", "Persona", new { id = Session["data"] }, null)%>
                       </p>
                  <%
                    }%>
