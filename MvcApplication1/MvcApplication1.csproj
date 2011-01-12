@@ -126,6 +126,7 @@
     <Compile Include="Dominio\Model\Persona.cs" />
     <Compile Include="Dominio\Model\Validation.cs" />
     <Compile Include="Dominio\Model\Viaje.cs" />
+    <Compile Include="Dominio\Repositorios\AmistadRepositorio.cs" />
     <Compile Include="Dominio\Repositorios\ParticipanteRepositorio.cs" />
     <Compile Include="Dominio\Repositorios\DestinoRepositorio.cs" />
     <Compile Include="Dominio\Repositorios\PersonaRepositorio.cs" />
@@ -936,6 +937,7 @@
     <Content Include="Views\Home\Blog.aspx" />
     <Content Include="Views\Home\Contact.aspx" />
     <Content Include="Views\Home\Products.aspx" />
+    <Content Include="Views\Persona\VerAmigos.aspx" />
     <Content Include="Views\Persona\Create.aspx" />
     <Content Include="Views\Persona\Delete.aspx" />
     <Content Include="Views\Persona\Details.aspx" />

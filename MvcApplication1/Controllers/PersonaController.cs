@@ -209,6 +209,61 @@ namespace MvcApplication1.Controllers
             return RedirectToAction("VerViajes", "Viaje", new { nick = id });
         }
 
+        public ActionResult Amigos(String id)
+        {
 
+            return RedirectToAction("VerAmigos", "Persona", new { nick = id });
+        }
+       
+        public ActionResult AgregarAmigo(String id)
+        {
+            Persona persona = new Persona();
+            if (ModelState.IsValid)
+            {
+                
+                if (Session["data"] != null)
+                    persona.Nickname = Session["data"] as string;
+
+                Persona amigo = new Persona();
+                IRepositorioPersona<Persona> repo = new PersonaRepositorio();
+                amigo = repo.GetById(id);
+                Amistad amistad = new Amistad();
+                amistad.Nickname = persona.Nickname;
+                amistad.NicknameAmigo = id;
+                amistad.Fecha = System.DateTime.Today;
+                amistad.Persona1 = repo.GetById(persona.Nickname);
+                amistad.Persona = amigo;
+                IRepositorio<Amistad> repoAmistad = new AmistadRepositorio();
+                bool noc = repoAmistad.Save(amistad);
+
+                return RedirectToAction("Index", "Home");
+                
+            }
+
+            // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
+            IEnumerable<string> items = new string[] { "Publico", "Privado" };
+            ViewData["Privacidad"] = new SelectList(items);
+            return View(persona);
+           
+        }
+
+        public ActionResult VerAmigos(String nick)
+        {
+            IRepositorio<Amistad> repo = new AmistadRepositorio();
+            IRepositorioPersona<Persona> repoP = new PersonaRepositorio();
+            IList<Amistad> amistades = new List<Amistad>();
+            IList<Persona> amigos = new List<Persona>();
+            amistades = repo.GetAll();
+
+            foreach (var item in amistades)
+            {
+                if (item.Nickname == nick)
+                {
+                    amigos.Add(repoP.GetById(item.NicknameAmigo));
+                }
+            }
+
+            return View(amigos); ;
+        }
     }
 }
