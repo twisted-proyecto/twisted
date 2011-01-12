@@ -6,6 +6,16 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <script src="http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js"></script> 
+<style type="text/css">
+      @import url("http://www.google.com/uds/css/gsearch.css");
+      @import url("http://www.google.com/uds/solutions/localsearch/gmlocalsearch.css");
+    </style>
+
+    <script src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAAp0Kj6-TRULdy9KWugN_GfxTAdLk6fhpyuNdDdRr81ySzv4W5CRSHcX_iuexOywKZQSEdjN-rXx8BAA" type="text/javascript"></script>
+    <script src="http://www.google.com/jsapi?key=ABQIAAAAp0Kj6-TRULdy9KWugN_GfxTAdLk6fhpyuNdDdRr81ySzv4W5CRSHcX_iuexOywKZQSEdjN-rXx8BAA" type="text/javascript"></script>
+    <script src="../../Scripts/DestinosMap.js" type="text/javascript" ></script>
+    <script src="http://www.google.com/uds/solutions/localsearch/gmlocalsearch.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../../Content/style.css">
 <style>
     .tooltip {
 	
@@ -25,13 +35,16 @@
 </style>
 
 <h2>Gestion de Destinos</h2>
-    <br />
+ 
     <% if (Model.Count() == 0)
        { %>
            No existe ningun Destino para el viaje.
        <% }
        else
        {%>
+    <h2 id="mapName"></h2>
+    <div id="map" style="width : 700px; height : 400px;"></div> 
+    
     <table>
         <tr>
             <th></th>
@@ -45,9 +58,11 @@
             <th></th>
         </tr>
     <%
+           
            foreach (var item in Model)
-           {%>
-    
+           { %>
+           <%= Html.Action("setDestinos", "Destino", new {destino = item})%> 
+            
         <tr>
             <td>
                 <details>

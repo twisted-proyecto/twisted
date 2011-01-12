@@ -53,6 +53,18 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="MvcContrib">
+      <HintPath>references\MvcContrib.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib.FluentHtml">
+      <HintPath>references\MvcContrib.FluentHtml.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib.TestHelper">
+      <HintPath>references\MvcContrib.TestHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib.WatiN">
+      <HintPath>references\MvcContrib.WatiN.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>references\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -107,6 +119,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DestinoController.cs" />
+    <Compile Include="Controllers\FormatFilterAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
@@ -124,6 +137,7 @@
     <Compile Include="Dominio\Model\Foto.cs" />
     <Compile Include="Dominio\Model\Participante.cs" />
     <Compile Include="Dominio\Model\Persona.cs" />
+    <Compile Include="Dominio\Model\Pizza.cs" />
     <Compile Include="Dominio\Model\Validation.cs" />
     <Compile Include="Dominio\Model\Viaje.cs" />
     <Compile Include="Dominio\Repositorios\ParticipanteRepositorio.cs" />
@@ -912,6 +926,7 @@
     <Content Include="Global.asax" />
     <Content Include="hibernate.cfg.xml" />
     <Content Include="log4net.xml" />
+    <Content Include="Scripts\DestinosMap.js" />
     <Content Include="Scripts\jquery-1.2.6.min.js" />
     <Content Include="Scripts\jquery-1.4.2.min.js" />
     <Content Include="Scripts\jquery-1.4.3.js" />

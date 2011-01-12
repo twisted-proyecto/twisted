@@ -27,6 +27,27 @@ namespace MvcApplication1.Dominio.Repositorios
                 Locations = locations
             };
         }
+        public Map SetRepositories(IList<Destino> destinos)
+        {
+            List<Location> locations = new List<Location>();
+            Location loc = new Location();
+            for (int i = 0; i < destinos.Count; i++)
+            {
+                loc.Image = destinos[i].Url;
+                loc.LatLng = new LatLng { Latitude = destinos[i].Latitud, Longitude = destinos[i].Longitud };
+                loc.Name = destinos[i].Nombre;
+                locations.Add(loc);
+                loc = new Location();
+            }
+            return new Map
+            {
+                Name = "",
+                Zoom = 8,
+                center = new LatLng { Latitude = destinos[0].Latitud, Longitude = destinos[0].Longitud },
+                LatLng = new LatLng { Latitude = destinos[0].Latitud, Longitude = destinos[0].Longitud },
+                Locations = locations
+            };
+        }
         public Map SetRepositories()
         {
             return new Map

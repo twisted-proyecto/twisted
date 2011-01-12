@@ -27,6 +27,7 @@ namespace MvcApplication1.Controllers
 
 
         static PhotoCollection photos = new PhotoCollection();
+        static IList<Destino> destinos = new List<Destino>();
         public ActionResult Create(int idViaje)
         {
             int id2 = idViaje;
@@ -92,15 +93,31 @@ namespace MvcApplication1.Controllers
         public ActionResult Map()
         {
             var mapRepository = new MapRepository();
-            var map = new Map();
+            Map map;
             if (photos.Count == 0)
                 map = mapRepository.SetRepositories();
             else
                 map = mapRepository.SetRepositories(photos);
-
+            photos = new PhotoCollection();
             return Json(map, "1",JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult MapDestino()
+        {
+            var mapRepository = new MapRepository();
+            Map map;
+            if (destinos.Count == 0)
+                map = mapRepository.SetRepositories();
+            else
+                map = mapRepository.SetRepositories(destinos);
+            destinos = new List<Destino>();
+            return Json(map, "1", JsonRequestBehavior.AllowGet);
+        }
         
+        public void setDestinos(Destino destino)
+        {
+            destinos.Add(destino);
+        }
         //
         // GET: /Destino/
         public ActionResult Index(int idViaje)
