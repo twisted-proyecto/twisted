@@ -39,7 +39,7 @@
                 <%: Html.Label("Avatar:") %>
             </div>
             <div class="editor-field">
-                <img alt="avatar" src="<%:Html.GetGravatarUrl(64)%>" width="64px" height="64px" />
+                <img alt="avatar" src="<%:Html.GetGravatarUrl(128)%>" width="128px" height="128px" />
             </div>
         </div>
         <div class="editor-row">
