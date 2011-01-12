@@ -20,6 +20,12 @@
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Valores predeterminados de parámetro
             );
 
+            routes.MapRoute(
+	            "Format",
+	            "{controller}/{action}/{id}.{format}",
+	            new {id = "", format = ""}
+            );
+
         }
 
         protected void Application_Start()
