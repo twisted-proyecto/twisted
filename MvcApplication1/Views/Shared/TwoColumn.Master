@@ -64,7 +64,8 @@
                 
                 </p>
             </div>
-
+            <% if (!Request.IsAuthenticated || Session["data"] == null)
+               {%>
              <div class="sidebox ui-widget ui-widget-content ui-corner-all">
                 <script src="http://widgets.twimg.com/j/2/widget.js"></script>
                 <script>
@@ -102,6 +103,48 @@
             <asp:ContentPlaceHolder ID="SideContent" runat="server">
 
             </asp:ContentPlaceHolder>
-        </div>
+        </div>        
+           <%  } 
+               else
+               { %>
+                   <div class="sidebox ui-widget ui-widget-content ui-corner-all">
+                <script src="http://widgets.twimg.com/j/2/widget.js"></script>
+                <script>
+                    new TWTR.Widget({
+                        version: 2,
+                        type: 'search',
+                        search:"TwistedUCAB OR <%=Session["data"]%>",
+                        interval: 6000,
+                        width: 'auto',
+                        height: 300,
+                        theme: {
+                            shell: {
+                                background: '#54a9d1',
+                                color: '#ffffff'
+                            },
+                            tweets: {
+                                background: '#ffffff',
+                                color: '#030303',
+                                links: '#0726eb'
+                            }
+                        },
+                        features: {
+                            scrollbar: false,
+                            loop: true,
+                            live: true,
+                            hashtags: true,
+                            timestamp: true,
+                            avatars: true,
+                            toptweets: true,
+                            behavior: 'default'
+                        }
+                    }).render().start();
+                </script>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+
+            </asp:ContentPlaceHolder>
+        </div>        
+            <% }%>
     </div>
 </asp:Content>

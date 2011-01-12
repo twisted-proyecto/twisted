@@ -18,15 +18,15 @@ namespace MvcApplication1.Controllers
         {
           
             IRepositorio<Viaje> repo = new ViajeRepositorio();
-            IList<Viaje> Viajes = repo.GetAll();
-            IList<Viaje> ViajesPublicos = new List<Viaje>();
-            foreach (var item in Viajes)
+            IList<Viaje> viajes = repo.GetAll();
+            IList<Viaje> viajesPublicos = new List<Viaje>();
+            foreach (var item in viajes)
             {
                 if(item.Privacidad == "Publico")
-                  ViajesPublicos.Add(item);
+                  viajesPublicos.Add(item);
             }
             
-            return View(ViajesPublicos);
+            return View(viajesPublicos);
         }
 
         public ActionResult Details(int id)
@@ -124,16 +124,17 @@ namespace MvcApplication1.Controllers
         {
             IRepositorio<Viaje> repo = new ViajeRepositorio();
             IRepositorioParticipante<Participante> repoP = new ParticipanteRepositorio();
-            IList<Viaje> Viajes = new List<Viaje>();
-            IList<Participante> Participantes = repoP.GetAllByNick(nick);
+            IList<Viaje> viajes = new List<Viaje>();
+            IList<Participante> participantes = repoP.GetAllByNick(nick);
 
-            foreach (var item in Participantes)
+            foreach (var item in participantes)
             {
-                Viajes.Add(repo.GetById(item.IdViaje));
+                viajes.Add(repo.GetById(item.IdViaje));
             }
 
-            return View(Viajes); ;
+            return View(viajes); ;
         }
+
 
     }
 }

@@ -10,7 +10,9 @@
 
     <table>
         <tr>
-            <th></th>
+            <th>
+                Avatar
+            </th>
             <th>
                 Nickname
             </th>
@@ -21,7 +23,7 @@
                 Apellido
             </th>
             <th>
-                FechaNacimiento
+                Fecha de Nac.
             </th>
             <th>
                 Email
@@ -33,21 +35,7 @@
     
         <tr>
             <td>
-             <% if ((this.Session["data"]!=null) &&(this.Session["data"] as string ==item.Nickname))
-                         { %>
-                            <%: Html.ActionLink("Edit", "Edit", new {  id=item.Nickname  }) %> 
-                      <%}%>
-                
-                <% if ((this.Session["data"]!=null) &&(this.Session["data"] as string ==item.Nickname))
-                        { %>
-                            <%: Html.ActionLink("Delete", "Delete", new {  id=item.Nickname })%>
-                      <%}%> 
-
-                <% if ((this.Session["data"]!=null) &&(this.Session["data"] as string ==item.Nickname))
-                        { %>
-                             <%: Html.ActionLink("Viajes", "Viajes", new {  id=item.Nickname })%>
-                      <%}%> 
-               
+                <img alt="avatar" src="<%:Html.GetGravatarUrlEmail(50,item.Email)%>" width="50px" height="50px" />
             </td>
             <td>
                 <%: item.Nickname %>
