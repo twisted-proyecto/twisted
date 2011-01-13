@@ -129,14 +129,23 @@ namespace MvcApplication1.Controllers
             IRepositorio<Destino> repo = new DestinoRepositorio();
             IList<Destino> destinos = repo.GetAll();
             IList<Destino> destinosViaje = new List<Destino>();
-
-            foreach (Destino destino in destinos)
+            using (var session = new MongoSession<Category>())
             {
-                if (destino.Viaje.IdViaje == id2)
+                
+                foreach (Destino destino in destinos)
                 {
-                    destinosViaje.Add(destino);
+                    if (destino.Viaje.IdViaje == id2)
+                    {
+                        Destino destino1 = destino;
+                        var category = session.Queryable
+                          .Where(c => c.IdDestino == destino1.IdDestino)
+                          .AsEnumerable();
+                        destino.Votos = category!=null ? category.Count() : 0;
+                        destinosViaje.Add(destino);
+                    }
                 }
             }
+            
 
            
             return View(destinosViaje);
@@ -198,13 +207,14 @@ namespace MvcApplication1.Controllers
             }
         }
 
-        public ActionResult DeleteVoto(ObjectId id, int id2)
+        public ActionResult DeleteVoto(int id2)
         {
             using (var session = new MongoSession<Category>())
             {
                 var category = session.Queryable
-                      .Where(c => c.Id == id)
+                    .Where(c => c.Nickname == Session["data"] as string)
                       .FirstOrDefault();
+
                 session.Delete(category);
                 return RedirectToAction("Index", "Destino", new { idViaje = id2 });
             }

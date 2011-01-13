@@ -134,6 +134,24 @@
                   <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="25px" width="25px" /></a>
             </td>
             <%
+                if (Request.IsAuthenticated && Session["data"] != null)
+                {
+                    %>
+                        <td>
+                            <%= item.Votos %> 
+                        </td>
+                        <td>
+                            <a title="Votar" href="<%=Url.Action("AgregarVoto", "Destino", new {id2 = item.IdDestino}, null)%>">
+                                <img src="<%=Url.Content("~/Content/agregar.png")%>" height="25px" width="25px" /></a>
+                        </td>
+                       
+                        <td>
+                            <a title="Eliminar Voto" href="<%=Url.Action("DeleteVoto", "Destino", new {id2 = Request["idViaje"]}, null)%>">
+                                <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="25px" width="25px" /></a>
+                        </td>
+                 <%
+                
+                }
                }%>
         </tr>
     

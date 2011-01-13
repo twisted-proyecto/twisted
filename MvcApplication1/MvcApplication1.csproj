@@ -77,6 +77,10 @@
     <Reference Include="NHibernate.Validator">
       <HintPath>references\NHibernate.Validator.dll</HintPath>
     </Reference>
+    <Reference Include="Norm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>references\Norm.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>references\nunit.framework.dll</HintPath>
     </Reference>
@@ -117,7 +121,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contract\IUniqueIdentifier.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Category.cs" />
     <Compile Include="Controllers\DestinoController.cs" />
     <Compile Include="Controllers\FormatFilterAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -156,6 +162,10 @@
     <Compile Include="Dominio\Model\oAuth.cs" />
     <Compile Include="Dominio\Model\oAuthTwitter.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Helpers\ImageActionLinkHelper.cs" />
+    <Compile Include="Helpers\SelectedHelper.cs" />
+    <Compile Include="Helpers\ToSelectListItems.cs" />
+    <Compile Include="Infrastructure\Session.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
