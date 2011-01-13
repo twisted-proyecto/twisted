@@ -18,13 +18,7 @@
                             <%: Html.ActionLink("Viajes", "Index", "Viaje")%>
                         </li>
                         <li class="ui-state-default ui-corner-top <%:Html.IsActiveTab("Persona") %>">
-                            <%: Html.ActionLink("Perfiles Publicos", "Index", "Persona")%>
-                        </li>
-                        <li class="ui-state-default ui-corner-top <%:Html.IsActiveTab("About") %>">
-                            <%: Html.ActionLink("About", "About", "Home")%>
-                        </li>
-                        <li class="ui-state-default ui-corner-top <%:Html.IsActiveTab("Contact") %>">
-                            <%: Html.ActionLink("Contact", "Contact", "Home")%>
+                            <%: Html.ActionLink("Perfiles", "Index", "Persona")%>
                         </li>
                     </ul>
                     <asp:ContentPlaceHolder ID="MainContent" runat="server">

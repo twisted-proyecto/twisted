@@ -58,8 +58,8 @@ namespace MvcApplication1.Controllers
                 FormsService.SignIn(nick, false /* createPersistentCookie */);
                 return RedirectToAction("Index", "Home");
             }
-            else
-                return RedirectToAction("Create", "Persona");
+            
+            return RedirectToAction("Create", "Persona");
 
         }
 
@@ -170,7 +170,6 @@ namespace MvcApplication1.Controllers
             }
 
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
-
             return View(Persona);
         }
 
@@ -234,27 +233,19 @@ namespace MvcApplication1.Controllers
                 amistad.Persona1 = repo.GetById(persona.Nickname);
                 amistad.Persona = amigo;
                 IRepositorio<Amistad> repoAmistad = new AmistadRepositorio();
-                bool noc = repoAmistad.Save(amistad);
-
-                return RedirectToAction("Index", "Home");
-                
+                repoAmistad.Save(amistad);
+                return RedirectToAction("Index", "Persona");   
             }
-
-            // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
-            IEnumerable<string> items = new string[] { "Publico", "Privado" };
-            ViewData["Privacidad"] = new SelectList(items);
-            return View(persona);
-           
+            return RedirectToAction("Index", "Persona");
         }
 
         public ActionResult VerAmigos(String nick)
         {
             IRepositorio<Amistad> repo = new AmistadRepositorio();
             IRepositorioPersona<Persona> repoP = new PersonaRepositorio();
-            IList<Amistad> amistades = new List<Amistad>();
+            IList<Amistad> amistades= repo.GetAll();
             IList<Persona> amigos = new List<Persona>();
-            amistades = repo.GetAll();
-
+            
             foreach (var item in amistades)
             {
                 if (item.Nickname == nick)
@@ -262,8 +253,45 @@ namespace MvcApplication1.Controllers
                     amigos.Add(repoP.GetById(item.NicknameAmigo));
                 }
             }
-
             return View(amigos); ;
+        }
+
+        public MvcHtmlString EsAmigo(String nick)
+        {
+            IRepositorio<Amistad> repo = new AmistadRepositorio();
+            IRepositorioPersona<Persona> repoP = new PersonaRepositorio();
+            IList<Amistad> amistades = repo.GetAll();
+
+            foreach (var item in amistades)
+            {
+                if (item.Nickname == (string) Session["data"])
+                {
+                    if(item.NicknameAmigo == nick)
+                    {
+                        return MvcHtmlString.Create("true");
+                    }
+                }
+            }
+            return MvcHtmlString.Create("false");
+        }
+
+        public ActionResult EliminarAmigo(String nick)
+        {
+            IRepositorio<Amistad> repo = new AmistadRepositorio();
+            IRepositorioPersona<Persona> repoP = new PersonaRepositorio();
+            IList<Amistad> amistades = repo.GetAll();
+
+            foreach (var item in amistades)
+            {
+                if (item.Nickname == (string)Session["data"])
+                {
+                    if (item.NicknameAmigo == nick)
+                    {
+                        repo.Delete(item);
+                    }
+                }
+            }
+            return RedirectToAction("Index", "Persona");
         }
     }
 }

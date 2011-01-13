@@ -127,7 +127,6 @@
         
     <!-- The JavaScript -->
     
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
     <script src="../../Scripts/jquery.transform-0.9.1.min.js"></script>
         <script type="text/javascript">
             //Paul Irish smartresize : http://paulirish.com/2009/throttled-smartresize-jquery-event-handler/

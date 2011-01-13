@@ -1,12 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Persona>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/OneColumn.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Persona>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Editar Perfil
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <script src="../../Scripts/jquery-1.4.3.js"></script>
-    <script src="../../Scripts/jquery.ui.core.js"></script>
     <script src="../../Scripts/jquery.ui.datepicker-es.js"></script>
     <script src="../../Scripts/jquery.ui.datepicker.js"></script>
     <script type="text/javascript">
@@ -14,8 +12,18 @@
             $("#FechaNacimiento").datepicker();
         });
 	</script>
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery.loadimages.1.0.1.js") %>"></script>
+    <script type="text/javascript">
+        $(document).ready(initialiseSettings);
+    </script>
     
-    <br />
+    <div id="editprofile">
+    <ul>
+        <li>
+            <a href="#tab_profile">Modificar Perfil</a>
+        </li>
+    </ul>
+    <div id="tab_profile">
 
     <% using (Html.BeginForm()) {%>
         <%: Html.ValidationSummary(true) %>
@@ -78,7 +86,7 @@
         </fieldset>
 
     <% } %>
-
-
+    </div>
+    </div>
 </asp:Content>
 

@@ -20,8 +20,8 @@
     </ul>
     <div id="tab_profile">
 
-    <a title="Volver" href="<%= Url.Action("Edit", "Persona",new {id = this.Session["data"]}) %>">
-      <img src="<%= Url.Content("~/Content/editar.png") %>" height="15px" width="15px" /></a>
+    <a title="Editar" href="<%= Url.Action("Edit", "Persona",new {id = this.Session["data"]}) %>">
+      <img src="<%= Url.Content("~/Content/editar.png") %>" height="25px" width="25px" /></a>
       <%= Html.ActionLink("Editar Perfil", "Edit", "Persona",new {id = this.Session["data"]},null)%>
     <% using (Html.BeginForm("editprofiledetails", "account"))
        { %>

@@ -8,7 +8,6 @@
 h1, h2, h3, h4, h5, h6
 {
     font-size: 1.5em;
-    color: #000;
 }
 
 h1
@@ -136,23 +135,18 @@ table
 {
   margin-left : auto;
   margin-right : auto;
-  padding : 1px;
-  border: solid 1px white;
-  border-collapse: collapse;
 }
 
 table td 
 {
   padding: 5px;   
-  border: solid 1px white;
 }
 
 table th
 {
   padding: 6px 5px;
   text-align: center;
-  font-weight:bold;
-  border: solid 1px white;   
+  font-weight:bold;  
 }
 
 table td
@@ -280,4 +274,22 @@ div#title
 .tri-state
 {
     width: 6em;
+}
+
+/*Ventana Modal*/
+.tooltip {
+	
+	border:1px solid #fff;
+	padding:10px 15px;
+	width:300px;
+	display:none;
+	color: Black;
+	
+	text-align:center;
+	font-size:12px;
+	background-color:White;
+
+	/* outline radius for mozilla/firefox only */
+	-moz-box-shadow:0 0 10px #000;
+	-webkit-box-shadow:0 0 10px #000;
 }
