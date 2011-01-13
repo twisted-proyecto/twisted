@@ -59,18 +59,9 @@ namespace MvcApplication1.Controllers
                 //apiResponse.InnerHtml = Server.HtmlEncode(xml);
                     XmlSiteMapProvider my = new XmlSiteMapProvider();
                     return RedirectToAction("Verificar", "Persona");
-
-
                 }
             }
-
-             return View();
-        }
-
-        [HttpPost]
-        public ActionResult Index(Object sender, EventArgs e)
-        {
-              return View();
+            return RedirectToAction("Index", "Home");
         }
 
         public String parsear(String xml, String parametroApertura, String parametroCierre) {

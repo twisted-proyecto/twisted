@@ -51,7 +51,8 @@ CREATE TABLE [Destino]
  [fecha] Date NULL,
  [direccion] Varchar(150) NULL,
  [descripcion] Varchar(150) NULL,
- [idViaje] Int NULL
+ [idViaje] Int NULL,
+ [votos] Int NULL
 )
 go
 

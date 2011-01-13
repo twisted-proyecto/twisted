@@ -12,6 +12,7 @@
 		<property name="Longitud" column="`longitud`" />
 		<property name="Nombre" column="`nombre`" length="25" />
 		<property name="Url" column="`url`" length="100" />
+    <property name="Votos" column="`votos`" />
 		<set name="Comentarios" fetch="select" cascade="save-update">
 			<key column="`idDestino`" />
 			<one-to-many class="Comentario" />

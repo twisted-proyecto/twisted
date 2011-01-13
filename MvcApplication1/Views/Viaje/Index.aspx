@@ -26,7 +26,7 @@
     <br />
     <% if (Model.Count() == 0)
        { %>
-           No pexiste ningun Viaje disponible.
+           No existe ningun Viaje disponible.
        <% }
     else
        {%>
