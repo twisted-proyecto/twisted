@@ -14,7 +14,7 @@ namespace MvcApplication1.Dominio.Model
 
        
         public string Nickname { get; set;}
-        public string IdDestino { get; set; }
+        public int IdDestino { get; set; }
         public string Voto { get; set; }
 
     }

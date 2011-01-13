@@ -9,15 +9,6 @@ namespace MvcApplication1.Controllers
     public class CategoryController : Controller
     {
         
-        public ActionResult Index()
-        {
-            using (var session = new MongoSession<Category>())
-            {
-                var categories = session.Queryable.AsEnumerable<Category>();
-                return View(categories);
-            }
-        }
-
        
         [HttpGet]
         public ActionResult Edit(ObjectId id) 
@@ -43,6 +34,7 @@ namespace MvcApplication1.Controllers
         [HttpPost]
         public ActionResult Save(Category category)
         {
+            
             if (!ModelState.IsValid)
             {
                 return View("Save", category);

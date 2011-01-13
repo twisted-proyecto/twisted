@@ -7,6 +7,8 @@ using MvcApplication1.Dominio;
 using MvcApplication1.Dominio.Repositorios;
 using MvcApplication1.Dominio.Model;
 using FlickrNet;
+using MvcApplication1.Infrastructure;
+using Norm;
 
 namespace MvcApplication1.Controllers
 {
@@ -180,6 +182,37 @@ namespace MvcApplication1.Controllers
             ViewData["idViaje"] = id2;
             return RedirectToAction("Index", "Destino", new { idViaje = id2 });
         }
-       
+
+
+
+        public ActionResult AgregarVoto(int id2)
+        {
+            var category = new Category {IdDestino = id2, Nickname = Session["data"] as string, Voto = "1"};
+
+            using (var session = new MongoSession<Category>())
+            {
+                
+                session.Save(category);
+                return RedirectToAction("Index", "Destino", new {idViaje = id2});
+
+            }
+        }
+
+        public ActionResult DeleteVoto(ObjectId id, int id2)
+        {
+            using (var session = new MongoSession<Category>())
+            {
+                var category = session.Queryable
+                      .Where(c => c.Id == id)
+                      .FirstOrDefault();
+                session.Delete(category);
+                return RedirectToAction("Index", "Destino", new { idViaje = id2 });
+            }
+
+        }
+  
+
+
+
     }
 }
