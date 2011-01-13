@@ -135,6 +135,22 @@ namespace MvcApplication1.Controllers
             return View(viajes); ;
         }
 
+        public MvcHtmlString EsMiViajeOParticipo(int idViaje)
+        {
+            string nick = Session["data"] as string;
+            if (nick == null)
+                return MvcHtmlString.Create("false");
+            IRepositorioParticipante<Participante> repoP = new ParticipanteRepositorio();
+            IList<Participante> participantes = repoP.GetAllByNick(nick);
 
+            foreach (var item in participantes)
+            {
+                if (item.IdViaje == idViaje)
+                {
+                    return MvcHtmlString.Create("true");
+                }
+            }
+            return MvcHtmlString.Create("false");
+        }
     }
 }

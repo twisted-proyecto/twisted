@@ -52,7 +52,10 @@
             <td>
                 <%: item.Email %>
             </td>
-        
+            <td>
+                <a title="Eliminar amigo" href="<%=Url.Action("EliminarAmigo", "Persona", new {nick = item.Nickname}, null)%>">
+                    <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="25px" width="25px" /></a>
+            </td>
         </tr>
     
     <% } %>

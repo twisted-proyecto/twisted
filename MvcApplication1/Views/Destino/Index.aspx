@@ -16,25 +16,27 @@
     <script src="../../Scripts/DestinosMap.js" type="text/javascript" ></script>
     <script src="http://www.google.com/uds/solutions/localsearch/gmlocalsearch.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../../Content/style.css">
-<style>
-    .tooltip {
-	
-	border:1px solid #fff;
-	padding:10px 15px;
-	width:300px;
-	display:none;
-	
-	text-align:center;
-	font-size:12px;
-	background-color:White;
 
-	/* outline radius for mozilla/firefox only */
-	-moz-box-shadow:0 0 10px #000;
-	-webkit-box-shadow:0 0 10px #000;
-}
-</style>
-
-<h2>Gestion de Destinos</h2>
+    <table style=" width:700px;">
+        <th style=" text-align: left">
+        <h2>Gestion de Destinos</h2>
+        </th>
+        <th style=" text-align: right">
+        <% if (Request.IsAuthenticated && this.Session["data"]!= null)
+        { 
+            MvcHtmlString flag = Html.Action("EsMiViajeOParticipo", "Viaje", new {idViaje = Request["idViaje"]});
+            if (flag.ToString() == "true")
+            {%>
+                <p>
+                    <a title="Agregar" href="<%=Url.Action("Create", "Destino", new {idViaje = ViewData["idViaje"]})%>">
+                      <img src="<%=Url.Content("~/Content/agregar.png")%>" height="25px" width="25px" /></a>
+                    <%= Html.ActionLink("Agregar nuevo destino", "Create", new {idViaje = ViewData["idViaje"]})%>
+                </p>
+                <%
+            }
+        } %>
+        </th>
+    </table>
  
     <% if (Model.Count() == 0)
        { %>
@@ -47,7 +49,12 @@
     
     <table>
         <tr>
+        <% MvcHtmlString flag = Html.Action("EsMiViajeOParticipo", "Viaje", new {idViaje = Request["idViaje"]});
+           if (flag.ToString() == "true")
+           { %>
             <th></th>
+            <%
+           }%>
             <th></th>
             <th>
                 Nombre
@@ -106,20 +113,28 @@
                 </fieldset>
                 </div>
             </td>
+            <% if (flag.ToString() == "true")
+               {%>
             <td>
-                <a title="Editar" href="<%= Url.Action("Edit", "Destino", new {id = item.IdDestino, idViaje = ViewData["idViaje"]}, null) %>">
-                  <img src="<%= Url.Content("~/Content/editar.png") %>" height="25px" width="25px" /></a>
+                <a title="Editar" href="<%=Url.Action("Edit", "Destino", new {id = item.IdDestino, idViaje = ViewData["idViaje"]}, null)%>">
+                  <img src="<%=Url.Content("~/Content/editar.png")%>" height="25px" width="25px" /></a>
             </td>
+            <%
+               }%>
             <td>
                 <%=Html.Encode(item.Nombre)%>
             </td>
             <td>
                  <%: String.Format("{0:dd/MM/yyyy}", item.Fecha)%>
             </td>
+            <% if (flag.ToString() == "true")
+               {%>
             <td>
-                <a title="Eliminar" href="<%= Url.Action("Delete", "Destino", new {id = item.IdDestino, idViaje = ViewData["idViaje"]}, null) %>">
-                  <img src="<%= Url.Content("~/Content/eliminar.png") %>" height="25px" width="25px" /></a>
+                <a title="Eliminar" href="<%=Url.Action("Delete", "Destino", new {id = item.IdDestino, idViaje = ViewData["idViaje"]}, null)%>">
+                  <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="25px" width="25px" /></a>
             </td>
+            <%
+               }%>
         </tr>
     
     <%
@@ -127,15 +142,6 @@
        }%>
 
     </table>
-    <% if (Request.IsAuthenticated && this.Session["data"]!= null)
-       { %>
-    <p>
-        <a title="Agregar" href="<%= Url.Action("Create", "Destino", new { idViaje = ViewData["idViaje"] }) %>">
-          <img src="<%= Url.Content("~/Content/agregar.png") %>" height="25px" width="25px" /></a>
-        <%= Html.ActionLink("Agregar nuevo destino", "Create", new { idViaje = ViewData["idViaje"] })%>
-    </p>
-    <%     
-       }%>
     <script>
         $(document).ready(function () {
             $("details").tooltip({ offset: [90, -350], effect: 'slide' });
