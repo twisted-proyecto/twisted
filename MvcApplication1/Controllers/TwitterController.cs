@@ -27,7 +27,7 @@ namespace MvcApplication1.Controllers
             {
                 //Redirect the user to Twitter for authorization.
                 //Using oauth_callback for local testing.
-                oAuth.CallBackUrl = "http://localhost:53953/Twitter";
+                oAuth.CallBackUrl = "http://localhost:53953/MvcApplication1/Twitter";
                 Response.Redirect(oAuth.AuthorizationLinkGet());
             }
             else
@@ -46,6 +46,7 @@ namespace MvcApplication1.Controllers
 
                     ViewData["XML"] = xmlParseado;
                     ViewData["login"] = "Logeado Correctamente Como...";
+                    Session.Timeout = 5;
                     Session["data"] = xmlParseado;
                     //POST Test
                     IRepositorioPersona<Persona> repo = new PersonaRepositorio();

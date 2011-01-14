@@ -13,9 +13,9 @@
 
     <script src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAAp0Kj6-TRULdy9KWugN_GfxTAdLk6fhpyuNdDdRr81ySzv4W5CRSHcX_iuexOywKZQSEdjN-rXx8BAA" type="text/javascript"></script>
     <script src="http://www.google.com/jsapi?key=ABQIAAAAp0Kj6-TRULdy9KWugN_GfxTAdLk6fhpyuNdDdRr81ySzv4W5CRSHcX_iuexOywKZQSEdjN-rXx8BAA" type="text/javascript"></script>
-    <script src="../../Scripts/DestinosMap.js" type="text/javascript" ></script>
+    <script src="../../MvcApplication1/Scripts/DestinosMap.js" type="text/javascript" ></script>
     <script src="http://www.google.com/uds/solutions/localsearch/gmlocalsearch.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="../../Content/style.css">
+    <link rel="stylesheet" href="../../MvcApplication1/Content/style.css">
 
     <table style=" width:700px;">
         <th style=" text-align: left">
@@ -141,6 +141,7 @@
                             <%= item.Votos %> 
                         </td>
                         <td>
+
                             <a title="Votar" href="<%=Url.Action("AgregarVoto", "Destino", new {id2 = item.IdDestino}, null)%>">
                                 <img src="<%=Url.Content("~/Content/agregar.png")%>" height="25px" width="25px" /></a>
                         </td>
@@ -150,7 +151,8 @@
                                 <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="25px" width="25px" /></a>
                         </td>
                  <%
-                
+                    Session["idViaje"]=Request["idViaje"];
+                  
                 }
                }%>
         </tr>

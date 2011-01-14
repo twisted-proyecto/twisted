@@ -6,7 +6,7 @@
 <head runat="server">
     <link href="<%: Url.Content("~/Content/default.css")%>" rel="stylesheet" />
     <link href="<%: Url.Content("~/Content/themes/" + Html.GetTheme() +  "/jquery.ui.all.css")%>" rel="stylesheet" />
-    <link rel="SHORTCUT ICON" href="../../Content/logo.ico"/>
+    <link rel="SHORTCUT ICON" href="../../MvcApplication1/Content/logo.ico"/>
     
     <!-- <link href="<%: "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/" + Html.GetTheme()  + "/jquery-ui.css" %>" rel="stylesheet" />-->
     <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery-1.4.2.min.js") %>"></script>
@@ -25,7 +25,7 @@
 <body>
     <div class="main">
         <div class="header ui-widget-content ui-corner-bottom ui-helper-clearfix">
-            <a class="logo" href="http://localhost:53953/">
+            <a class="logo" href="http://localhost:53953/MvcApplication1/">
             </a>
             <div class="usermenu ui-widget ui-widget-header ui-corner-bottom">
                 <% Html.RenderPartial("LogOnUserControl"); %>

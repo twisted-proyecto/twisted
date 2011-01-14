@@ -98,13 +98,14 @@ namespace MvcApplication1.Controllers
                         {
                             par.Tipo = "creador";
                         }
+                        return RedirectToAction("Index");
                     }
                 }
                 else
                 {
                     ModelState.AddModelError(string.Empty, "La fecha de inicio debe ser menor a la fecha fin.");
                 }
-                return RedirectToAction("Index");
+                
             }
 
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario

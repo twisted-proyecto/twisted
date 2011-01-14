@@ -10,17 +10,17 @@
 		<property name="Hospedaje" column="`hospedaje`" length="50" />
 		<property name="Nombre" column="`nombre`" length="25" />
 		<property name="Privacidad" column="`privacidad`" length="25" />
-		<set name="Destinos" fetch="select" cascade="save-update">
+		<set name="Destinos" fetch="select" cascade="delete" inverse="true" >
 			<key column="`idViaje`" />
 			<one-to-many class="Destino" />
 		</set>
-		<set name="Fotos" fetch="select" cascade="save-update">
+		<set name="Fotos" fetch="select" cascade="delete" inverse="true" >
 			<key column="`idViaje`" />
-			<one-to-many class="Foto" />
+			<one-to-many class="Foto"  />
 		</set>
-		<set name="Participantes" fetch="select" cascade="save-update">
+		<set name="Participantes" fetch="select" cascade="delete" inverse="true" >
 			<key column="`idViaje`" />
-			<one-to-many class="Participante" />
+			<one-to-many class="Participante"  />
 		</set>
 	</class>
 </hibernate-mapping>

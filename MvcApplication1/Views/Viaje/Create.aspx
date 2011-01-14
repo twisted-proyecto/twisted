@@ -5,10 +5,10 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <script src="../../Scripts/jquery-1.4.3.js"></script>
-    <script src="../../Scripts/jquery.ui.core.js"></script>
-    <script src="../../Scripts/jquery.ui.datepicker-es.js"></script>
-    <script src="../../Scripts/jquery.ui.datepicker.js"></script>
+    <script src="../../MvcApplication1/Scripts/jquery-1.4.3.js"></script>
+    <script src="../../MvcApplication1/Scripts/jquery.ui.core.js"></script>
+    <script src="../../MvcApplication1/Scripts/jquery.ui.datepicker-es.js"></script>
+    <script src="../../MvcApplication1/Scripts/jquery.ui.datepicker.js"></script>
     <script type="text/javascript">
         $(function () {
             $("#fechaInicio").datepicker();

@@ -39,10 +39,10 @@ namespace MvcApplication1.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Create(Destino Destino,string Button, int idViaje)
+        public ActionResult Create(Destino Destino,string Button, Map map)
         {
-            var map = new Map();
-            UpdateModel(map);
+            var idViaje = Convert.ToInt32(Request["idViaje"]);
+
             if (Button == "Agregar Destino")
             {
                 IRepositorio<Destino> repo = new DestinoRepositorio();
@@ -57,11 +57,18 @@ namespace MvcApplication1.Controllers
                 photos = flickr.PhotosSearch(options);
                 foreach (Photo photo in photos)
                 {
-                    if (Destino.Url.CompareTo(photo.SmallUrl) == 0)
+                    if (Destino.Url != null)
                     {
-                        Destino.Latitud = photo.Latitude;
-                        Destino.Longitud = photo.Longitude;
-                        Destino.Nombre = photo.Title;
+                        if (Destino.Url.CompareTo(photo.SmallUrl) == 0)
+                        {
+                            Destino.Latitud = photo.Latitude;
+                            Destino.Longitud = photo.Longitude;
+                            Destino.Nombre = photo.Title;
+                        }
+                    }else
+                    {
+                        ModelState.AddModelError(string.Empty,"Es Necesario que escoja una foto!");
+                        return View();
                     }
                 }
                 repo.Save(Destino);
@@ -78,7 +85,9 @@ namespace MvcApplication1.Controllers
                 options.Tags = map.Name;
                 options.HasGeo = true;
                 options.PerPage = 24;
-                Flickr flickr = new Flickr("3de826e278b4988011ef0227585a7838", "81a96df44a82b16c");
+                
+                Flickr flickr = new Flickr("18ead65365e9b505cc7f97abd38a33fe", "1b0f7df21b450da8");
+               
                 photos = flickr.PhotosSearch(options);
                 foreach (Photo photo in photos)
                 {
@@ -88,6 +97,7 @@ namespace MvcApplication1.Controllers
                 }
                 int id2 = idViaje;
                 ViewData["idViaje"] = id2;
+                
                 return View();
             }
         }
@@ -200,10 +210,8 @@ namespace MvcApplication1.Controllers
 
             using (var session = new MongoSession<Category>())
             {
-                
                 session.Save(category);
-                return RedirectToAction("Index", "Destino", new {idViaje = id2});
-
+                return RedirectToAction("Index", "Destino", new { idViaje = Session["idViaje"] });
             }
         }
 

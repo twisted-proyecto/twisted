@@ -31,7 +31,7 @@
         protected void Application_Start()
         {
             // build the list of themes
-            string physicalPath = Server.MapPath("~/content/themes");
+            string physicalPath = Server.MapPath("~/Content/themes");
             string[] themeDirs = Directory.GetDirectories(physicalPath);
             IList<string> themes = new List<string>();
             foreach (string themeDir in themeDirs)

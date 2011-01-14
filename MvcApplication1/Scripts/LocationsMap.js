@@ -5,10 +5,10 @@ $(function () {
     if (google.maps.BrowserIsCompatible()) {
         // $.getJSON("http://" + window.location.host + "/Home/Map", initialise);
         var pathArray = window.location.pathname.split('/');
-        if (pathArray[1] != "")
-            $.getJSON("/" + pathArray[1] + "/Map", initialise);
+        if ((pathArray[1] != "") && (pathArray[2] != ""))
+            $.getJSON("/" + pathArray[1] + "/" + pathArray[2] + "/Map", initialise);
         else
-            $.getJSON("/Home/Map", initialise);
+            $.getJSON("/Destino/Map", initialise);
     }
 });
 

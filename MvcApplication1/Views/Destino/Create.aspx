@@ -11,15 +11,15 @@
       @import url("http://www.google.com/uds/solutions/localsearch/gmlocalsearch.css");
     </style>
 
-    <script src="../../Scripts/jquery-1.4.3.js"></script>
-    <script src="../../Scripts/jquery.ui.core.js"></script>
-    <script src="../../Scripts/jquery.ui.datepicker-es.js"></script>
-    <script src="../../Scripts/jquery.ui.datepicker.js"></script>
+    <script src="../../MvcApplication1/Scripts/jquery-1.4.3.js"></script>
+    <script src="../../MvcApplication1/Scripts/jquery.ui.core.js"></script>
+    <script src="../../MvcApplication1/Scripts/jquery.ui.datepicker-es.js"></script>
+    <script src="../../MvcApplication1/Scripts/jquery.ui.datepicker.js"></script>
     <script src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAAp0Kj6-TRULdy9KWugN_GfxTAdLk6fhpyuNdDdRr81ySzv4W5CRSHcX_iuexOywKZQSEdjN-rXx8BAA" type="text/javascript"></script>
     <script src="http://www.google.com/jsapi?key=ABQIAAAAp0Kj6-TRULdy9KWugN_GfxTAdLk6fhpyuNdDdRr81ySzv4W5CRSHcX_iuexOywKZQSEdjN-rXx8BAA" type="text/javascript"></script>
-    <script src="../../Scripts/LocationsMap.js" type="text/javascript" ></script>
+    <script src="../../MvcApplication1/Scripts/LocationsMap.js" type="text/javascript" ></script>
     <script src="http://www.google.com/uds/solutions/localsearch/gmlocalsearch.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="../../Content/style.css">
+    <link rel="stylesheet" href="../../MvcApplication1/Content/style.css">
     <script type="text/javascript">
         $(function () {
             $("#Fecha").datepicker();
@@ -65,9 +65,9 @@
         } %>
      </div>
       <form id="form1" runat="server">
-
-    <% Html.BeginForm();{%>
-        <%: Html.ValidationSummary(true)%>
+    
+    <%: Html.ValidationSummary(true)%>
+    <% Html.BeginForm();{%>    
 
         <fieldset>
             <legend>Datos adicionales:</legend>
@@ -89,7 +89,7 @@
             </div>
             <div class="editor-field">
                 <%: Html.TextBoxFor(model => model.Descripcion)%>
-                <%: Html.ValidationMessageFor(model => model.Descripcion)%>
+                <%: Html.ValidationMessageFor(model => model.Descripcion,"*")%>
             </div>
             
             <div class="editor-label">
@@ -97,7 +97,7 @@
             </div>
             <div class="editor-field">
                 <%: Html.TextBoxFor(model => model.Direccion)%>
-                <%: Html.ValidationMessageFor(model => model.Direccion)%>
+                <%: Html.ValidationMessageFor(model => model.Direccion,"*")%>
             </div>
             
             <div class="editor-label">
@@ -105,7 +105,7 @@
             </div>
             <div class="editor-field">
                 <%: Html.TextBoxFor(model => model.Fecha)%>
-                <%: Html.ValidationMessageFor(model => model.Fecha)%>
+                <%: Html.ValidationMessageFor(model => model.Fecha,"*")%>
             </div>
 
             <div class="editor-label">
@@ -127,7 +127,7 @@
         
     <!-- The JavaScript -->
     
-    <script src="../../Scripts/jquery.transform-0.9.1.min.js"></script>
+    <script src="../../MvcApplication1/Scripts/jquery.transform-0.9.1.min.js"></script>
         <script type="text/javascript">
             //Paul Irish smartresize : http://paulirish.com/2009/throttled-smartresize-jquery-event-handler/
             (function ($, sr) {

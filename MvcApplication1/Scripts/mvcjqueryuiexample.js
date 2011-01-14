@@ -71,7 +71,7 @@ function initialiseSettings() {
     initialiseThemes();
 
     // preload the busy image
-    $.loadImages('/Content/ajax-loader.gif', preloadDone());
+    $.loadImages('/MvcApplication1/Content/ajax-loader.gif', preloadDone());
 }
 
 /********************************************************/
@@ -101,14 +101,14 @@ function onThemeChanged() {
     /// </summary>
 
     // get the first link that points to a css in our themes folder
-    var link = $("link[href*='Content/themes/']")[0];
+    var link = $("link[href*='MvcApplication1/Content/themes/']")[0];
 
     // get the newly selected theme from the select element
     var newTheme = $("#theme").children("option:selected").text();
     newTheme = $.trim(newTheme);
 
     // build the url for the new css file
-    var newLinkHref = "/Content/themes/" + newTheme + "/jquery.ui.all.css";
+    var newLinkHref = "/MvcApplication1/Content/themes/" + newTheme + "/jquery.ui.all.css";
 
     // if the theme has changed and not been saved show a message that it has not been saved yet
     if (originalTheme != newTheme) {
@@ -144,7 +144,7 @@ function cssLoaded() {
     /// </summary>
 
     // remove the old element
-    var cssLinks = $("link[href*='/Content/themes']");
+    var cssLinks = $("link[href*='/MvcApplication1/Content/themes']");
     if (cssLinks.length > 1) {
         var toDieLinks = cssLinks.slice(0, cssLinks.length - 1)
         // kill all but the last link to one of the jquery themes, the last one will be the new theme
@@ -170,7 +170,7 @@ function showBusy() {
             .attr({ id: "busyIndicator" })
             .append($('<img></img>')
                 .attr({ alt: "" })
-                .attr({ src: "/Content/ajax-loader.gif" })
+                .attr({ src: "/MvcApplication1/Content/ajax-loader.gif" })
                 .attr({ width: 64 })
                 .attr({ height: 64 })
             );
