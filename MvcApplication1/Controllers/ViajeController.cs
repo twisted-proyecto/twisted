@@ -180,7 +180,7 @@ namespace MvcApplication1.Controllers
             Viaje viaje = repo.GetById(idViaje);
             viaje.Estatus = "cerrado";
             repo.Update(viaje);
-            return RedirectToAction("Index");
+            return RedirectToAction("Pdf", "Pdf", new { idViaje = idViaje });
         }
 
         public MvcHtmlString ViajeCerrado(int idViaje)

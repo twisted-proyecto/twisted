@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using MvcApplication1.Dominio;
+using MvcApplication1.Dominio.Model;
+using MvcApplication1.Dominio.Repositorios;
 using Winnovative.WnvHtmlConvert;
 
 namespace MvcApplication1.Controllers
@@ -115,7 +118,7 @@ namespace MvcApplication1.Controllers
         public ActionResult Pdf(string idViaje)
         {
 
-            string urlToConvert = "http://localhost/MvcApplication1/Destino?idViaje=" + idViaje;
+            string urlToConvert = "http://localhost:53953/MvcApplication1/Viaje/ViajeDestinosReporte?idViaje=" + idViaje;
             string downloadName = "Viaje";
             byte[] downloadBytes = null;
             downloadName += ".pdf";
@@ -152,13 +155,67 @@ namespace MvcApplication1.Controllers
                 }
             }
 
-            string url = "http://" + localIP + "/Pdf/" + Session["data"] + "Viaje" + idViaje +
-                         ".pdf";
+            string url = "http://" + localIP + "/Pdf/" + Session["data"] + "Viaje" + idViaje +".pdf";
             string urlCorto = Shorten(url);
 
+            IRepositorioPersona<Persona> repoP = new PersonaRepositorio();
+            IRepositorioParticipante<Participante> repoParti = new ParticipanteRepositorio();
+            IList<Participante> participantes = new List<Participante>();
+            IList<Participante> participantesV = new List<Participante>();
+            
+
+            participantes = repoParti.GetAll();
+
+            foreach (var item in participantes)
+            {
+                if (item.IdViaje == Convert.ToInt32(idViaje))
+                {
+                    participantesV.Add(item);
+                }
+            }
+
+            IList<Persona> perList = new List<Persona>();
+
+            foreach (var item in participantesV)
+            {
+                perList.Add(repoP.GetById(item.Nickname));
+            }
+
+            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+            foreach (var persona in perList)
+            {
+                msg.To.Add(persona.Email);
+            }
+            IRepositorio<Viaje> repov = new ViajeRepositorio();
+            Viaje v = repov.GetById(Convert.ToInt32(idViaje));
+
+            msg.From = new MailAddress("twisted.j2l@gmail.com", "Twisted", System.Text.Encoding.UTF8);
+            msg.Subject = "Ha sido cerrado el Viaje " + v.Nombre;
+            msg.SubjectEncoding = Encoding.UTF8;
+            msg.Body = "Hola , \n\n El Viaje " + v.Nombre + " Ha Sido Cerrado.\n Este es el Url del PDF que Contine La hoja de Ruta "+urlCorto+".\nGracias!\n\nTe invitamos a Seguirnos @TwistedUCAB  \n\nSaludos, \nj2l Team Â© ";
+            msg.BodyEncoding = Encoding.UTF8;
+            msg.IsBodyHtml = false;
+
+            //AquÃ­ es donde se hace lo especial
+            SmtpClient client = new SmtpClient();
+            client.Credentials = new NetworkCredential("twisted.j2l@gmail.com", "j2ltwisted");
+            client.Port = 587;
+            client.Host = "smtp.gmail.com";
+            client.EnableSsl = true;
+            try
+            {
+                client.Send(msg);
+            }
+            catch (System.Net.Mail.SmtpException ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.ReadLine();
+            }
 
 
-            return View();
+
+
+            return RedirectToAction("Index", "Viaje");
         }
 
 

@@ -970,10 +970,10 @@
     <Content Include="Views\Destino\Details.aspx" />
     <Content Include="Views\Destino\Edit.aspx" />
     <Content Include="Views\Destino\Index.aspx" />
-    <Content Include="Views\Home\Blog.aspx" />
     <Content Include="Views\Home\Contact.aspx" />
     <Content Include="Views\Home\Products.aspx" />
     <Content Include="Views\Pdf\Pdf.aspx" />
+    <Content Include="Views\Persona\InvitarAmigos.aspx" />
     <Content Include="Views\Persona\VerAmigos.aspx" />
     <Content Include="Views\Persona\Create.aspx" />
     <Content Include="Views\Persona\Delete.aspx" />
@@ -986,6 +986,7 @@
     <Content Include="Views\Viaje\Index.aspx" />
     <Content Include="Views\Viaje\Create.aspx" />
     <Content Include="Views\Viaje\VerViajes.aspx" />
+    <Content Include="Views\Viaje\ViajeDestinosReporte.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1037,7 +1038,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>53953</DevelopmentServerPort>
           <DevelopmentServerVPath>/MvcApplication1/</DevelopmentServerVPath>
