@@ -129,7 +129,7 @@
                {%>
             <td>
                 <a title="Cerrar Viaje" href="<%=Url.Action("CerrarViaje", "Viaje", new {idViaje = item.IdViaje}, null)%>">
-                    <img src="<%=Url.Content("~/Content/cerrar.png")%>" height="37px" width="37px" /></a>
+                    <img src="<%=Url.Content("~/Content/cerrarViaje.png")%>" height="37px" width="37px" /></a>
             </td>
             <%
                }
