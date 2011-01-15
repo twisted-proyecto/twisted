@@ -119,14 +119,19 @@
     <Reference Include="Twitterizer2">
       <HintPath>references\Twitterizer2.dll</HintPath>
     </Reference>
+    <Reference Include="wnvhtmlconvert">
+      <HintPath>..\..\..\Downloads\WnvHtmlToPDF-v6.4\Bin\Net_4.0\wnvhtmlconvert.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contract\IUniqueIdentifier.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\Category.cs" />
     <Compile Include="Controllers\DestinoController.cs" />
     <Compile Include="Controllers\FormatFilterAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PdfController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\TwitterController.cs" />
@@ -139,6 +144,9 @@
     <Compile Include="Dominio\IRepositorio.cs" />
     <Compile Include="Dominio\Model\Amistad.cs" />
     <Compile Include="Dominio\Model\Comentario.cs" />
+    <Compile Include="Dominio\Model\PersonaXml.cs" />
+    <Compile Include="Dominio\Model\DestinoXml.cs" />
+    <Compile Include="Dominio\Model\ViajeXml.cs" />
     <Compile Include="Dominio\Model\Destino.cs" />
     <Compile Include="Dominio\Model\Foto.cs" />
     <Compile Include="Dominio\Model\Participante.cs" />
@@ -955,13 +963,17 @@
     <Content Include="Views\Account\EditProfile.aspx" />
     <Content Include="Views\Account\LogOn.aspx" />
     <Content Include="Views\Account\Register.aspx" />
+    <Content Include="Views\Api\DatosPersona.aspx" />
+    <Content Include="Views\Api\Viaje.aspx" />
+    <Content Include="Views\Api\ViajesPersona.aspx" />
     <Content Include="Views\Destino\Create.aspx" />
     <Content Include="Views\Destino\Details.aspx" />
     <Content Include="Views\Destino\Edit.aspx" />
     <Content Include="Views\Destino\Index.aspx" />
-    <Content Include="Views\Home\Blog.aspx" />
     <Content Include="Views\Home\Contact.aspx" />
     <Content Include="Views\Home\Products.aspx" />
+    <Content Include="Views\Pdf\Pdf.aspx" />
+    <Content Include="Views\Persona\InvitarAmigos.aspx" />
     <Content Include="Views\Persona\VerAmigos.aspx" />
     <Content Include="Views\Persona\Create.aspx" />
     <Content Include="Views\Persona\Delete.aspx" />
@@ -974,6 +986,7 @@
     <Content Include="Views\Viaje\Index.aspx" />
     <Content Include="Views\Viaje\Create.aspx" />
     <Content Include="Views\Viaje\VerViajes.aspx" />
+    <Content Include="Views\Viaje\ViajeDestinosReporte.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1029,7 +1042,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>53953</DevelopmentServerPort>
           <DevelopmentServerVPath>/MvcApplication1/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/</IISUrl>
+          <IISUrl>http://localhost/MvcApplication1/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

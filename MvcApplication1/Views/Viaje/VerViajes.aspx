@@ -96,7 +96,7 @@
             </td>
              <td>
                <a title="Participantes" href="<%= Url.Action("Invitar", "Persona", new { id = item.IdViaje }, null) %>">
-                    <img src="<%= Url.Content("~/Content/InvAmigo.png") %>" height="25px" width="25px" /></a>
+                    <img src="<%= Url.Content("~/Content/participantes.png") %>" height="25px" width="25px" /></a>
                </td>       
         </tr>
     <%
