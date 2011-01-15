@@ -62,6 +62,9 @@
             <th>
                 Fecha tentativa
             </th>
+            <th>
+                # Votos
+            </th>
             <th></th>
         </tr>
     <%
@@ -127,6 +130,9 @@
             <td>
                  <%: String.Format("{0:dd/MM/yyyy}", item.Fecha)%>
             </td>
+            <td>
+                <%=item.Votos%> 
+            </td>
             <% if (flag.ToString() == "true")
                {%>
             <td>
@@ -134,26 +140,16 @@
                   <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="25px" width="25px" /></a>
             </td>
             <%
-                if (Request.IsAuthenticated && Session["data"] != null)
-                {
-                    %>
+                   MvcHtmlString flagVoto = Html.Action("YaHiceUnVoto", "Destino", new {idDestino = item.IdDestino});
+                   if (flagVoto.ToString() == "false")
+                   { %>
                         <td>
-                            <%= item.Votos %> 
-                        </td>
-                        <td>
-
                             <a title="Votar" href="<%=Url.Action("AgregarVoto", "Destino", new {id2 = item.IdDestino}, null)%>">
-                                <img src="<%=Url.Content("~/Content/agregar.png")%>" height="25px" width="25px" /></a>
-                        </td>
-                       
-                        <td>
-                            <a title="Eliminar Voto" href="<%=Url.Action("DeleteVoto", "Destino", new {id2 = Request["idViaje"]}, null)%>">
-                                <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="25px" width="25px" /></a>
-                        </td>
+                                <img src="<%=Url.Content("~/Content/votar.png")%>" height="33px" width="33px" /></a>
+                        </td>                       
                  <%
-                    Session["idViaje"]=Request["idViaje"];
-                  
-                }
+                   }
+               Session["idViaje"]=Request["idViaje"];
                }%>
         </tr>
     

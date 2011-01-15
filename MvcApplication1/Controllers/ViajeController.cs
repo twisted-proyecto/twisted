@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Iesi.Collections.Generic;
 using MvcApplication1.Dominio;
 using MvcApplication1.Dominio.Repositorios;
 using MvcApplication1.Dominio.Model;
@@ -152,6 +153,77 @@ namespace MvcApplication1.Controllers
                 }
             }
             return MvcHtmlString.Create("false");
+        }
+
+        public MvcHtmlString EsMiViaje(int idViaje)
+        {
+            string nick = Session["data"] as string;
+            if (nick == null)
+                return MvcHtmlString.Create("false");
+            IRepositorioParticipante<Participante> repoP = new ParticipanteRepositorio();
+            IList<Participante> participantes = repoP.GetAllByNick(nick);
+
+            foreach (var item in participantes)
+            {
+                if (item.IdViaje == idViaje && item.Tipo == "creador")
+                {
+                    return MvcHtmlString.Create("true");
+                }
+            }
+            return MvcHtmlString.Create("false");
+        }
+
+        public ActionResult CerrarViaje(int idViaje)
+        {
+            string nick = Session["data"] as string;
+            IRepositorio<Viaje> repo = new ViajeRepositorio();
+            Viaje viaje = repo.GetById(idViaje);
+            viaje.Estatus = "cerrado";
+            repo.Update(viaje);
+            return RedirectToAction("Index");
+        }
+
+        public MvcHtmlString ViajeCerrado(int idViaje)
+        {
+            IRepositorio<Viaje> repo = new ViajeRepositorio();
+            IList<Viaje> viajes = repo.GetAll();
+
+            foreach (var item in viajes)
+            {
+                if (item.Estatus != null)
+                {
+                    String estatus = item.Estatus.Trim().ToLower();
+                    if (item.IdViaje == idViaje && estatus == "cerrado")
+                    {
+                        return MvcHtmlString.Create("true");
+                    }
+                }
+            }
+            return MvcHtmlString.Create("false");
+        }
+
+        public ActionResult ViajeDestinosReporte(int idViaje)
+        {
+            IRepositorio<Viaje> repo = new ViajeRepositorio();
+            Viaje viaje = repo.GetById(idViaje);
+
+            IRepositorio<Destino> repoD = new DestinoRepositorio();
+            IList<Destino> todosDestinos = repoD.GetAll();
+
+            IList<Destino> destinos = new List<Destino>();
+            foreach (var destino in todosDestinos)
+            {
+                if (destino.Viaje.IdViaje == idViaje)
+                {
+                    destinos.Add(destino);
+                }
+            }
+            viaje.Destinos = new List<Destino>();
+            foreach (var item in destinos)
+            {
+                viaje.Destinos.Add(item);
+            }
+            return View(viaje);
         }
     }
 }

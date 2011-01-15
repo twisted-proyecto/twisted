@@ -94,6 +94,10 @@
                 <a title="Eliminar" href="<%=Url.Action("Delete", "Viaje", new {id = item.IdViaje}, null)%>">
                     <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="25px" width="25px" /></a>
             </td>
+             <td>
+               <a title="Participantes" href="<%= Url.Action("Invitar", "Persona", new { id = item.IdViaje }, null) %>">
+                    <img src="<%= Url.Content("~/Content/InvAmigo.png") %>" height="25px" width="25px" /></a>
+               </td>       
         </tr>
     <%
            }

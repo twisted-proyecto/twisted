@@ -63,11 +63,6 @@ namespace MvcApplication1.Controllers
 
         }
 
-        public ActionResult Details(String id)
-        {
-            IRepositorioPersona<Persona> repo = new PersonaRepositorio();
-            return View(repo.GetById(id));
-        }
 
         //
         // GET: /Persona/Create
@@ -213,7 +208,13 @@ namespace MvcApplication1.Controllers
 
             return RedirectToAction("VerAmigos", "Persona", new { nick = id });
         }
-       
+
+        public ActionResult Invitar(int id)
+        {
+
+            return RedirectToAction("InvitarAmigos", "Persona", new { id = id });
+        }
+
         public ActionResult AgregarAmigo(String id)
         {
             Persona persona = new Persona();
@@ -230,11 +231,12 @@ namespace MvcApplication1.Controllers
                 amistad.Nickname = persona.Nickname;
                 amistad.NicknameAmigo = id;
                 amistad.Fecha = System.DateTime.Today;
-                amistad.Persona1 = repo.GetById(persona.Nickname);
+                persona = repo.GetById(persona.Nickname);
+                amistad.Persona1 = persona;
                 amistad.Persona = amigo;
                 IRepositorio<Amistad> repoAmistad = new AmistadRepositorio();
                 repoAmistad.Save(amistad);
-                return RedirectToAction("Index", "Persona");   
+                return RedirectToAction("CorreoAmistad", "Persona", new { personaNick = persona.Nickname, amigoNick = amigo.Nickname });    
             }
             return RedirectToAction("Index", "Persona");
         }
@@ -254,6 +256,62 @@ namespace MvcApplication1.Controllers
                 }
             }
             return View(amigos); ;
+        }
+
+
+        public ActionResult InvitarAmigos(int id)
+        {
+            string nick = Session["data"] as string;
+
+            IRepositorio<Amistad> repo = new AmistadRepositorio();
+            IRepositorioPersona<Persona> repoPer = new PersonaRepositorio();
+            IList<Amistad> amistades = repo.GetAll();
+            IList<Persona> amigos = new List<Persona>();
+
+            foreach (var item in amistades)
+            {
+                if (item.Nickname == nick)
+                {
+                    amigos.Add(repoPer.GetById(item.NicknameAmigo));
+                }
+            }
+
+            IRepositorioPersona<Persona> repoP = new PersonaRepositorio();
+            IRepositorioParticipante<Participante> repoParti = new ParticipanteRepositorio();
+            IList<Participante> participantes = new List<Participante>();
+            IList<Participante> participantesV = new List<Participante>();
+            IList<Persona> amigosNoInv = new List<Persona>();
+  
+            participantes = repoParti.GetAll();
+
+            foreach (var item in participantes)
+            {
+                if (item.IdViaje == id)
+                {
+                    participantesV.Add(item);
+                }
+            }
+
+
+            bool flag = false;
+            foreach (var item in amigos)
+            {
+                foreach (var itemPar in participantesV)
+                {
+                    if (item.Nickname == itemPar.Nickname)
+                    {
+                        flag = true;
+                    }
+                }
+
+                if (!flag)
+                {
+                  amigosNoInv.Add(repoP.GetById(item.Nickname));   
+                }
+                flag = false;
+            }
+            Session["idViajeInvitado"] = id;
+            return View(amigosNoInv);
         }
 
         public MvcHtmlString EsAmigo(String nick)
@@ -293,5 +351,71 @@ namespace MvcApplication1.Controllers
             }
             return RedirectToAction("Index", "Persona");
         }
+
+        public ActionResult InvitarAmigoViaje(string nick, int idViaje)
+        {
+            IRepositorioParticipante<Participante> repoP = new ParticipanteRepositorio();
+            Participante miParticipante = new Participante();
+            miParticipante.IdViaje = idViaje;
+            miParticipante.Nickname = nick;
+            miParticipante.Tipo = "Participante";
+            repoP.Save(miParticipante);
+            return RedirectToAction("InvitarAmigos", "Persona", new { id = idViaje });
+        }
+
+
+        public ActionResult consultarInvitados(int idViaje)
+        {
+            IRepositorioParticipante<Participante> repoParti = new ParticipanteRepositorio();
+            IRepositorioPersona<Persona> repoP = new PersonaRepositorio();
+            IList<Participante> participantes = new List<Participante>();
+            IList<Persona> personas = new List<Persona>();
+           
+            participantes = repoParti.GetAll();
+
+            foreach (var item in participantes)
+            {
+                if (item.IdViaje == idViaje)
+                {
+                    personas.Add(repoP.GetById(item.Nickname));
+                }
+            }
+
+
+            return View("VerAmigos", personas);
+        }
+
+        public ActionResult CorreoAmistad(String personaNick, String amigoNick)
+        {
+            IRepositorioPersona<Persona> repoP = new PersonaRepositorio();
+            Persona persona = repoP.GetById(personaNick);
+            Persona amigo = repoP.GetById(amigoNick);
+            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+            msg.To.Add(amigo.Email);
+            msg.From = new MailAddress("twisted.j2l@gmail.com", "Twisted", System.Text.Encoding.UTF8);
+            msg.Subject = persona.Nombre + " " + persona.Apellido + " ahora es tu amigo!";
+            msg.SubjectEncoding = System.Text.Encoding.UTF8;
+            msg.Body = "Hola " + amigo.Nombre + " " + amigo.Apellido + ", \n\n" + persona.Nombre + " " + persona.Apellido + " te agrego como amigo en Twisted,\nahora el podra ver tus viajes privados y publicos e invitarte a viajes planificados por el.\nGracias!\n\nTe invitamos a Seguirnos @TwistedUCAB  \n\nSaludos, \nj2l Team Â© ";
+            msg.BodyEncoding = System.Text.Encoding.UTF8;
+            msg.IsBodyHtml = false;
+
+            //AquÃ­ es donde se hace lo especial
+            SmtpClient client = new SmtpClient();
+            client.Credentials = new System.Net.NetworkCredential("twisted.j2l@gmail.com", "j2ltwisted");
+            client.Port = 587;
+            client.Host = "smtp.gmail.com";
+            client.EnableSsl = true;
+            try
+            {
+                client.Send(msg);
+            }
+            catch (System.Net.Mail.SmtpException ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.ReadLine();
+            }
+            return RedirectToAction("Index", "Persona");
+        }
+
     }
 }

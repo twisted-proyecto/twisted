@@ -68,7 +68,7 @@ namespace MvcApplication1.Dominio.Repositorios
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
-                ICriteria criteria = session.CreateCriteria(typeof(Viaje));
+                ICriteria criteria = session.CreateCriteria(typeof(Participante));
                 return criteria.List<Participante>();
             }
         }
