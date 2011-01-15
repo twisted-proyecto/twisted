@@ -10,10 +10,7 @@
 		<property name="Hospedaje" column="`hospedaje`" length="50" />
 		<property name="Nombre" column="`nombre`" length="25" />
 		<property name="Privacidad" column="`privacidad`" length="25" />
-		<set name="Destinos" fetch="select" cascade="delete" inverse="true" >
-			<key column="`idViaje`" />
-			<one-to-many class="Destino" />
-		</set>
+    <property name="Estatus" column="`estatus`" length="25" />
 		<set name="Fotos" fetch="select" cascade="delete" inverse="true" >
 			<key column="`idViaje`" />
 			<one-to-many class="Foto"  />

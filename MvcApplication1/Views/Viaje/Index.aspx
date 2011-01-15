@@ -101,17 +101,38 @@
             <td>
                 <%:String.Format("{0:dd/MM/yyyy}", item.FechaInicio)%>
             </td>
+
+            <% MvcHtmlString flagCerrado = Html.Action("ViajeCerrado", "Viaje", new { idViaje = item.IdViaje });
+            if (flagCerrado.ToString() == "false")
+            { %>
             <td>
                 <a title="Destinos de este viaje" href="<%=Url.Action("Index", "Destino", new {idViaje = item.IdViaje}, null)%>">
                     <img src="<%=Url.Content("~/Content/destinos.png")%>" height="23px" width="23px" /></a>
             </td>
-            <% if (flag.ToString() == "true")
+            <%
+            }
+            else
+            { %>
+            <td>
+                <a title="Mostrar Itinerario" href="<%=Url.Action("ViajeDestinosReporte", "Viaje", new {idViaje = item.IdViaje}, null)%>">
+                    <img src="<%=Url.Content("~/Content/itinerario.png")%>" height="23px" width="23px" /></a>
+            </td>
+         <% }%>
+            <% MvcHtmlString flagDuenio = Html.Action("EsMiViaje", "Viaje", new { idViaje = item.IdViaje });
+               if (flagDuenio.ToString() == "true")
                {%>
             <td>
                 <a title="Eliminar" href="<%=Url.Action("Delete", "Viaje", new {id = item.IdViaje}, null)%>">
                     <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="25px" width="25px" /></a>
             </td>
+            <% if (flagCerrado.ToString() == "false")
+               {%>
+            <td>
+                <a title="Cerrar Viaje" href="<%=Url.Action("CerrarViaje", "Viaje", new {idViaje = item.IdViaje}, null)%>">
+                    <img src="<%=Url.Content("~/Content/cerrar.png")%>" height="37px" width="37px" /></a>
+            </td>
             <%
+               }
                }%>
         </tr>
    

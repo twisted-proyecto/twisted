@@ -9,6 +9,7 @@ using MvcApplication1.Dominio.Model;
 using FlickrNet;
 using MvcApplication1.Infrastructure;
 using Norm;
+using Norm.Collections;
 
 namespace MvcApplication1.Controllers
 {
@@ -215,22 +216,19 @@ namespace MvcApplication1.Controllers
             }
         }
 
-        public ActionResult DeleteVoto(int id2)
+        public MvcHtmlString YaHiceUnVoto(int idDestino)
         {
             using (var session = new MongoSession<Category>())
             {
-                var category = session.Queryable
-                    .Where(c => c.Nickname == Session["data"] as string)
-                      .FirstOrDefault();
-
-                session.Delete(category);
-                return RedirectToAction("Index", "Destino", new { idViaje = id2 });
+                IQueryable<Category> categorias = session.Queryable
+                    .Where(c => c.Nickname == Session["data"] as string);
+                foreach (var categoria in categorias)
+                {
+                    if (categoria.IdDestino == idDestino)
+                        return MvcHtmlString.Create("true");
+                }
+                return MvcHtmlString.Create("false");
             }
-
         }
-  
-
-
-
     }
 }
