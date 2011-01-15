@@ -121,7 +121,7 @@
       <%=Html.ActionLink("Volver...", "Index", "Destino", new { idViaje = ViewData["idViaje"] }, null)%>   
     </div>
       </form>
-      <div id="im_loading" class="im_loading"></div>
+      
 		<div id="im_next" class="im_next"></div>
 		<div id="im_prev" class="im_prev"></div>
         
@@ -228,8 +228,8 @@
                         var $thumb = $(this);
                         //calculate left and top for each thumb,
                         //considering how many we want per line
-                        var left = (spaces_w * ((i % per_line) + 1) - $thumb.width() / 2) + 600;
-                        var top = (spaces_h * (Math.ceil((i + 1) / per_line)) - $thumb.height() / 2) + 250;
+                        var left = (spaces_w * ((i % per_line) + 1) - $thumb.width() / 2) + 400;
+                        var top = (spaces_h * (Math.ceil((i + 1) / per_line)) - $thumb.height() / 2) + 450;
                         //lets give a random degree to each thumb
                         var r = Math.floor(Math.random() * 41) - 20;
                         /*
@@ -314,8 +314,8 @@
                                 //calculate the dimentions of the full image
                                 var f_w = per_line * 50;
                                 var f_h = per_col * 50;
-                                var f_l = (600 / 2 - f_w / 2) + 730
-                                var f_t = (600 / 2 - f_h / 2) + 200
+                                var f_l = (600 / 2 - f_w / 2) + 400
+                                var f_t = (600 / 2 - f_h / 2) + 450
                                 /*
                                 set the background image for the thumb
                                 and animate the thumbs postions and rotation

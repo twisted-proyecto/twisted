@@ -21,7 +21,7 @@ namespace MvcApplication1.Dominio.Repositorios
             return new Map
             {
                 Name = "",
-                Zoom = 8,
+                Zoom = 2,
                 center = new LatLng { Latitude = photos[0].Latitude, Longitude = photos[0].Longitude },
                 LatLng = new LatLng { Latitude = photos[0].Latitude, Longitude = photos[0].Longitude },
                 Locations = locations
@@ -42,7 +42,7 @@ namespace MvcApplication1.Dominio.Repositorios
             return new Map
             {
                 Name = "",
-                Zoom = 8,
+                Zoom = 2,
                 center = new LatLng { Latitude = destinos[0].Latitud, Longitude = destinos[0].Longitud },
                 LatLng = new LatLng { Latitude = destinos[0].Latitud, Longitude = destinos[0].Longitud },
                 Locations = locations
