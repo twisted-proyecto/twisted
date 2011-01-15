@@ -31,6 +31,8 @@ namespace MvcApplication1.Controllers
 
         static PhotoCollection photos = new PhotoCollection();
         static IList<Destino> destinos = new List<Destino>();
+
+        
         public ActionResult Create(int idViaje)
         {
             int id2 = idViaje;
