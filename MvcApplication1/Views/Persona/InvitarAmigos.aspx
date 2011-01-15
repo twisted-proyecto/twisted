@@ -75,7 +75,7 @@
             </td>
              <td>
                <a title="Invitar amigo" href="<%=Url.Action("InvitarAmigoViaje", "Persona", new {nick = item.Nickname, idViaje = Session["idViajeInvitado"]}, null)%>">
-               <img src="<%=Url.Content("~/Content/Participante.png")%>" height="25px" width="25px" /></a>
+               <img src="<%=Url.Content("~/Content/participantes.png")%>" height="25px" width="25px" /></a>
             </td>
         </td>
     
