@@ -7,6 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     
     <table style=" width:700px;">
+
         <th style=" text-align: left">
             <h2>Gestion de participantes</h2>
         </th>
@@ -27,6 +28,7 @@
        {%>
     <table>
         <tr>
+        <th></th>
             <th>
                 Avatar
             </th>
@@ -73,7 +75,7 @@
             </td>
              <td>
                <a title="Invitar amigo" href="<%=Url.Action("InvitarAmigoViaje", "Persona", new {nick = item.Nickname, idViaje = Session["idViajeInvitado"]}, null)%>">
-               <img src="<%=Url.Content("~/Content/InvAmigo.png")%>" height="25px" width="25px" /></a>
+               <img src="<%=Url.Content("~/Content/Participante.png")%>" height="25px" width="25px" /></a>
             </td>
         </td>
     
