@@ -120,7 +120,7 @@
       <HintPath>references\Twitterizer2.dll</HintPath>
     </Reference>
     <Reference Include="wnvhtmlconvert">
-      <HintPath>..\..\..\Downloads\WnvHtmlToPDF-v6.4\Bin\Net_4.0\wnvhtmlconvert.dll</HintPath>
+      <HintPath>references\wnvhtmlconvert.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -964,6 +964,7 @@
     <Content Include="Views\Account\LogOn.aspx" />
     <Content Include="Views\Account\Register.aspx" />
     <Content Include="Views\Api\DatosPersona.aspx" />
+    <Content Include="Views\Api\MostrarViaje.aspx" />
     <Content Include="Views\Api\Viaje.aspx" />
     <Content Include="Views\Api\ViajesPersona.aspx" />
     <Content Include="Views\Destino\Create.aspx" />
@@ -1038,7 +1039,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>53953</DevelopmentServerPort>
           <DevelopmentServerVPath>/MvcApplication1/</DevelopmentServerVPath>

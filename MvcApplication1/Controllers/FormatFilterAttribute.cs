@@ -89,18 +89,25 @@ namespace MvcApplication1.Controllers
         /// <returns></returns>
         private FileFormat GetFileFormat(string path)
         {
-            string ext = Path.GetExtension(path);
-            if (string.IsNullOrEmpty(ext))
+            try
             {
-                return FileFormat.Html;
-            }
+                string ext = Path.GetExtension(path);
+                if (string.IsNullOrEmpty(ext))
+                {
+                    return FileFormat.Html;
+                }
 
-            if (!IsValidFileExtension(ext))
+                if (!IsValidFileExtension(ext))
+                {
+                    throw new FormatException("Requested format is not available");
+                }
+
+                return (FileFormat) Enum.Parse(typeof (FileFormat), ext.Substring(1), true);
+            }catch(Exception e)
             {
-                throw new FormatException("Requested format is not available");
+                return (FileFormat)Enum.Parse(typeof(FileFormat), "xml", true);
             }
-
-            return (FileFormat)Enum.Parse(typeof(FileFormat), ext.Substring(1), true);
+            
         }
 
         private ActionResult FormatViewResult(ViewResultBase view)
@@ -114,7 +121,8 @@ namespace MvcApplication1.Controllers
                 case FileFormat.Xml:
                     return new XmlResult(view.ViewData.Model);
                 default:
-                    throw new FormatException(string.Concat("Cannot server the content in the request format: ", RequestedFormat));
+                    //throw new FormatException(string.Concat("Cannot server the content in the request format: ", RequestedFormat));
+                    return view;
             }
         }
     }

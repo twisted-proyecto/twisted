@@ -27,7 +27,7 @@ namespace MvcApplication1.Controllers
             {
                 //Redirect the user to Twitter for authorization.
                 //Using oauth_callback for local testing.
-                oAuth.CallBackUrl = "http://localhost:53953/MvcApplication1/Twitter";
+                oAuth.CallBackUrl = "http://localhost/MvcApplication1/Twitter";
                 Response.Redirect(oAuth.AuthorizationLinkGet());
             }
             else
