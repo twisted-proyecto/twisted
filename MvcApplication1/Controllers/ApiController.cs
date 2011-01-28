@@ -34,6 +34,7 @@ namespace MvcApplication1.Controllers
                     if (destino.Viaje.IdViaje == idViajeConsulta)
                     {
                         if (destino.Fecha != null)
+                            
                             destinosViaje.Add(new DestinoXml
                                                   {
                                                       Descripcion = destino.Descripcion,
@@ -171,6 +172,86 @@ namespace MvcApplication1.Controllers
             }
             return View();
         }
+
+        public ActionResult MostrarViaje3(String Url)
+        {
+
+            if (ValidateUrl(Url))
+            {
+                String xml = WebRequest(oAuthTwitter.Method.GET, Url, String.Empty);
+                if (xml != "")
+                {
+                    XmlDocument myXmlDocument = new XmlDocument();
+                    myXmlDocument.LoadXml(xml);
+                    myXmlDocument.Normalize();
+
+                    XmlNodeList myNodeList = myXmlDocument.GetElementsByTagName("trip");
+
+                    
+                    var viaje = new Viaje();
+                    foreach (XmlNode nodo in myNodeList)
+                    {
+                        viaje.FechaFin = DateTime.Parse(nodo.ChildNodes[4].InnerText);
+                        viaje.FechaInicio = DateTime.Parse(nodo.ChildNodes[7].InnerText);
+                        viaje.Hospedaje = nodo.ChildNodes[5].InnerText;
+                        viaje.IdViaje = Int32.Parse(nodo.ChildNodes[1].InnerText);
+                    }
+
+
+
+                    return View(viaje);
+                }
+            }
+            return View();
+        }
+
+        public ActionResult MostrarViaje2(String Url)
+        {
+
+            if (ValidateUrl(Url))
+            {
+                String xml = WebRequest(oAuthTwitter.Method.GET, Url, String.Empty);
+                if (xml != "")
+                {
+                    XmlDocument myXmlDocument = new XmlDocument();
+                    myXmlDocument.LoadXml(xml);
+                    myXmlDocument.Normalize();
+
+                    XmlNodeList myNodeList = myXmlDocument.GetElementsByTagName("itinerary");
+
+                    IList<Viaje> viajes = new List<Viaje>();
+                    IList<Destino> destinos = new List<Destino>();
+                    var destino = new Destino();
+                    foreach (XmlNode nodo in myNodeList)
+                    {
+                        destino.Direccion = nodo.ChildNodes[6].InnerText;
+                        destino.Descripcion = nodo.ChildNodes[2].InnerText;
+                        destino.Fecha = DateTime.Parse(nodo.ChildNodes[8].InnerText);
+                        destino.Url = nodo.ChildNodes[4].InnerText;
+                      //  XmlNodeList myNodeList2 = nodo.ChildNodes[7].ChildNodes;
+
+                        /*foreach (XmlNode nodo2 in myNodeList2)
+                        {
+                            Destino destino = new Destino();
+                            destino.Descripcion = nodo2.ChildNodes[0].InnerText;
+                            destino.Direccion = nodo2.ChildNodes[1].InnerText;
+                            destino.Fecha = DateTime.Parse(nodo2.ChildNodes[2].InnerText);
+                            destinos.Add(destino);
+                        }
+                        viaje.Destinos = destinos;*/
+
+
+                    }
+
+
+
+                    return View(destino);
+                }
+            }
+            return View();
+        }
+
+
 
         public static bool ValidateUrl(string url)
         {

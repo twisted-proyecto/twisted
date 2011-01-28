@@ -965,6 +965,8 @@
     <Content Include="Views\Account\Register.aspx" />
     <Content Include="Views\Api\DatosPersona.aspx" />
     <Content Include="Views\Api\MostrarViaje.aspx" />
+    <Content Include="Views\Api\MostrarViaje2.aspx" />
+    <Content Include="Views\Api\MostrarViaje3.aspx" />
     <Content Include="Views\Api\Viaje.aspx" />
     <Content Include="Views\Api\ViajesPersona.aspx" />
     <Content Include="Views\Destino\Create.aspx" />
