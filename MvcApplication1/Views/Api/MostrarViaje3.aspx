@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Dominio.Model.Viaje>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Dominio.Model.Viaje>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Details
@@ -7,31 +7,37 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     
-    <%if (Model != null && Model.Hospedaje !=null)
-        {%>
+    <%if (Model != null)
+        {
+            foreach (var item in Model)
+            {%>
+
 <h2>- Viajes -</h2>
     <fieldset>
         <legend>Detalles:</legend>
         <p>
             <b>Id Viaje:</b>
-            <%=Html.Encode(Model.IdViaje)%>
+            <%=Html.Encode(item.IdViaje)%>
         </p>
         <p>
             <b>Hospedaje:</b>
-            <%=Html.Encode(Model.Hospedaje)%>
+            <%=Html.Encode(item.Hospedaje)%>
         </p>
        
         <p>
             <b>Fecha Inicio:</b>
-          <%:String.Format("{0:dd/MM/yyyy}", Model.FechaInicio)%>
+          <%:String.Format("{0:dd/MM/yyyy}", item.FechaInicio)%>
         </p>
         <p>
             <b>Fecha Fin:</b>
-           <%:String.Format("{0:dd/MM/yyyy}", Model.FechaFin)%>
+           <%:String.Format("{0:dd/MM/yyyy}", item.FechaFin)%>
         </p>
     </fieldset>
 
-        <%}else{%>
+        <%
+            }
+        }
+      else{%>
             <b><%=Html.Encode("No hay viaje")%></b>
        <% }
 %>

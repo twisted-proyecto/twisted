@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.Mvc;
 using System.Xml;
 using MvcApplication1.Dominio;
@@ -108,7 +106,7 @@ namespace MvcApplication1.Controllers
         {
             if (Request["nickname"] != null)
             {
-                string nick = Request["nickname"] as string;
+                var nick = Request["nickname"] as string;
                 IRepositorioParticipante<Participante> repoPar = new ParticipanteRepositorio();
                 IList<Participante> participaciones = repoPar.GetAllByNick(nick);
                 if(participaciones!=null)
@@ -123,12 +121,12 @@ namespace MvcApplication1.Controllers
             return View();
         }
 
-        public ActionResult MostrarViaje(String Url)
+        public ActionResult MostrarViaje(String url)
         {
 
-            if (ValidateUrl(Url))
+            if (ValidateUrl(url))
             {
-                String xml = WebRequest(oAuthTwitter.Method.GET, Url, String.Empty);
+                String xml = WebRequest(oAuthTwitter.Method.GET, url, String.Empty);
                 if (xml != "")
                 {
                     XmlDocument myXmlDocument = new XmlDocument();
@@ -173,12 +171,12 @@ namespace MvcApplication1.Controllers
             return View();
         }
 
-        public ActionResult MostrarViaje3(String Url)
+        public ActionResult MostrarViaje3(String url)
         {
 
-            if (ValidateUrl(Url))
+            if (ValidateUrl(url))
             {
-                String xml = WebRequest(oAuthTwitter.Method.GET, Url, String.Empty);
+                String xml = WebRequest(oAuthTwitter.Method.GET, url, String.Empty);
                 if (xml != "")
                 {
                     XmlDocument myXmlDocument = new XmlDocument();
@@ -187,7 +185,7 @@ namespace MvcApplication1.Controllers
 
                     XmlNodeList myNodeList = myXmlDocument.GetElementsByTagName("trip");
 
-                    
+                    IList<Viaje> viajes = new List<Viaje>();
                     var viaje = new Viaje();
                     foreach (XmlNode nodo in myNodeList)
                     {
@@ -195,22 +193,23 @@ namespace MvcApplication1.Controllers
                         viaje.FechaInicio = DateTime.Parse(nodo.ChildNodes[7].InnerText);
                         viaje.Hospedaje = nodo.ChildNodes[5].InnerText;
                         viaje.IdViaje = Int32.Parse(nodo.ChildNodes[1].InnerText);
+                        viajes.Add(viaje);
                     }
 
 
 
-                    return View(viaje);
+                    return View(viajes);
                 }
             }
             return View();
         }
 
-        public ActionResult MostrarViaje2(String Url)
+        public ActionResult MostrarViaje2(String url)
         {
 
-            if (ValidateUrl(Url))
+            if (ValidateUrl(url))
             {
-                String xml = WebRequest(oAuthTwitter.Method.GET, Url, String.Empty);
+                String xml = WebRequest(oAuthTwitter.Method.GET, url, String.Empty);
                 if (xml != "")
                 {
                     XmlDocument myXmlDocument = new XmlDocument();
@@ -219,7 +218,7 @@ namespace MvcApplication1.Controllers
 
                     XmlNodeList myNodeList = myXmlDocument.GetElementsByTagName("itinerary");
 
-                    IList<Viaje> viajes = new List<Viaje>();
+                   
                     IList<Destino> destinos = new List<Destino>();
                     var destino = new Destino();
                     foreach (XmlNode nodo in myNodeList)
@@ -228,24 +227,84 @@ namespace MvcApplication1.Controllers
                         destino.Descripcion = nodo.ChildNodes[2].InnerText;
                         destino.Fecha = DateTime.Parse(nodo.ChildNodes[8].InnerText);
                         destino.Url = nodo.ChildNodes[4].InnerText;
-                      //  XmlNodeList myNodeList2 = nodo.ChildNodes[7].ChildNodes;
-
-                        /*foreach (XmlNode nodo2 in myNodeList2)
-                        {
-                            Destino destino = new Destino();
-                            destino.Descripcion = nodo2.ChildNodes[0].InnerText;
-                            destino.Direccion = nodo2.ChildNodes[1].InnerText;
-                            destino.Fecha = DateTime.Parse(nodo2.ChildNodes[2].InnerText);
-                            destinos.Add(destino);
-                        }
-                        viaje.Destinos = destinos;*/
-
-
+                        destinos.Add(destino);
                     }
 
 
 
-                    return View(destino);
+                    return View(destinos);
+                }
+            }
+            return View();
+        }
+
+        public ActionResult MostrarDestinoIco(String url)
+        {
+            
+            if (ValidateUrl(url))
+            {
+                String xml = WebRequest(oAuthTwitter.Method.GET, url, String.Empty);
+                if (xml != "")
+                {
+                    XmlDocument myXmlDocument = new XmlDocument();
+                    myXmlDocument.LoadXml(xml);
+                    myXmlDocument.Normalize();
+
+                    XmlNodeList myNodeList = myXmlDocument.GetElementsByTagName("CUENTA");
+
+
+                    IList<Destino> destinos = new List<Destino>();
+                    var destino = new Destino();
+                    foreach (XmlNode nodo in myNodeList)
+                    {
+                        destino.Direccion = nodo.ChildNodes[6].InnerText;
+                        destino.Descripcion = nodo.ChildNodes[2].InnerText;
+                        destino.Fecha = DateTime.Parse(nodo.ChildNodes[8].InnerText);
+                        destino.Url = nodo.ChildNodes[4].InnerText;
+                        destinos.Add(destino);
+                    }
+
+
+
+                    return View(destinos);
+                }
+            }
+            return View();
+        }
+
+        public ActionResult MostrarViajeIco(String url)
+        {
+
+            if (ValidateUrl(url))
+            {
+                String xml = WebRequest(oAuthTwitter.Method.GET, url, String.Empty);
+                if (xml != "")
+                {
+                    XmlDocument myXmlDocument = new XmlDocument();
+                    myXmlDocument.LoadXml(xml);
+                    myXmlDocument.Normalize();
+
+                    XmlNodeList myNodeList = myXmlDocument.GetElementsByTagName("trip");
+
+                    IList<Viaje> viajes = new List<Viaje>();
+                    var viaje = new Viaje();
+                    foreach (XmlNode nodo in myNodeList)
+                    {
+                        XmlNodeList myNodeList2 = nodo.ChildNodes[9].ChildNodes;
+
+                        foreach (XmlNode nodo2 in myNodeList2)
+                        {
+                            
+                            viaje.IdViaje = Int32.Parse(nodo2.ChildNodes[0].InnerText);
+                            viaje.Nombre = nodo2.ChildNodes[1].InnerText;
+                            viajes.Add(viaje);
+                            
+                        }
+                    }
+
+
+
+                    return View(viajes);
                 }
             }
             return View();
@@ -255,7 +314,7 @@ namespace MvcApplication1.Controllers
 
         public static bool ValidateUrl(string url)
         {
-            if (url == null || url == "") return false;
+            if (string.IsNullOrEmpty(url)) return false;
 
             Regex oRegExp = new Regex(@"(http)://", RegexOptions.IgnoreCase);
             return oRegExp.Match(url).Success;
