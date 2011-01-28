@@ -34,7 +34,8 @@ CREATE TABLE [Viaje]
  [fechaFin] Date NOT NULL,
  [hospedaje] Varchar(50) NOT NULL,
  [privacidad] Varchar(25) NOT NULL,
- [destino] Varchar(35) NULL
+ [destino] Varchar(35) NULL,
+ [estatus] Varchar(25) NULL
 )
 go
 
