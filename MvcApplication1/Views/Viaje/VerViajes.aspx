@@ -134,12 +134,20 @@
                    }
                    if (flagCerrado.ToString() == "false")
                {%>
-            <td>
-                <a title="Cerrar Viaje" href="<%=Url.Action("CerrarViaje", "Viaje", new {idViaje = item.IdViaje}, null)%>">
-                    <img src="<%=Url.Content("~/Content/cerrarViaje.png")%>" height="37px" width="37px" /></a>
-            </td>
+                <td>
+                    <a title="Cerrar Viaje" href="<%=Url.Action("CerrarViaje", "Viaje", new {idViaje = item.IdViaje}, null)%>">
+                        <img src="<%=Url.Content("~/Content/cerrarViaje.png")%>" height="37px" width="37px" /></a>
+                </td>
             <%
                }
+                   if (flagCerrado.ToString() == "false")
+                   {%>
+               <td>
+                    <a title="Invitar amigo" href="<%=Url.Action("Invitar", "Persona", new {id = item.IdViaje}, null)%>">
+                        <img src="<%=Url.Content("~/Content/amistades.png")%>" height="25px" width="25px" /></a>
+                </td>
+              <%
+                   }
                }%>
         </tr>
     <%
