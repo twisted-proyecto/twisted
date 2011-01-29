@@ -137,10 +137,10 @@ namespace MvcApplication1.Controllers
                     
                     IList<Viaje> viajes = new List<Viaje>();
                     IList<Destino> destinos = new List<Destino>();
-                    var viaje = new Viaje();
+                    Viaje viaje=null;
                     foreach (XmlNode nodo in myNodeList)
                     {
-                        
+                        viaje = new Viaje();
                         viaje.Destino = nodo.ChildNodes[0].InnerText;
                         viaje.Nombre = nodo.ChildNodes[5].InnerText;
                         viaje.FechaFin = DateTime.Parse(nodo.ChildNodes[1].InnerText);
@@ -171,7 +171,7 @@ namespace MvcApplication1.Controllers
             return View();
         }
 
-        public ActionResult MostrarViaje3(String url)
+        public ActionResult MostrarViajeMateo(String url)
         {
 
             if (ValidateUrl(url))
@@ -186,9 +186,10 @@ namespace MvcApplication1.Controllers
                     XmlNodeList myNodeList = myXmlDocument.GetElementsByTagName("trip");
 
                     IList<Viaje> viajes = new List<Viaje>();
-                    var viaje = new Viaje();
+                    
                     foreach (XmlNode nodo in myNodeList)
                     {
+                        var viaje = new Viaje();
                         viaje.FechaFin = DateTime.Parse(nodo.ChildNodes[4].InnerText);
                         viaje.FechaInicio = DateTime.Parse(nodo.ChildNodes[7].InnerText);
                         viaje.Hospedaje = nodo.ChildNodes[5].InnerText;
@@ -204,7 +205,7 @@ namespace MvcApplication1.Controllers
             return View();
         }
 
-        public ActionResult MostrarViaje2(String url)
+        public ActionResult MostrarDestinoMateo(String url)
         {
 
             if (ValidateUrl(url))
@@ -220,9 +221,10 @@ namespace MvcApplication1.Controllers
 
                    
                     IList<Destino> destinos = new List<Destino>();
-                    var destino = new Destino();
+                    
                     foreach (XmlNode nodo in myNodeList)
                     {
+                        var destino = new Destino();
                         destino.Direccion = nodo.ChildNodes[6].InnerText;
                         destino.Descripcion = nodo.ChildNodes[2].InnerText;
                         destino.Fecha = DateTime.Parse(nodo.ChildNodes[8].InnerText);
@@ -310,7 +312,95 @@ namespace MvcApplication1.Controllers
             return View();
         }
 
+        public ActionResult MostrarViajeNata(String url)
+        {
 
+            if (ValidateUrl(url))
+            {
+                String xml = WebRequest(oAuthTwitter.Method.GET, url, String.Empty);
+                if (xml != "")
+                {
+                    XmlDocument myXmlDocument = new XmlDocument();
+                    myXmlDocument.LoadXml(xml);
+                    myXmlDocument.Normalize();
+
+                    XmlNodeList myNodeList = myXmlDocument.GetElementsByTagName("ITINERARIOS");
+
+                    IList<Viaje> viajes = new List<Viaje>();
+                    IList<Destino> destinos = new List<Destino>();
+                    Viaje viaje=null;
+                    foreach (XmlNode nodo in myNodeList)
+                    {
+                        viaje = new Viaje();
+                        viaje.Destino = nodo.ChildNodes[0].InnerText;
+                        XmlNodeList myNodeList2 = nodo.ChildNodes[1].ChildNodes;
+
+                        foreach (XmlNode nodo2 in myNodeList2)
+                        {
+                            Destino destino = new Destino();
+                            destino.Direccion = nodo2.ChildNodes[0].InnerText;
+                            destino.Fecha = DateTime.Parse(nodo2.ChildNodes[1].InnerText);
+                            destino.Url = nodo2.ChildNodes[2].InnerText;
+                            destinos.Add(destino);
+                        }
+                        viaje.Destinos = destinos;
+
+
+                    }
+
+
+
+                    return View(viaje);
+                }
+            }
+            return View();
+        }
+
+        public ActionResult MostrarViajeMari(String url)
+        {
+
+            if (ValidateUrl(url))
+            {
+                String xml = WebRequest(oAuthTwitter.Method.GET, url, String.Empty);
+                if (xml != "")
+                {
+                    XmlDocument myXmlDocument = new XmlDocument();
+                    myXmlDocument.LoadXml(xml);
+                    myXmlDocument.Normalize();
+
+                    XmlNodeList myNodeList = myXmlDocument.GetElementsByTagName("viaje");
+
+                    
+                    IList<Destino> destinos = new List<Destino>();
+                    Viaje viaje = null;
+                    foreach (XmlNode nodo in myNodeList)
+                    {
+                        viaje = new Viaje();
+                        viaje.Destino = nodo.ChildNodes[0].InnerText;
+                        viaje.Hospedaje = nodo.ChildNodes[1].InnerText;
+                        //viaje.FechaInicio = DateTime.Parse(nodo.ChildNodes[3].InnerText);
+
+                        XmlNodeList myNodeList2 = nodo.ChildNodes[2].ChildNodes;
+                       /* foreach (XmlNode nodo2 in myNodeList2)
+                        {
+                            Destino destino = new Destino();
+                            destino.Direccion = nodo2.ChildNodes[0].InnerText;
+                            destino.Fecha = DateTime.Parse(nodo2.ChildNodes[1].InnerText);
+                            destino.Url = nodo2.ChildNodes[2].InnerText;
+                            destinos.Add(destino);
+                        }
+                        viaje.Destinos = destinos;*/
+
+
+                    }
+
+
+                    
+                    return View(viaje);
+                }
+            }
+            return View();
+        }
 
         public static bool ValidateUrl(string url)
         {

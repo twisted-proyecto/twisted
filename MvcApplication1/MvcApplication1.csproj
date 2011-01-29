@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\MvcApplication1.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -964,9 +965,13 @@
     <Content Include="Views\Account\LogOn.aspx" />
     <Content Include="Views\Account\Register.aspx" />
     <Content Include="Views\Api\DatosPersona.aspx" />
+    <Content Include="Views\Api\MostrarDestinoIco.aspx" />
     <Content Include="Views\Api\MostrarViaje.aspx" />
-    <Content Include="Views\Api\MostrarViaje2.aspx" />
-    <Content Include="Views\Api\MostrarViaje3.aspx" />
+    <Content Include="Views\Api\MostrarDestinoMateo.aspx" />
+    <Content Include="Views\Api\MostrarViajeIco.aspx" />
+    <Content Include="Views\Api\MostrarViajeMateo.aspx" />
+    <Content Include="Views\Api\MostrarViajeMari.aspx" />
+    <Content Include="Views\Api\MostrarViajeNata.aspx" />
     <Content Include="Views\Api\Viaje.aspx" />
     <Content Include="Views\Api\ViajesPersona.aspx" />
     <Content Include="Views\Destino\Create.aspx" />
@@ -1041,7 +1046,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>53953</DevelopmentServerPort>
           <DevelopmentServerVPath>/MvcApplication1/</DevelopmentServerVPath>
