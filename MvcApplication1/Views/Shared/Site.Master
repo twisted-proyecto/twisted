@@ -14,6 +14,7 @@
     <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery-getCSS.min.js") %>"></script>
     <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery.loadImages.1.0.1.min.js") %>"></script>
     <script type="text/javascript" src="<%:Url.Content("~/Scripts/mvcjqueryuiexample.js") %>"></script>
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery.autocomplete.js") %>"></script>
     <title>
         <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
     </title>

@@ -6,7 +6,13 @@
     <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-    <h2><%:Html.ActionLink("Principal", "Index", "Home") %></h2>
-    <br />
-    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    <div class="menu ui-tabs ui-widget ui-corner-all ">
+        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-top">
+            <li class="ui-state-default ui-corner-top <%:Html.IsActiveTab("Home") %>">
+                <%: Html.ActionLink("Principal", "Index", "Home")%>
+            </li>
+        </ul>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
 </asp:Content>

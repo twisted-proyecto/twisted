@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.HtmlControls;
 using MvcApplication1.Dominio;
 using MvcApplication1.Dominio.Repositorios;
 using MvcApplication1.Dominio.Model;
@@ -142,6 +143,7 @@ namespace MvcApplication1.Controllers
             IRepositorio<Destino> repo = new DestinoRepositorio();
             IList<Destino> destinos = repo.GetAll();
             IList<Destino> destinosViaje = new List<Destino>();
+            IRepositorioComentario<Comentario> repoC = new ComentarioRepositorio();
             using (var session = new MongoSession<Category>())
             {
                 
@@ -154,6 +156,14 @@ namespace MvcApplication1.Controllers
                           .Where(c => c.IdDestino == destino1.IdDestino)
                           .AsEnumerable();
                         destino.Votos = category!=null ? category.Count() : 0;
+                        IList<Comentario> comentarios = repoC.GetAll();
+                        destino.Comentarios = new List<Comentario>();
+                        foreach (var comentario in comentarios)
+                        {
+                            if(comentario.IdDestino == destino.IdDestino)
+                            destino.Comentarios.Add(comentario);    
+                        }
+                        
                         destinosViaje.Add(destino);
                     }
                 }
@@ -162,6 +172,31 @@ namespace MvcApplication1.Controllers
 
            
             return View(destinosViaje);
+        }
+
+        [HttpPost]
+        public ActionResult Index(HtmlForm form)
+        {
+            string comentario = Request["comentario"] as string;
+            int idDestino = Convert.ToInt32(Request["idDestino"]);
+            int idViaje = Convert.ToInt32(Session["idViaje"]);
+            string nick = Session["data"] as string;
+            Comentario miComentario = new Comentario();
+            miComentario.Descripcion = comentario;
+            miComentario.IdDestino = idDestino;
+            miComentario.Fecha = DateTime.Today;
+            miComentario.Nickname = nick;
+            
+            IRepositorioComentario<Comentario> repo = new ComentarioRepositorio();
+            IRepositorio<Destino> repoD = new DestinoRepositorio();
+            IRepositorioPersona<Persona> repoP = new PersonaRepositorio();
+
+            miComentario.Destino = repoD.GetById(idDestino);
+            miComentario.Persona = repoP.GetById(nick);
+
+            repo.Save(miComentario);
+
+            return RedirectToAction("Index", "Destino", new { idViaje = idViaje });
         }
 
         public ActionResult Details(int id, int idViaje)

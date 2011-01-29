@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.HtmlControls;
 using MvcApplication1.Dominio;
 using MvcApplication1.Dominio.Model;
 using MvcApplication1.Dominio.Repositorios;
 using System.Net.Mail;
 using System.Web.Security;
 using System.Web.Routing;
+using NHibernate.Criterion;
 
 namespace MvcApplication1.Controllers
 {
@@ -48,6 +51,15 @@ namespace MvcApplication1.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult Index(HtmlForm form)
+        {
+            string nick = Request["persona"];
+            IRepositorioPersona<Persona> repo = new PersonaRepositorio();
+            Persona miPersona = repo.GetById(nick);
+            IList<Persona> milista = new List<Persona> {miPersona};
+            return View(milista);
+        }
 
         public ActionResult Verificar()
         {
@@ -417,5 +429,29 @@ namespace MvcApplication1.Controllers
             return RedirectToAction("Index", "Persona");
         }
 
+
+        public ActionResult Find(string q) 
+        { 
+            IRepositorioPersona<Persona> repoP = new PersonaRepositorio();
+            IList<Persona> personas = repoP.GetAll();
+            IList<Persona> posiblesAmigos = new List<Persona>();
+
+            foreach (var item in personas)
+            {
+                if (item.Nickname.Contains(q.ToUpper()) || item.Nickname.Contains(q.ToLower()))
+                {
+                    posiblesAmigos.Add(repoP.GetById(item.Nickname));
+                }
+            }
+            string[] ami = new string[posiblesAmigos.Count];
+            int i = 0;
+            foreach (var persona in posiblesAmigos)
+            {
+                ami[i] = persona.Nickname;
+                i++;
+            }
+
+            return Content(string.Join("\n", ami)); ;
+        } 
     }
 }

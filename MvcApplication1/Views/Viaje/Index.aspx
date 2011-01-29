@@ -11,17 +11,7 @@
         <th style=" text-align: left">
         <h2> Gestion de Viajes </h2>
         </th>
-        <th style=" text-align: right">
-        <% if (Request.IsAuthenticated && this.Session["data"]!= null)
-       { %>
-            <div>
-                <a title="Agregar" href="<%= Url.Action("Create", "Viaje") %>">
-                  <img src="<%= Url.Content("~/Content/agregar.png") %>" height="25px" width="25px" /></a>
-                <%= Html.ActionLink("Agregar nuevo viaje", "Create") %>
-            </div>
-            <%     
-       }%>
-        </th>
+        
     </table>
     <br />
     <% if (Model.Count() == 0)
@@ -50,46 +40,55 @@
     
         <tr>
             <td>
-                <details> <a title="Detalles" href="#">
+                <details> <a title="Detalles" href="#" rel="#petrol<%= item.IdViaje%>">
                 <img src="<%=Url.Content("~/Content/consultar.png")%>" height="25px" width="25px" /></a></details>
 
-                <div class="tooltip"><fieldset>
-                <legend>Detalles:</legend>
-                    <p>
-                        Nombre:
+                <div class="apple_overlay" id="petrol<%= item.IdViaje%>"><fieldset>
+                <legend><h1><b>Detalles:</b></h1></legend>
+                    <h2>
+                        <b>Nombre:</b>
                         <%= Html.Encode(item.Nombre) %>
-                    </p>
-                    <p>
-                        Destino:
+                    </h2>
+                    <h2>
+                        <b>Destino:</b>
                         <%= Html.Encode(item.Destino) %>
-                    </p>
-                    <p>
-                        Hospedaje:
+                    </h2>
+                    <h2>
+                        <b>Hospedaje:</b>
                         <%= Html.Encode(item.Hospedaje) %>
-                    </p>
-                    <p>
+                    </h2>
+                    <h2>
             
-                        <div class="display-field">Fecha Inicio: <%: String.Format("{0:dd/MM/yyyy}", item.FechaInicio)%></div>
-                    </p>
-                    <p>
+                        <div class="display-field"><b>Fecha Inicio:</b> <%: String.Format("{0:dd/MM/yyyy}", item.FechaInicio)%></div>
+                    </h2>
+                    <h2>
           
-                        <div class="display-field">Fecha Fin: <%: String.Format("{0:dd/MM/yyyy}", item.FechaFin)%></div>
-                    </p>
-                    <p>
-                        Privacidad:
+                        <div class="display-field"><b>Fecha Fin:</b> <%: String.Format("{0:dd/MM/yyyy}", item.FechaFin)%></div>
+                    </h2>
+                    <h2>
+                        <b>Privacidad:</b>
                         <%= Html.Encode(item.Privacidad) %>
-                    </p>
+                    </h2>
+                    <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
                 </fieldset>
                 </div>
             </td>
             <% MvcHtmlString flag = Html.Action("EsMiViajeOParticipo", "Viaje", new {idViaje = item.IdViaje});
+               MvcHtmlString flagCerrado = Html.Action("ViajeCerrado", "Viaje", new { idViaje = item.IdViaje });
                if (flag.ToString() == "true")
-               {%>
-            <td>
-                <a title="Editar" href="<%=Url.Action("Edit", "Viaje", new {id = item.IdViaje}, null)%>">
-                  <img src="<%=Url.Content("~/Content/editar.png")%>" height="25px" width="25px" /></a>
-            </td>
-            <%
+               {    
+                    if (flagCerrado.ToString() == "false")
+                    {%>
+                        <td>
+                            <a title="Editar" href="<%=Url.Action("Edit", "Viaje", new {id = item.IdViaje}, null)%>">
+                              <img src="<%=Url.Content("~/Content/editar.png")%>" height="25px" width="25px" /></a>
+                        </td>
+                     <%
+                    }
+                   else
+                   { %>
+                      <td></td>
+                <% }
                }
                else
                { %>
@@ -102,7 +101,7 @@
                 <%:String.Format("{0:dd/MM/yyyy}", item.FechaInicio)%>
             </td>
 
-            <% MvcHtmlString flagCerrado = Html.Action("ViajeCerrado", "Viaje", new { idViaje = item.IdViaje });
+            <% 
             if (flagCerrado.ToString() == "false")
             { %>
             <td>
@@ -120,12 +119,16 @@
          <% }%>
             <% MvcHtmlString flagDuenio = Html.Action("EsMiViaje", "Viaje", new { idViaje = item.IdViaje });
                if (flagDuenio.ToString() == "true")
-               {%>
-            <td>
-                <a title="Eliminar" href="<%=Url.Action("Delete", "Viaje", new {id = item.IdViaje}, null)%>">
-                    <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="25px" width="25px" /></a>
-            </td>
-            <% if (flagCerrado.ToString() == "false")
+               {
+                   if (flagCerrado.ToString() == "false")
+                   {%>
+                        <td>
+                            <a title="Eliminar" href="<%=Url.Action("Delete", "Viaje", new {id = item.IdViaje}, null)%>">
+                                <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="25px" width="25px" /></a>
+                        </td>
+                    <%
+                   }
+                   if (flagCerrado.ToString() == "false")
                {%>
             <td>
                 <a title="Cerrar Viaje" href="<%=Url.Action("CerrarViaje", "Viaje", new {idViaje = item.IdViaje}, null)%>">
@@ -142,9 +145,9 @@
 
     </table>
     <script>
-        $(document).ready(function () {
-            $("details").tooltip({ offset: [30, -330], effect: 'slide' });
+        $(function () {
+            $("a[rel]").overlay({ mask: '#000', effect: 'apple' });
         });
-    </script>
+    </script> 
 </asp:Content>
 

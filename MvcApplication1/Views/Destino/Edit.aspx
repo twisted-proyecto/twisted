@@ -55,18 +55,11 @@
                 <%: Html.ValidationMessageFor(model => model.Fecha) %>
             </div>
          
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.Latitud) %>
-            </div>
-            
-            <div class="editor-field">
+            <div class="editor-field-hidden">
                 <%: Html.TextBoxFor(model => model.Latitud)%>
             </div>
 
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.Longitud) %>
-            </div>
-            <div class="editor-field">
+            <div class="editor-field-hidden">
                 <%: Html.TextBoxFor(model => model.Longitud)%>
             </div>
 

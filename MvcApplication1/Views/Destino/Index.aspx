@@ -50,6 +50,7 @@
     <table>
         <tr>
         <% MvcHtmlString flag = Html.Action("EsMiViajeOParticipo", "Viaje", new {idViaje = Request["idViaje"]});
+           MvcHtmlString flagCerrado = Html.Action("ViajeCerrado", "Viaje", new { idViaje = Request["idViaje"] });
            if (flag.ToString() == "true")
            { %>
             <th></th>
@@ -76,43 +77,31 @@
         <tr>
             <td>
                 <details>
-                <a title="Detalles" href="#">
+                <a title="Detalles" href="#" rel="#custom<%= item.IdDestino%>">
                   <img src="<%= Url.Content("~/Content/consultar.png") %>" height="25px" width="25px" /></a>   
                 </details>
-                <div class="tooltip"><fieldset>
-                <legend>Detalles:</legend>
-                    <p>
-                        Nombre:
+                <div class="apple_overlay" id="custom<%= item.IdDestino%>" >
+                <fieldset>
+                    <legend><h2><b>Detalles:</b></h2></legend>
+                    <h2>
+                        <b>Nombre:</b>
                         <%= Html.Encode(item.Nombre) %>
-                    </p>
-                    <p>
-                        Descripcion:
+                    </h2>
+                    <h2>
+                        <b>Descripcion:</b>
                         <%= Html.Encode(item.Descripcion) %>
-                    </p>
-                    <p>
-                        Direccion:
+                    </h2>
+                    <h2>
+                        <b>Direccion:</b>
                         <%= Html.Encode(item.Direccion) %>
-                    </p>
-                    <p>
-                        Estatus:
-                        <%= Html.Encode(item.Estatus) %>
-                    </p>
-                    <p>
+                    </h2>
+                    <h2>
             
-                        <div class="display-field">Fecha: <%: String.Format("{0:dd/MM/yyyy}", item.Fecha)%></div>
-                    </p>
-                    <p>
-                        Latitud:
-                        <%= Html.Encode(item.Latitud) %>
-                    </p>
-                    <p>
-                        Longitud:
-                        <%= Html.Encode(item.Longitud) %>
-                    </p>
-                    <p>
-                        Foto referencial:
+                        <div class="display-field"><b>Fecha:</b> <%: String.Format("{0:dd/MM/yyyy}", item.Fecha)%></div>
+                    </h2>
+                    <h2>
                         <img src="<%: item.Url %>" alt="" />
-                    </p>
+                    </h2>
                 </fieldset>
                 </div>
             </td>
@@ -134,12 +123,16 @@
                 <%=item.Votos%> 
             </td>
             <% if (flag.ToString() == "true")
-               {%>
-            <td>
-                <a title="Eliminar" href="<%=Url.Action("Delete", "Destino", new {id = item.IdDestino, idViaje = ViewData["idViaje"]}, null)%>">
-                  <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="25px" width="25px" /></a>
-            </td>
-            <%
+               {
+                   if (flagCerrado.ToString() == "false")
+                   {%>
+                        <td>
+                            <a title="Eliminar" href="<%=Url.Action("Delete", "Destino",
+                                                    new {id = item.IdDestino, idViaje = ViewData["idViaje"]}, null)%>">
+                              <img src="<%=Url.Content("~/Content/eliminar.png")%>" height="25px" width="25px" /></a>
+                        </td>
+                    <%
+                   }
                    MvcHtmlString flagVoto = Html.Action("YaHiceUnVoto", "Destino", new {idDestino = item.IdDestino});
                    if (flagVoto.ToString() == "false")
                    { %>
@@ -149,8 +142,46 @@
                         </td>                       
                  <%
                    }
-               Session["idViaje"]=Request["idViaje"];
-               }%>
+                   Session["idViaje"] = Request["idViaje"];
+                   %>
+                   <td>
+                    <details> <a title="Comentar" href="#" rel="#petrol<%= item.IdDestino%>">
+                    <img src="<%=Url.Content("~/Content/comentario.png")%>" height="25px" width="25px" /></a></details>
+                   </td>
+                    <div class="apple_overlay" id="petrol<%= item.IdDestino%>">
+                    <% using (Html.BeginForm())
+                       { %>
+                    <fieldset>
+                    <legend><h2><b>Haz tu comentario:</b></h2></legend>
+                 
+                        <div class="editor-label">
+                            <label for="Nombre">Comentario:</label>
+                        </div>
+                        <div class="editor-field">
+                            <%= Html.TextBox("comentario",null, new { @class = "text-box" })%>
+                        </div>
+                        <div class="editor-field">
+                            <input type="hidden" name="idDestino" value="<%= item.IdDestino %>" />
+                        </div>
+                        <div class="editor-label">
+                            <input type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" value="Agregar" />
+                        </div>
+                    </fieldset>
+                    <%
+                        foreach (var comentarios in item.Comentarios)
+                        {%>
+                       <fieldset>
+                       <legend><h2><b>Comentarios:</b></h2></legend>
+                       <div class="editor-field">
+                            <%= Html.Label(comentarios.Nickname +": "+comentarios.Descripcion)%>
+                        </div>
+                       </fieldset>
+                 
+                    
+                    <%
+                        }
+                       } %>
+                <% }%>
         </tr>
     
     <%
@@ -159,8 +190,8 @@
 
     </table>
     <script>
-        $(document).ready(function () {
-            $("details").tooltip({ offset: [90, -350], effect: 'slide' });
+        $(function () {
+            $("a[rel]").overlay({ mask: '#000', effect: 'apple' });
         });
-    </script>
+    </script> 
 </asp:Content>

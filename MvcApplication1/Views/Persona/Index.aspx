@@ -5,7 +5,28 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
+    
     <h2>Gestion de Perfiles</h2>
+
+    <% using (Html.BeginForm())
+    {%>
+        <fieldset>
+        <legend>Buscar amigo</legend>
+            
+            <div class="editor-label">
+                <label for="Nombre">Nickname:</label>
+            </div>
+            <div class="editor-field">
+            <%= Html.TextBox("persona",null, new { @class = "text-box" })%>
+            </div>
+            <div class="editor-label">
+                <input type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" value="Buscar"/>
+            </div>
+         </fieldset>
+     <%
+    }%>
+
     <br />
     <% if (Model.Count() == 0)
        { %>
@@ -85,7 +106,13 @@
        }%>
 
     </table>
+    <script type="text/javascript">
 
+        $(document).ready(function () {
+            $("input#persona").autocomplete('<%= Url.Action("Find", "Persona") %>');
+        }); 
+
+</script>
     
 
 </asp:Content>

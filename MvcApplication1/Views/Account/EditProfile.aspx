@@ -13,13 +13,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
 <div id="editprofile">
-    <ul>
-        <li>
-            <a href="#tab_profile">Detalles de usuario</a>
-        </li>
-    </ul>
     <div id="tab_profile">
-
+    <fieldset style=" width:700px; margin-left:100px">
+        <legend>Perfil de Usuario:</legend>
     <a title="Editar" href="<%= Url.Action("Edit", "Persona",new {id = this.Session["data"]}) %>">
       <img src="<%= Url.Content("~/Content/editar.png") %>" height="25px" width="25px" /></a>
       <%= Html.ActionLink("Editar Perfil", "Edit", "Persona",new {id = this.Session["data"]},null)%>
@@ -77,8 +73,9 @@
         </div>
     <% } %>
         <br />
+        </fieldset>
     </div>
-
+    
 </div>
 
 </asp:Content>
