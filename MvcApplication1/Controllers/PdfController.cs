@@ -115,24 +115,16 @@ namespace MvcApplication1.Controllers
         }
 
 
-        public ActionResult Pdf(string idViaje)
+        public ActionResult Pdf()
         {
-
-            string urlToConvert = "http://localhost:53953/MvcApplication1/Viaje/ViajeDestinosReporte?idViaje=" + idViaje;
+            String idViaje = Session["idViajePdf"] as string;
+            string urlToConvert = "http://localhost/MvcApplication1/Viaje/ViajeDestinosReporte?idViaje=" + idViaje;
             string downloadName = "Viaje";
             byte[] downloadBytes = null;
             downloadName += ".pdf";
             PdfConverter pdfConverter = GetPdfConverter();
             downloadBytes = pdfConverter.GetPdfBytesFromUrl(urlToConvert);
-            HttpResponse response = System.Web.HttpContext.Current.Response;
-            response.Clear();
-            response.AddHeader("Content-Type", "binary/octet-stream");
-            response.AddHeader("Content-Disposition",
-                "attachment; filename=" + downloadName + "; size=" + downloadBytes.Length.ToString());
-            response.Flush();
-            response.BinaryWrite(downloadBytes);
-            response.Flush();
-            response.End();
+            
             if (Session["data"] != "")
             {
                 using (
@@ -195,7 +187,9 @@ namespace MvcApplication1.Controllers
             msg.Body = "Hola , \n\n El Viaje " + v.Nombre + " Ha Sido Cerrado.\n Este es el Url del PDF que Contine La hoja de Ruta "+urlCorto+".\nGracias!\n\nTe invitamos a Seguirnos @TwistedUCAB  \n\nSaludos, \nj2l Team Â© ";
             msg.BodyEncoding = Encoding.UTF8;
             msg.IsBodyHtml = false;
+            String twt = "El viaje "+ v.Nombre +" Ha Sido Cerrado Este el itinerario " + urlCorto;
 
+            Session["twt"] = twt;
             //AquÃ­ es donde se hace lo especial
             SmtpClient client = new SmtpClient();
             client.Credentials = new NetworkCredential("twisted.j2l@gmail.com", "j2ltwisted");
@@ -211,11 +205,18 @@ namespace MvcApplication1.Controllers
                 Console.WriteLine(ex.Message);
                 Console.ReadLine();
             }
-
-
-
-
-            return RedirectToAction("Index", "Viaje");
+            HttpResponse response = System.Web.HttpContext.Current.Response;
+            
+         /*   response.Clear();
+            response.AddHeader("Content-Type", "binary/octet-stream");
+            response.AddHeader("Content-Disposition",
+                "attachment; filename=" + downloadName + "; size=" + downloadBytes.Length.ToString());
+            response.BinaryWrite(downloadBytes);
+            response.Flush();
+            response.End();*/
+            
+            
+            return RedirectToAction("CerrarViaje", "Twitter");
         }
 
 

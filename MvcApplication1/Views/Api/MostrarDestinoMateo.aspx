@@ -12,7 +12,7 @@
           foreach (var item in Model)
           {%>
 <h2>- Itinerario -</h2>
-    <fieldset>
+    <fieldset style=" width:20%; margin-left:6% ">
         <legend>Detalles:</legend>
         <p>
             <b>Direccion:</b>
@@ -29,7 +29,7 @@
         </p>
         <p>
             <b>Foto:</b>
-          <img src="<%:item.Url%>" alt="" />
+            <img src="<%:item.Url%>" height="15%"  alt="" />
         </p>
         
         

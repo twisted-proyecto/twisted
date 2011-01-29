@@ -34,6 +34,7 @@ namespace MvcApplication1.Controllers
             {
                 //Get the access token and secret.
                 oAuth.AccessTokenGet(Request["oauth_token"], Request["oauth_verifier"]);
+                
                 if (oAuth.TokenSecret.Length > 0)
                 {
                     //We now have the credentials, so make a call to the Twitter API.
@@ -48,6 +49,7 @@ namespace MvcApplication1.Controllers
                     ViewData["login"] = "Logeado Correctamente Como...";
                     Session.Timeout = 5;
                     Session["data"] = xmlParseado;
+                    Session["tokken"] =oAuth.TokenSecret;
                     //POST Test
                     IRepositorioPersona<Persona> repo = new PersonaRepositorio();
                     Persona p = repo.GetById(xmlParseado);
@@ -63,6 +65,48 @@ namespace MvcApplication1.Controllers
                 }
             }
             return RedirectToAction("Index", "Home");
+        }
+        
+        public ActionResult CerrarViaje()
+        {
+            string url = "";
+            string xml = "";
+            oAuthTwitter oAuth = new oAuthTwitter();
+            
+            if (Request["oauth_token"] == null)
+            {
+                //Redirect the user to Twitter for authorization.
+                //Using oauth_callback for local testing.
+                oAuth.CallBackUrl = "http://localhost/MvcApplication1/Twitter/CerrarViaje";
+                Response.Redirect(oAuth.AuthorizationLinkGet());
+            }
+            else
+            {
+                //Get the access token and secret.
+                oAuth.AccessTokenGet(Request["oauth_token"], Request["oauth_verifier"]);
+                if (oAuth.TokenSecret.Length > 0)
+                {
+                    //We now have the credentials, so make a call to the Twitter API.
+                    url = "http://twitter.com/account/verify_credentials.xml";
+                    xml = oAuth.oAuthWebRequest(oAuthTwitter.Method.GET, url, String.Empty);
+                    //apiResponse.InnerHtml = Server.HtmlEncode(xml);
+                    String parametroApertura = "<screen_name>";
+                    String parametroCierre = "</screen_name>";
+                    String xmlParseado = parsear(xml, parametroApertura, parametroCierre);
+
+                    ViewData["XML"] = xmlParseado;
+                    ViewData["login"] = "Logeado Correctamente Como...";
+                    Session.Timeout = 5;
+                    Session["data"] = xmlParseado;
+                    //POST Test
+                    url = "http://twitter.com/statuses/update.xml";
+                    String twt = Session["twt"] as string;
+                    xml = oAuth.oAuthWebRequest(oAuthTwitter.Method.POST, url, "status=" + oAuth.UrlEncode(twt));
+                    
+                    return RedirectToAction("Pdf", "Pdf");
+                }
+            }
+            return RedirectToAction("Pdf", "Pdf");
         }
 
         public String parsear(String xml, String parametroApertura, String parametroCierre) {

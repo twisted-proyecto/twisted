@@ -13,7 +13,7 @@
             {%>
 
 <h2>- Viajes -</h2>
-    <fieldset>
+    <fieldset style=" width:20%; margin-left:6% ">
         <legend>Detalles:</legend>
         <p>
             <b>Id Viaje:</b>
